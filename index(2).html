@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donodaseves Utilities</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%B0%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1117;
+    --bg-2:#0b0d12;
+    --panel:#171a24;
+    --panel-2:#1d2130;
+    --border:#2a2f40;
+    --border-soft:#20242f;
+    --text:#e7e9f0;
+    --text-dim:#8890a4;
+    --text-faint:#5b6272;
+    --accent:#5eead4;
+    --accent-dim:#2f7a6f;
+    --accent-2:#f5a623;
+    --danger:#ef6a6a;
+    --ok:#7ee787;
+    --btn-text:#0b0d12;
+    --mono:'JetBrains Mono', 'Fira Code', monospace;
+    --sans:'Inter', system-ui, -apple-system, sans-serif;
+    --radius:10px;
+  }
+  body.light-theme{
+    --bg:#f5f4f0;
+    --bg-2:#ffffff;
+    --panel:#ffffff;
+    --panel-2:#f0eee8;
+    --border:#dcdad2;
+    --border-soft:#e8e6df;
+    --text:#191c24;
+    --text-dim:#5c6270;
+    --text-faint:#8b8f9b;
+    --accent:#0d9488;
+    --accent-dim:#0d948833;
+    --accent-2:#b8650f;
+    --danger:#c0392b;
+    --ok:#1a7f37;
+    --btn-text:#ffffff;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    min-height:100vh;
+    line-height:1.5;
+    transition:background .15s ease, color .15s ease;
+  }
+  ::selection{background:var(--accent);color:#0b0d12;}
+  a{color:var(--accent);}
+
+  /* ---------- topbar ---------- */
+  .topbar{
+    position:sticky;
+    top:0;
+    z-index:30;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    background:var(--bg-2);
+    border-bottom:1px solid var(--border);
+    padding:12px 20px;
+  }
+  .topbar-brand{
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:14px;
+    white-space:nowrap;
+    color:var(--text);
+  }
+  .topbar-brand span{color:var(--accent);}
+  .search-wrap{
+    flex:1;
+    max-width:420px;
+    position:relative;
+  }
+  .search-wrap input{
+    width:100%;
+    background:var(--bg);
+    border:1px solid var(--border);
+    color:var(--text);
+    border-radius:8px;
+    padding:8px 70px 8px 34px;
+    font-size:13.5px;
+    font-family:var(--sans);
+    outline:none;
+  }
+  .search-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(94,234,212,.15);}
+  .search-wrap .icon{
+    position:absolute;left:11px;top:50%;transform:translateY(-50%);
+    color:var(--text-faint);font-size:13px;pointer-events:none;
+  }
+  .search-wrap kbd{
+    position:absolute;right:8px;top:50%;transform:translateY(-50%);
+    font-family:var(--mono);font-size:10.5px;color:var(--text-faint);
+    border:1px solid var(--border);border-radius:4px;padding:2px 5px;
+    pointer-events:none;
+  }
+  .theme-toggle{
+    margin-left:auto;
+    background:var(--panel);
+    border:1px solid var(--border);
+    color:var(--text);
+    font-family:var(--mono);
+    font-size:12px;
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    display:flex;align-items:center;gap:6px;
+    white-space:nowrap;
+  }
+  .theme-toggle:hover{border-color:var(--accent);}
+
+  /* ---------- layout ---------- */
+  .app{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:calc(100vh - 49px);
+  }
+  @media (max-width: 880px){
+    .app{grid-template-columns:1fr;}
+    .topbar-brand{font-size:13px;}
+    .search-wrap{max-width:none;}
+  }
+
+  /* ---------- sidebar ---------- */
+  .sidebar{
+    background:var(--bg-2);
+    border-right:1px solid var(--border);
+    padding:14px 0 40px;
+    position:sticky;
+    top:49px;
+    align-self:start;
+    height:calc(100vh - 49px);
+    overflow-y:auto;
+  }
+  .nav-toggle{display:none;}
+  @media (max-width: 880px){
+    .nav-toggle{
+      display:flex;align-items:center;justify-content:space-between;
+      width:100%;background:none;border:none;color:var(--text);
+      padding:12px 20px;font-family:var(--mono);font-size:13px;cursor:pointer;
+    }
+    .nav-body{display:none;}
+    .nav-body.open{display:block;}
+    .sidebar{height:auto;max-height:calc(100vh - 49px);position:sticky;}
+  }
+
+  .category{margin:10px 0;}
+  .category-label{
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--text-faint);
+    padding:6px 20px;
+    letter-spacing:.03em;
+  }
+  .tool-link{
+    display:flex;align-items:center;gap:8px;width:100%;text-align:left;
+    background:none;border:none;color:var(--text-dim);
+    font-family:var(--mono);font-size:13px;
+    padding:7px 20px 7px 30px;cursor:pointer;border-left:2px solid transparent;
+  }
+  .tool-link:hover{color:var(--text);background:var(--panel);}
+  .tool-link.active{color:var(--accent);border-left-color:var(--accent);background:var(--panel);}
+  .tool-link .ext{color:var(--text-faint);}
+  .tool-link.active .ext{color:var(--accent-dim);}
+  .tool-link .arrow{margin-left:auto;font-size:11px;color:var(--text-faint);}
+  .tool-link.hidden-by-search{display:none;}
+  .category.hidden-by-search{display:none;}
+
+  /* ---------- main ---------- */
+  main{padding:32px 42px 80px;max-width:920px;}
+  @media (max-width:600px){main{padding:22px 16px 60px;}}
+  .panel{display:none;animation:fade .25s ease;}
+  .panel.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+  .panel-head{margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--border-soft);}
+  .panel-eyebrow{font-family:var(--mono);font-size:12px;color:var(--accent);margin:0 0 6px;}
+  .panel-head h2{margin:0 0 6px;font-size:26px;letter-spacing:-0.01em;}
+  .panel-head p{margin:0;color:var(--text-dim);font-size:14.5px;max-width:62ch;}
+
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;}
+  .card h3{margin:0 0 14px;font-size:14px;font-family:var(--mono);color:var(--text-dim);font-weight:600;}
+
+  label{display:block;font-size:12.5px;color:var(--text-dim);margin-bottom:5px;font-family:var(--mono);}
+  input[type=text], input[type=number], select, textarea{
+    width:100%;background:var(--bg-2);border:1px solid var(--border);color:var(--text);
+    border-radius:7px;padding:9px 11px;font-size:14px;font-family:var(--sans);outline:none;
+  }
+  input[type=color]{width:52px;height:38px;border:1px solid var(--border);border-radius:7px;background:var(--bg-2);padding:2px;cursor:pointer;}
+  input:focus, select:focus, textarea:focus, button:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px rgba(94,234,212,.15);}
+  textarea{resize:vertical;min-height:100px;font-family:var(--mono);font-size:13px;}
+
+  .row{display:flex;gap:12px;flex-wrap:wrap;}
+  .row > div{flex:1;min-width:110px;}
+  .field{margin-bottom:12px;}
+
+  button, .btn{
+    background:var(--accent);color:var(--btn-text);border:none;font-family:var(--mono);
+    font-weight:600;font-size:13px;padding:9px 16px;border-radius:7px;cursor:pointer;
+    transition:transform .08s ease, opacity .15s ease;
+  }
+  button:hover{opacity:.88;}
+  button:active{transform:scale(.97);}
+  button.secondary{background:transparent;color:var(--text);border:1px solid var(--border);}
+  button.secondary:hover{border-color:var(--text-dim);opacity:1;}
+  button.danger{background:var(--danger);color:#fff;}
+  button.small{padding:6px 10px;font-size:12px;}
+  button:disabled{opacity:.4;cursor:not-allowed;}
+
+  .result{
+    font-family:var(--mono);font-size:15px;background:var(--bg-2);border:1px dashed var(--border);
+    border-radius:7px;padding:12px 14px;color:var(--accent);margin-top:10px;word-break:break-word;
+  }
+  .result .dim{color:var(--text-dim);font-size:12.5px;}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border-soft);}
+  th{font-family:var(--mono);color:var(--text-dim);font-weight:600;font-size:12px;}
+  tr.best td{color:var(--accent);}
+
+  .link-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(200px,1fr));gap:14px;}
+  .link-card{display:block;background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:18px;text-decoration:none;transition:border-color .15s ease, transform .1s ease;}
+  .link-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+  .link-card .name{font-family:var(--mono);color:var(--text);font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center;}
+  .link-card .name .go{color:var(--accent);font-size:13px;}
+  .link-card .desc{color:var(--text-dim);font-size:12.5px;margin-top:6px;}
+  .link-card .url{color:var(--text-faint);font-size:11.5px;margin-top:8px;font-family:var(--mono);}
+
+  footer.foot{margin-top:40px;padding-top:16px;border-top:1px solid var(--border-soft);color:var(--text-faint);font-family:var(--mono);font-size:12px;}
+
+  /* dice */
+  .dice-tray{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
+  .die{width:56px;height:56px;border-radius:10px;background:var(--bg-2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:20px;color:var(--accent);}
+  .die.rolling{animation:roll .35s ease;}
+  @keyframes roll{0%{transform:rotate(0deg) scale(1);}50%{transform:rotate(180deg) scale(1.08);}100%{transform:rotate(360deg) scale(1);}}
+
+  /* contrast checker */
+  .contrast-preview{border-radius:8px;padding:26px 20px;text-align:center;margin-top:14px;border:1px solid var(--border);}
+  .contrast-preview .big{font-size:22px;font-weight:700;margin-bottom:4px;}
+  .contrast-preview .small{font-size:14px;}
+  .badge{display:inline-block;font-family:var(--mono);font-size:11px;padding:3px 8px;border-radius:5px;margin:2px 6px 2px 0;}
+  .badge.pass{background:rgba(126,231,135,.15);color:var(--ok);}
+  .badge.fail{background:rgba(239,106,106,.15);color:var(--danger);}
+
+  /* paint */
+  #paintCanvas{background:#ffffff;border-radius:8px;border:1px solid var(--border);touch-action:none;display:block;max-width:100%;cursor:crosshair;}
+  .paint-toolbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px;}
+  .paint-toolbar .field{margin-bottom:0;min-width:auto;}
+  .swatches{display:flex;gap:6px;}
+  .swatch{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);cursor:pointer;}
+  .swatch.active{border-color:var(--text);}
+
+  /* decision tree v2 */
+  .tree-scroll{
+    overflow:auto;
+    padding:10px 4px 20px;
+    max-height:480px;
+    cursor:grab;
+    border-radius:8px;
+    background-image:radial-gradient(var(--border-soft) 1px, transparent 1px);
+    background-size:18px 18px;
+  }
+  .tree-scroll.panning{cursor:grabbing;user-select:none;}
+  .tree-diagram{display:inline-flex;justify-content:center;min-width:100%;padding:0 40px;}
+  .tree-node{display:flex;flex-direction:column;align-items:center;}
+  .tree-card{
+    background:var(--bg-2);border:1px solid var(--border);border-radius:9px;
+    padding:12px;width:200px;position:relative;
+  }
+  .tree-card.outcome{border-color:var(--accent);background:var(--accent-dim);}
+  .tree-card input{font-size:13px;padding:7px 9px;}
+  .tree-card .node-actions{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+  .tree-children{display:flex;justify-content:center;gap:34px;position:relative;padding-top:22px;margin-top:0;}
+  .tree-children.single{justify-content:center;}
+  .tree-children::before{
+    content:'';position:absolute;top:0;left:25%;right:25%;height:22px;
+    border-top:2px solid var(--border);
+  }
+  .tree-children.single::before{left:50%;right:50%;border:none;}
+  .tree-branch{position:relative;padding-top:0;display:flex;flex-direction:column;align-items:center;}
+  .tree-branch::before{content:'';position:absolute;top:-22px;left:50%;width:2px;height:22px;background:var(--border);}
+  .tree-children.single .tree-branch::before{height:22px;top:-22px;}
+  .branch-label{
+    font-family:var(--mono);font-size:10.5px;color:var(--text-faint);
+    background:var(--bg);padding:2px 6px;border:1px solid var(--border);border-radius:10px;
+    margin-bottom:8px;position:relative;z-index:1;
+  }
+
+  /* timers */
+  .timer-display{
+    font-family:var(--mono);font-size:52px;font-weight:700;text-align:center;
+    padding:24px 10px;letter-spacing:.02em;color:var(--accent);
+  }
+  .timer-display.finished{color:var(--danger);animation:pulse 1s ease infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+  .timer-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+  .timer-inputs{display:flex;gap:10px;justify-content:center;max-width:320px;margin:0 auto;}
+  .timer-inputs .field{text-align:center;}
+  .timer-inputs label{text-align:center;}
+  .lap-list{margin-top:14px;max-height:180px;overflow-y:auto;}
+  .lap-list table{font-family:var(--mono);}
+
+  /* shortcuts */
+  .kbd-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-soft);}
+  .kbd-row:last-child{border-bottom:none;}
+  .kbd-row .desc{color:var(--text-dim);font-size:14px;}
+  kbd.key{font-family:var(--mono);font-size:12px;background:var(--bg-2);border:1px solid var(--border);border-radius:5px;padding:3px 8px;color:var(--text);}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand"><span>$</span> Donodaseves Utilities</div>
+  <div class="search-wrap">
+    <span class="icon">⌕</span>
+    <input type="text" id="searchInput" placeholder="Search tools…">
+    <kbd id="searchKbd">Ctrl K</kbd>
+  </div>
+  <button class="theme-toggle" id="themeToggle"><span id="themeIcon">☾</span><span id="themeLabel">Dark</span></button>
+</div>
+
+<div class="app">
+  <aside class="sidebar">
+    <button class="nav-toggle" id="navToggle">
+      <span>menu</span>
+      <span>☰</span>
+    </button>
+    <div class="nav-body" id="navBody">
+      <nav id="navList">
+        <div class="category" data-cat="calculators">
+          <div class="category-label">/calculators</div>
+          <button class="tool-link" data-tool="percent">percentage<span class="ext">.calc</span></button>
+          <button class="tool-link" data-tool="ppu">price-per-unit<span class="ext">.calc</span></button>
+        </div>
+        <div class="category" data-cat="generators">
+          <div class="category-label">/generators</div>
+          <button class="tool-link" data-tool="picker">random-picker<span class="ext">.gen</span></button>
+          <button class="tool-link" data-tool="decisiontree">decision-tree<span class="ext">.gen</span></button>
+          <button class="tool-link" data-tool="lorem">lorem-ipsum<span class="ext">.gen</span></button>
+        </div>
+        <div class="category" data-cat="design">
+          <div class="category-label">/design</div>
+          <button class="tool-link" data-tool="contrast">contrast-checker<span class="ext">.tool</span></button>
+          <button class="tool-link" data-tool="paint">paint<span class="ext">.tool</span></button>
+        </div>
+        <div class="category" data-cat="timers">
+          <div class="category-label">/timers</div>
+          <button class="tool-link" data-tool="countdown">countdown<span class="ext">.timer</span></button>
+          <button class="tool-link" data-tool="stopwatch">stopwatch<span class="ext">.timer</span></button>
+        </div>
+        <div class="category" data-cat="fun">
+          <div class="category-label">/fun</div>
+          <button class="tool-link" data-tool="dice">virtual-dice<span class="ext">.tool</span></button>
+        </div>
+        <div class="category" data-cat="external">
+          <div class="category-label">/external</div>
+          <button class="tool-link" data-tool="links">redirects<span class="arrow">↗</span></button>
+        </div>
+        <div class="category" data-cat="shortcuts">
+          <div class="category-label">/shortcuts</div>
+          <button class="tool-link" data-tool="shortcuts">keyboard<span class="ext">.help</span></button>
+        </div>
+      </nav>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- PERCENTAGE CALCULATOR -->
+    <section class="panel" id="panel-percent">
+      <div class="panel-head">
+        <p class="panel-eyebrow">/calculators/percentage.calc</p>
+        <h2>% Math Calculator</h2>
+        <p>Three common percentage problems, solved live as you type.</p>
+      </div>
+
+      <div class="card">
+        <h3>what is X% of Y</h3>
+        <div class="row">
+          <div class="field"><label>X (%)</label><input type="number" id="p1x" placeholder="e.g. 15"></div>
+          <div class="field"><label>Y</label><input type="number" id="p1y" placeholder="e.g. 200"></div>
+        </div>
+        <div class="result" id="p1r">—</div>
+      </div>
+
+      <div class="card">
+        <h3>X is what % of Y</h3>
+        <div class="row">
+          <div class="field"><label>X</label><input type="number" id="p2x" placeholder="e.g. 30"></div>
+          <div class="field"><label>Y</label><input type="number" id="p2y" placeholder="e.g. 200"></div>
+        </div>
+        <div class="result" id="p2r">—</div>
+      </div>
+
+      <div class="card">
+        <h3>% change from X to Y</h3>
+        <div class="row">
+          <div class="field"><label>X (start)</label><input type="number" id="p3x" placeholder="e.g. 80"></div>
+          <div class="field"><label>Y (end)</label><input type="number" id="p3y" placeholder="e.g. 100"></div>
+        </div>
+        <div class="result" id="p3r">—</div>
+      </div>
+    </section>
+
+    <!-- PRICE PER UNIT -->
+    <section class="panel" id="panel-ppu">
+      <div class="panel-head">
+        <p class="panel-eyebrow">/calculators/price-per-unit.calc</p>
+        <h2>Price-per-Unit Comparison</h2>
+        <p>Compare products with different sizes to see which is actually cheaper.</p>
+      </div>
+      <div class="card">
+        <table id="ppuTable">
+          <thead><tr><th>item</th><th>price</th><th>qty</th><th>unit</th><th>per unit</th><th></th></tr></thead>
+          <tbody id="ppuBody"></tbody>
+        </table>
+        <button class="secondary small" id="ppuAdd" style="margin-top:12px;">+ add item</button>
+      </div>
+    </section>
+
+    <!-- RANDOM PICKER -->
+    <section class="panel" id="panel-picker">
+      <div class="panel-head">
+        <p class="panel-eyebrow">/generators/random-picker.gen</p>
+        <h2>Random Picker</h2>
+        <p>One item per line. Pick one at random.</p>
+      </div>
+      <div class="card">
+        <label>options</label>
+        <textarea id="pickerList" placeholder="pizza&#10;sushi&#10;tacos&#10;burgers"></textarea>
+        <div class="row" style="margin-top:12px;align-items:center;">
+          <div class="field" style="flex:none;">
+            <label style="display:inline-flex;align-items:center;gap:6px;font-size:13px;">
+              <input type="checkbox" id="pickerRemove" style="width:auto;"> remove after pick
+            </label>
+          </div>
+          <div style="flex:none;"><button id="pickerBtn">pick one</button></div>
+        </div>
+        <div class="result" id="pickerResult">—</div>
+      </div>
+    </section>
+
+    <!-- DECISION TREE -->
+    <section class="panel" id="panel-decisiontree">
+      <div class="panel-head">
+        <p class="panel-eyebrow">/generators/decision-tree.gen</p>
+        <h2>Decision Tree Generator</h2>
+        <p>Build a yes/no decision tree. Each question branches into two paths until it reaches an outcome.</p>
+      </div>
+      <div class="card">
+        <div class="tree-scroll">
+          <div class="tree-diagram" id="treeRoot"></div>
+        </div>
+        <div class="node-actions" style="margin-top:14px;">
+          <button class="secondary small" id="treeReset">reset tree</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOREM IPSUM / PLACEHOLDER DATA -->
+    <section class="panel" id="panel-lorem">
+      <div class="panel-head">
+        <p class="panel-eyebrow">/generators/lorem-ipsum.gen</p>
+        <h2>Lorem Ipsum & Placeholder Data</h2>
+        <p>Filler text for layouts, and fake rows of data for testing tables and forms.</p>
+      </div>
+
+      <div class="card">
+        <h3>lorem ipsum</h3>
+        <div class="row">
+          <div class="field"><label>paragraphs</label><input type="number" id="loremCount" min="1" max="20" value="3"></div>
+          <div style="flex:none;align-self:flex-end;"><button id="loremBtn">generate</button></div>
+        </div>
+        <textarea id="loremOut" style="min-height:160px;margin-top:10px;" readonly></textarea>
+        <button class="secondary small" id="loremCopy" style="margin-top:8px;">copy</button>
+      </div>
+
+      <div class="card">
+        <h3>placeholder data</h3>
+        <div class="row">
+          <div class="field"><label>rows</label><input type="number" id="fakeCount" min="1" max="50" value="8"></div>
+          <div style="flex:none;align-self:flex-end;"><button id="fakeBtn">generate</button></div>
+        </div>
+        <div style="overflow-x:auto;margin-top:10px;">
+          <table id="fakeTable"><thead><tr><th>name</th><th>email</th><th>phone</th><th>city</th></tr></thead><tbody id="fakeBody"></tbody></table>
+        </div>
+        <button class="secondary small" id="fakeCopy" style="margin-top:8px;">copy as JSON</button>
+      </div>
+    </section>
+
+    <!-- CONTRAST CHECKER -->
+    <section class="panel" id="panel-contrast">
+      <div class="panel-head">
+        <p class="panel-eyebrow">/design/contrast-checker.tool</p>
+        <h2>Contrast Checker</h2>
+        <p>WCAG contrast ratio between a foreground and background color.</p>
+      </div>
+      <div class="card">
+        <div class="row">
+          <div class="field"><label>text color</label><input type="color" id="fgColor" value="#e7e9f0"></div>
+          <div class="field"><label>background color</label><input type="color" id="bgColor" value="#0f1117"></div>
+        </div>
+        <div class="result" id="contrastRatio">—</div>
+        <div id="contrastBadges" style="margin-top:8px;"></div>
+        <div class="contrast-preview" id="contrastPreview">
+          <div class="big">The quick brown fox</div>
+          <div class="small">jumps over the lazy dog — sample body text at this size</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SIMPLE PAINT -->
+    <section class="panel" id="panel-paint">
+      <div class="panel-head">
+        <p class="panel-eyebrow">/design/paint.tool</p>
+        <h2>Simple Paint</h2>
+        <p>Draw something. Nothing is saved unless you download it.</p>
+      </div>
+      <div class="card">
+        <div class="paint-toolbar">
+          <div class="field"><label>color</label><input type="color" id="paintColor" value="#111111"></div>
+          <div class="swatches" id="swatches"></div>
+          <div class="field"><label>brush size</label><input type="number" id="brushSize" min="1" max="40" value="4" style="width:70px;"></div>
+          <button class="secondary small" id="paintClear">clear</button>
+          <button class="small" id="paintSave">download PNG</button>
+        </div>
+        <canvas id="paintCanvas" width="800" height="480"></canvas>
+      </div>
+    </section>
+
+    <!-- COUNTDOWN TIMER -->
+    <section class="panel" id="panel-countdown">
+      <div class="panel-head">
+        <p class="panel-eyebrow">/timers/countdown.timer</p>
+        <h2>Countdown Timer</h2>
+        <p>Set a custom duration and count down to zero.</p>
+      </div>
+      <div class="card">
+        <div class="timer-inputs">
+          <div class="field"><label>hours</label><input type="number" id="cdH" min="0" max="99" value="0"></div>
+          <div class="field"><label>minutes</label><input type="number" id="cdM" min="0" max="59" value="5"></div>
+          <div class="field"><label>seconds</label><input type="number" id="cdS" min="0" max="59" value="0"></div>
+        </div>
+        <div class="timer-display" id="cdDisplay">00:05:00</div>
+        <div class="timer-controls">
+          <button id="cdStart">start</button>
+          <button class="secondary" id="cdPause">pause</button>
+          <button class="secondary" id="cdReset">reset</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STOPWATCH -->
+    <section class="panel" id="panel-stopwatch">
+      <div class="panel-head">
+        <p class="panel-eyebrow">/timers/stopwatch.timer</p>
+        <h2>Stopwatch</h2>
+        <p>Start, lap, and reset. Nothing carries over between sessions.</p>
+      </div>
+      <div class="card">
+        <div class="timer-display" id="swDisplay">00:00.00</div>
+        <div class="timer-controls">
+          <button id="swStart">start</button>
+          <button class="secondary" id="swLap">lap</button>
+          <button class="secondary" id="swReset">reset</button>
+        </div>
+        <div class="lap-list" id="swLaps"></div>
+      </div>
+    </section>
+
+    <!-- VIRTUAL DICE -->
+    <section class="panel" id="panel-dice">
+      <div class="panel-head">
+        <p class="panel-eyebrow">/fun/virtual-dice.tool</p>
+        <h2>Virtual Dice</h2>
+        <p>Roll any number of dice, in any size.</p>
+      </div>
+      <div class="card">
+        <div class="row">
+          <div class="field"><label>number of dice</label><input type="number" id="diceCount" min="1" max="12" value="2"></div>
+          <div class="field">
+            <label>sides</label>
+            <select id="diceSides">
+              <option value="4">d4</option>
+              <option value="6" selected>d6</option>
+              <option value="8">d8</option>
+              <option value="10">d10</option>
+              <option value="12">d12</option>
+              <option value="20">d20</option>
+              <option value="100">d100</option>
+            </select>
+          </div>
+          <div style="flex:none;align-self:flex-end;"><button id="rollBtn">roll</button></div>
+        </div>
+        <div class="dice-tray" id="diceTray"></div>
+        <div class="result" id="diceSum">—</div>
+      </div>
+    </section>
+
+    <!-- EXTERNAL LINKS -->
+    <section class="panel" id="panel-links">
+      <div class="panel-head">
+        <p class="panel-eyebrow">/external/redirects</p>
+        <h2>Quick Redirects</h2>
+        <p>Shortcuts to external tools used often enough to be worth a bookmark.</p>
+      </div>
+      <div class="link-grid">
+        <a class="link-card" href="https://www.diffchecker.com/" target="_blank" rel="noopener noreferrer">
+          <div class="name">Diffchecker <span class="go">↗</span></div>
+          <div class="desc">Compare text, files, images, folders.</div>
+          <div class="url">diffchecker.com</div>
+        </a>
+        <a class="link-card" href="https://who.is/" target="_blank" rel="noopener noreferrer">
+          <div class="name">Who.is <span class="go">↗</span></div>
+          <div class="desc">WHOIS domain and DNS lookups.</div>
+          <div class="url">who.is</div>
+        </a>
+        <a class="link-card" href="https://temp-mail.org/" target="_blank" rel="noopener noreferrer">
+          <div class="name">Temp Mail <span class="go">↗</span></div>
+          <div class="desc">Disposable inbox for throwaway signups.</div>
+          <div class="url">temp-mail.org</div>
+        </a>
+        <a class="link-card" href="https://www.remove.bg/" target="_blank" rel="noopener noreferrer">
+          <div class="name">remove.bg <span class="go">↗</span></div>
+          <div class="desc">Automatic background removal for images.</div>
+          <div class="url">remove.bg</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- SHORTCUTS -->
+    <section class="panel" id="panel-shortcuts">
+      <div class="panel-head">
+        <p class="panel-eyebrow">/shortcuts/keyboard.help</p>
+        <h2>Shortcuts</h2>
+        <p>Keyboard shortcuts available anywhere on this site.</p>
+      </div>
+      <div class="card">
+        <div class="kbd-row"><span class="desc">Focus the search bar</span><kbd class="key">Ctrl / Cmd + K</kbd></div>
+        <div class="kbd-row"><span class="desc">Jump to the first matching tool</span><kbd class="key">Enter</kbd></div>
+        <div class="kbd-row"><span class="desc">Clear search and unfocus</span><kbd class="key">Esc</kbd></div>
+      </div>
+    </section>
+
+    <footer class="foot">Donodaseves Utilities — static, client-side only. nothing you type here is stored, sent, or saved.</footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------- navigation ---------------- */
+  var links = document.querySelectorAll('.tool-link');
+  var panels = document.querySelectorAll('.panel');
+
+  function showTool(name){
+    links.forEach(function(l){ l.classList.toggle('active', l.dataset.tool === name); });
+    panels.forEach(function(p){ p.classList.toggle('active', p.id === 'panel-' + name); });
+    var navBody = document.getElementById('navBody');
+    if(window.innerWidth <= 880){ navBody.classList.remove('open'); }
+    window.scrollTo({top:0});
+  }
+  links.forEach(function(l){
+    l.addEventListener('click', function(){ showTool(l.dataset.tool); });
+  });
+  document.getElementById('navToggle').addEventListener('click', function(){
+    document.getElementById('navBody').classList.toggle('open');
+  });
+  showTool('percent');
+
+  /* ---------------- theme toggle ---------------- */
+  var themeToggle = document.getElementById('themeToggle');
+  var themeIcon = document.getElementById('themeIcon');
+  var themeLabel = document.getElementById('themeLabel');
+  themeToggle.addEventListener('click', function(){
+    var isLight = document.body.classList.toggle('light-theme');
+    themeIcon.textContent = isLight ? '☀' : '☾';
+    themeLabel.textContent = isLight ? 'Light' : 'Dark';
+  });
+
+  /* ---------------- search ---------------- */
+  var searchInput = document.getElementById('searchInput');
+  var categories = document.querySelectorAll('.category');
+  var isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+  document.getElementById('searchKbd').textContent = isMac ? 'Cmd K' : 'Ctrl K';
+
+  function runSearch(){
+    var q = searchInput.value.trim().toLowerCase();
+    categories.forEach(function(cat){
+      var toolLinks = cat.querySelectorAll('.tool-link');
+      var anyVisible = false;
+      toolLinks.forEach(function(l){
+        var text = l.textContent.toLowerCase();
+        var match = q === '' || text.indexOf(q) !== -1;
+        l.classList.toggle('hidden-by-search', !match);
+        if(match) anyVisible = true;
+      });
+      cat.classList.toggle('hidden-by-search', !anyVisible);
+    });
+  }
+  searchInput.addEventListener('input', runSearch);
+
+  searchInput.addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){
+      var firstVisible = document.querySelector('.tool-link:not(.hidden-by-search)');
+      if(firstVisible){ firstVisible.click(); }
+    } else if(e.key === 'Escape'){
+      searchInput.value = '';
+      runSearch();
+      searchInput.blur();
+    }
+  });
+
+  document.addEventListener('keydown', function(e){
+    var isShortcut = (e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K');
+    if(isShortcut){
+      e.preventDefault();
+      searchInput.focus();
+      searchInput.select();
+    }
+  });
+
+  /* ---------------- percentage calculator ---------------- */
+  function fmt(n){
+    if(!isFinite(n)) return '—';
+    return (Math.round(n * 10000) / 10000).toString();
+  }
+  function bindPercent(xid, yid, rid, fn){
+    var x = document.getElementById(xid), y = document.getElementById(yid), r = document.getElementById(rid);
+    function calc(){
+      var xv = parseFloat(x.value), yv = parseFloat(y.value);
+      if(isNaN(xv) || isNaN(yv)){ r.textContent = '—'; return; }
+      r.textContent = fn(xv, yv);
+    }
+    x.addEventListener('input', calc);
+    y.addEventListener('input', calc);
+  }
+  bindPercent('p1x','p1y','p1r', function(x,y){ return x + '% of ' + y + ' = ' + fmt(x/100*y); });
+  bindPercent('p2x','p2y','p2r', function(x,y){ if(y===0) return 'y cannot be 0'; return x + ' is ' + fmt(x/y*100) + '% of ' + y; });
+  bindPercent('p3x','p3y','p3r', function(x,y){
+    if(x===0) return 'x cannot be 0';
+    var change = (y-x)/x*100;
+    var sign = change >= 0 ? '+' : '';
+    return sign + fmt(change) + '%  (' + (change>=0?'increase':'decrease') + ')';
+  });
+
+  /* ---------------- price per unit ---------------- */
+  var ppuBody = document.getElementById('ppuBody');
+  function ppuAddRow(name, price, qty, unit){
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td><input type="text" class="ppuName" value="'+(name||'')+'" placeholder="item" style="min-width:90px;"></td>' +
+      '<td><input type="number" class="ppuPrice" value="'+(price!==undefined?price:'')+'" placeholder="0.00" style="width:80px;"></td>' +
+      '<td><input type="number" class="ppuQty" value="'+(qty!==undefined?qty:'')+'" placeholder="0" style="width:70px;"></td>' +
+      '<td><input type="text" class="ppuUnit" value="'+(unit||'')+'" placeholder="g/ml/pcs" style="width:70px;"></td>' +
+      '<td class="ppuPer">—</td>' +
+      '<td><button class="secondary small ppuDel">×</button></td>';
+    ppuBody.appendChild(tr);
+    tr.querySelectorAll('input').forEach(function(inp){ inp.addEventListener('input', ppuRecalc); });
+    tr.querySelector('.ppuDel').addEventListener('click', function(){ tr.remove(); ppuRecalc(); });
+    ppuRecalc();
+  }
+  function ppuRecalc(){
+    var rows = Array.from(ppuBody.querySelectorAll('tr'));
+    var best = null, bestVal = Infinity;
+    rows.forEach(function(tr){
+      var price = parseFloat(tr.querySelector('.ppuPrice').value);
+      var qty = parseFloat(tr.querySelector('.ppuQty').value);
+      var per = tr.querySelector('.ppuPer');
+      tr.classList.remove('best');
+      if(isNaN(price) || isNaN(qty) || qty <= 0){ per.textContent = '—'; return; }
+      var val = price / qty;
+      per.textContent = fmt(val) + ' / ' + (tr.querySelector('.ppuUnit').value || 'unit');
+      if(val < bestVal){ bestVal = val; best = tr; }
+    });
+    if(best) best.classList.add('best');
+  }
+  document.getElementById('ppuAdd').addEventListener('click', function(){ ppuAddRow(); });
+  ppuAddRow('brand A', 3.49, 500, 'g');
+  ppuAddRow('brand B', 5.99, 1000, 'g');
+
+  /* ---------------- random picker ---------------- */
+  var pickerList = document.getElementById('pickerList'), pickerBtn = document.getElementById('pickerBtn'),
+      pickerResult = document.getElementById('pickerResult'), pickerRemove = document.getElementById('pickerRemove');
+  pickerBtn.addEventListener('click', function(){
+    var items = pickerList.value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
+    if(items.length === 0){ pickerResult.textContent = 'add at least one option'; return; }
+    var idx = Math.floor(Math.random() * items.length);
+    pickerResult.textContent = '→ ' + items[idx];
+    if(pickerRemove.checked){
+      items.splice(idx, 1);
+      pickerList.value = items.join('\n');
+    }
+  });
+
+  /* ---------------- decision tree v2 ---------------- */
+  var tree = { type:'question', text:'', yes:null, no:null };
+  var treeRoot = document.getElementById('treeRoot');
+
+  function newNode(){ return {type:'question', text:'', yes:null, no:null}; }
+
+  function buildCard(node){
+    var card = document.createElement('div');
+    card.className = 'tree-card' + (node.type === 'outcome' ? ' outcome' : '');
+
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = node.type === 'outcome' ? 'outcome…' : 'question…';
+    input.value = node.text;
+    input.addEventListener('input', function(){ node.text = input.value; });
+    card.appendChild(input);
+
+    var actions = document.createElement('div');
+    actions.className = 'node-actions';
+
+    if(node.type === 'question'){
+      if(!node.yes){
+        var addYes = document.createElement('button');
+        addYes.className = 'secondary small';
+        addYes.textContent = '+ yes';
+        addYes.addEventListener('click', function(){ node.yes = newNode(); render(); });
+        actions.appendChild(addYes);
+      }
+      if(!node.no){
+        var addNo = document.createElement('button');
+        addNo.className = 'secondary small';
+        addNo.textContent = '+ no';
+        addNo.addEventListener('click', function(){ node.no = newNode(); render(); });
+        actions.appendChild(addNo);
+      }
+      var toOutcome = document.createElement('button');
+      toOutcome.className = 'secondary small';
+      toOutcome.textContent = 'set as outcome';
+      toOutcome.addEventListener('click', function(){ node.type = 'outcome'; delete node.yes; delete node.no; render(); });
+      actions.appendChild(toOutcome);
+    } else {
+      var toQuestion = document.createElement('button');
+      toQuestion.className = 'secondary small';
+      toQuestion.textContent = 'set as question';
+      toQuestion.addEventListener('click', function(){ node.type = 'question'; node.yes = null; node.no = null; render(); });
+      actions.appendChild(toQuestion);
+    }
+    card.appendChild(actions);
+    return card;
+  }
+
+  function buildNode(node){
+    var wrap = document.createElement('div');
+    wrap.className = 'tree-node';
+    wrap.appendChild(buildCard(node));
+
+    if(node.type === 'question' && (node.yes || node.no)){
+      var childrenRow = document.createElement('div');
+      var branches = [];
+      if(node.yes) branches.push({label:'yes', child:node.yes});
+      if(node.no) branches.push({label:'no', child:node.no});
+      childrenRow.className = 'tree-children' + (branches.length === 1 ? ' single' : '');
+
+      branches.forEach(function(b){
+        var branch = document.createElement('div');
+        branch.className = 'tree-branch';
+        var lbl = document.createElement('div');
+        lbl.className = 'branch-label';
+        lbl.textContent = b.label;
+        branch.appendChild(lbl);
+        branch.appendChild(buildNode(b.child));
+        childrenRow.appendChild(branch);
+      });
+      wrap.appendChild(childrenRow);
+    }
+    return wrap;
+  }
+
+  function render(){
+    treeRoot.innerHTML = '';
+    treeRoot.appendChild(buildNode(tree));
+  }
+  document.getElementById('treeReset').addEventListener('click', function(){
+    tree = { type:'question', text:'', yes:null, no:null };
+    render();
+  });
+  render();
+
+  /* ---------------- decision tree canvas panning ---------------- */
+  var treeScroll = document.querySelector('.tree-scroll');
+  var isPanning = false, panStartX = 0, panStartY = 0, panScrollX = 0, panScrollY = 0, didPan = false;
+
+  function isInteractive(el){
+    return !!el.closest('input, button, textarea, select, a');
+  }
+  function panStart(e){
+    if(isInteractive(e.target)) return;
+    isPanning = true;
+    didPan = false;
+    treeScroll.classList.add('panning');
+    var p = e.touches ? e.touches[0] : e;
+    panStartX = p.clientX; panStartY = p.clientY;
+    panScrollX = treeScroll.scrollLeft; panScrollY = treeScroll.scrollTop;
+  }
+  function panMove(e){
+    if(!isPanning) return;
+    var p = e.touches ? e.touches[0] : e;
+    var dx = p.clientX - panStartX, dy = p.clientY - panStartY;
+    if(Math.abs(dx) > 3 || Math.abs(dy) > 3) didPan = true;
+    treeScroll.scrollLeft = panScrollX - dx;
+    treeScroll.scrollTop = panScrollY - dy;
+    if(e.touches) e.preventDefault();
+  }
+  function panEnd(){
+    isPanning = false;
+    treeScroll.classList.remove('panning');
+  }
+  treeScroll.addEventListener('mousedown', panStart);
+  window.addEventListener('mousemove', panMove);
+  window.addEventListener('mouseup', panEnd);
+  treeScroll.addEventListener('touchstart', panStart, {passive:true});
+  treeScroll.addEventListener('touchmove', panMove, {passive:false});
+  treeScroll.addEventListener('touchend', panEnd);
+
+  /* ---------------- lorem ipsum ---------------- */
+  var loremWords = ("lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor " +
+    "incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation " +
+    "ullamco laboris nisi aliquip ex ea commodo consequat duis aute irure in reprehenderit " +
+    "voluptate velit esse cillum eu fugiat nulla pariatur excepteur sint occaecat cupidatat " +
+    "non proident sunt culpa qui officia deserunt mollit anim id est laborum").split(' ');
+  function sentence(){
+    var len = 6 + Math.floor(Math.random()*10);
+    var words = [];
+    for(var i=0;i<len;i++){ words.push(loremWords[Math.floor(Math.random()*loremWords.length)]); }
+    var s = words.join(' ');
+    return s.charAt(0).toUpperCase() + s.slice(1) + '.';
+  }
+  function paragraph(){
+    var sentences = 3 + Math.floor(Math.random()*4);
+    var out = [];
+    for(var i=0;i<sentences;i++){ out.push(sentence()); }
+    return out.join(' ');
+  }
+  document.getElementById('loremBtn').addEventListener('click', function(){
+    var n = Math.max(1, Math.min(20, parseInt(document.getElementById('loremCount').value,10) || 3));
+    var paras = [];
+    for(var i=0;i<n;i++){ paras.push(paragraph()); }
+    document.getElementById('loremOut').value = paras.join('\n\n');
+  });
+  document.getElementById('loremCopy').addEventListener('click', function(){
+    var t = document.getElementById('loremOut');
+    t.select();
+    document.execCommand && document.execCommand('copy');
+    navigator.clipboard && navigator.clipboard.writeText(t.value).catch(function(){});
+  });
+
+  var fakeFirst = ["Alex","Jordan","Sam","Taylor","Casey","Morgan","Riley","Jamie","Quinn","Avery","Rui","Ines","Tiago","Bea","Leo","Nina","Marco","Sofia","Dara","Kai"];
+  var fakeLast = ["Silva","Costa","Pereira","Ferreira","Santos","Marques","Oliveira","Rocha","Cardoso","Lopes","Nguyen","Smith","Garcia","Muller","Novak","Kim","Andrade","Teixeira"];
+  var fakeCities = ["Lisbon","Porto","Coimbra","Braga","Faro","London","Madrid","Berlin","Toronto","Seoul"];
+  function randOf(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+  function genFake(n){
+    var rows = [];
+    for(var i=0;i<n;i++){
+      var f = randOf(fakeFirst), l = randOf(fakeLast);
+      rows.push({
+        name: f + ' ' + l,
+        email: (f + '.' + l).toLowerCase() + Math.floor(Math.random()*90+10) + '@example.com',
+        phone: '+1 ' + Math.floor(1000000000+Math.random()*8999999999).toString().slice(0,10),
+        city: randOf(fakeCities)
+      });
+    }
+    return rows;
+  }
+  var fakeData = [];
+  document.getElementById('fakeBtn').addEventListener('click', function(){
+    var n = Math.max(1, Math.min(50, parseInt(document.getElementById('fakeCount').value,10) || 8));
+    fakeData = genFake(n);
+    var body = document.getElementById('fakeBody');
+    body.innerHTML = '';
+    fakeData.forEach(function(r){
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>'+r.name+'</td><td>'+r.email+'</td><td>'+r.phone+'</td><td>'+r.city+'</td>';
+      body.appendChild(tr);
+    });
+  });
+  document.getElementById('fakeCopy').addEventListener('click', function(){
+    var json = JSON.stringify(fakeData, null, 2);
+    navigator.clipboard && navigator.clipboard.writeText(json).catch(function(){});
+  });
+
+  /* ---------------- contrast checker ---------------- */
+  var fgColor = document.getElementById('fgColor'), bgColor = document.getElementById('bgColor');
+  var contrastRatio = document.getElementById('contrastRatio'), contrastBadges = document.getElementById('contrastBadges'), contrastPreview = document.getElementById('contrastPreview');
+  function hexToRgb(hex){
+    var v = hex.replace('#','');
+    return { r: parseInt(v.substr(0,2),16), g: parseInt(v.substr(2,2),16), b: parseInt(v.substr(4,2),16) };
+  }
+  function relLum(rgb){
+    function chan(c){ c/=255; return c <= 0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4); }
+    return 0.2126*chan(rgb.r) + 0.7152*chan(rgb.g) + 0.0722*chan(rgb.b);
+  }
+  function calcContrast(){
+    var fg = hexToRgb(fgColor.value), bg = hexToRgb(bgColor.value);
+    var l1 = relLum(fg), l2 = relLum(bg);
+    var ratio = (Math.max(l1,l2) + 0.05) / (Math.min(l1,l2) + 0.05);
+    contrastRatio.textContent = fmt(ratio) + ' : 1';
+    var checks = [
+      ['AA normal text (4.5:1)', ratio >= 4.5],
+      ['AA large text (3:1)', ratio >= 3],
+      ['AAA normal text (7:1)', ratio >= 7],
+      ['AAA large text (4.5:1)', ratio >= 4.5]
+    ];
+    contrastBadges.innerHTML = checks.map(function(c){
+      return '<span class="badge '+(c[1]?'pass':'fail')+'">'+(c[1]?'✓':'✕')+' '+c[0]+'</span>';
+    }).join('');
+    contrastPreview.style.color = fgColor.value;
+    contrastPreview.style.background = bgColor.value;
+  }
+  fgColor.addEventListener('input', calcContrast);
+  bgColor.addEventListener('input', calcContrast);
+  calcContrast();
+
+  /* ---------------- simple paint ---------------- */
+  var canvas = document.getElementById('paintCanvas');
+  var ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  var drawing = false, lastX = 0, lastY = 0;
+  var paintColor = document.getElementById('paintColor'), brushSize = document.getElementById('brushSize');
+
+  function getPos(e){
+    var rect = canvas.getBoundingClientRect();
+    var scaleX = canvas.width / rect.width, scaleY = canvas.height / rect.height;
+    var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
+  }
+  function start(e){
+    drawing = true;
+    var p = getPos(e);
+    lastX = p.x; lastY = p.y;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, (parseInt(brushSize.value,10)||4)/2, 0, Math.PI*2);
+    ctx.fillStyle = paintColor.value;
+    ctx.fill();
+    e.preventDefault();
+  }
+  function move(e){
+    if(!drawing) return;
+    var p = getPos(e);
+    ctx.strokeStyle = paintColor.value;
+    ctx.lineWidth = parseInt(brushSize.value,10) || 4;
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+    lastX = p.x; lastY = p.y;
+    e.preventDefault();
+  }
+  function end(){ drawing = false; }
+  canvas.addEventListener('mousedown', start);
+  canvas.addEventListener('mousemove', move);
+  window.addEventListener('mouseup', end);
+  canvas.addEventListener('touchstart', start, {passive:false});
+  canvas.addEventListener('touchmove', move, {passive:false});
+  canvas.addEventListener('touchend', end);
+
+  document.getElementById('paintClear').addEventListener('click', function(){
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+  });
+  document.getElementById('paintSave').addEventListener('click', function(){
+    var link = document.createElement('a');
+    link.download = 'drawing.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+  var swatchColors = ['#111111','#ef6a6a','#f5a623','#5eead4','#4d8dff','#a855f7','#ffffff'];
+  var swatchesEl = document.getElementById('swatches');
+  swatchColors.forEach(function(c, i){
+    var s = document.createElement('div');
+    s.className = 'swatch' + (i===0?' active':'');
+    s.style.background = c;
+    s.addEventListener('click', function(){
+      paintColor.value = c;
+      swatchesEl.querySelectorAll('.swatch').forEach(function(sw){ sw.classList.remove('active'); });
+      s.classList.add('active');
+    });
+    swatchesEl.appendChild(s);
+  });
+
+  /* ---------------- shared beep ---------------- */
+  function beep(){
+    try{
+      var ac = new (window.AudioContext || window.webkitAudioContext)();
+      var o = ac.createOscillator(), g = ac.createGain();
+      o.connect(g); g.connect(ac.destination);
+      o.frequency.value = 880;
+      g.gain.value = 0.15;
+      o.start();
+      setTimeout(function(){ o.stop(); ac.close(); }, 400);
+    }catch(e){}
+  }
+
+  /* ---------------- countdown timer ---------------- */
+  var cdH = document.getElementById('cdH'), cdM = document.getElementById('cdM'), cdS = document.getElementById('cdS');
+  var cdDisplay = document.getElementById('cdDisplay');
+  var cdStartBtn = document.getElementById('cdStart'), cdPauseBtn = document.getElementById('cdPause'), cdResetBtn = document.getElementById('cdReset');
+  var cdRemainingMs = 0, cdEndTime = 0, cdRunning = false, cdInterval = null;
+
+  function pad2(n){ return n.toString().padStart(2,'0'); }
+  function formatHMS(ms){
+    var totalSec = Math.max(0, Math.round(ms/1000));
+    var h = Math.floor(totalSec/3600);
+    var m = Math.floor((totalSec%3600)/60);
+    var s = totalSec%60;
+    return pad2(h) + ':' + pad2(m) + ':' + pad2(s);
+  }
+  function cdUpdateFromInputs(){
+    var h = parseInt(cdH.value,10) || 0, m = parseInt(cdM.value,10) || 0, s = parseInt(cdS.value,10) || 0;
+    cdDisplay.textContent = formatHMS((h*3600+m*60+s)*1000);
+  }
+  [cdH,cdM,cdS].forEach(function(el){ el.addEventListener('input', function(){ if(!cdRunning && cdRemainingMs<=0) cdUpdateFromInputs(); }); });
+  cdUpdateFromInputs();
+
+  function cdTick(){
+    var remaining = cdEndTime - Date.now();
+    if(remaining <= 0){
+      clearInterval(cdInterval);
+      cdRunning = false;
+      cdRemainingMs = 0;
+      cdDisplay.textContent = '00:00:00';
+      cdDisplay.classList.add('finished');
+      beep();
+      return;
+    }
+    cdRemainingMs = remaining;
+    cdDisplay.textContent = formatHMS(remaining);
+  }
+  cdStartBtn.addEventListener('click', function(){
+    if(cdRunning) return;
+    cdDisplay.classList.remove('finished');
+    if(cdRemainingMs <= 0){
+      var h = parseInt(cdH.value,10) || 0, m = parseInt(cdM.value,10) || 0, s = parseInt(cdS.value,10) || 0;
+      cdRemainingMs = (h*3600+m*60+s)*1000;
+    }
+    if(cdRemainingMs <= 0) return;
+    cdEndTime = Date.now() + cdRemainingMs;
+    cdRunning = true;
+    cdInterval = setInterval(cdTick, 250);
+  });
+  cdPauseBtn.addEventListener('click', function(){
+    if(!cdRunning) return;
+    clearInterval(cdInterval);
+    cdRemainingMs = cdEndTime - Date.now();
+    cdRunning = false;
+  });
+  cdResetBtn.addEventListener('click', function(){
+    clearInterval(cdInterval);
+    cdRunning = false;
+    cdRemainingMs = 0;
+    cdDisplay.classList.remove('finished');
+    cdUpdateFromInputs();
+  });
+
+  /* ---------------- stopwatch ---------------- */
+  var swDisplay = document.getElementById('swDisplay');
+  var swStartBtn = document.getElementById('swStart'), swLapBtn = document.getElementById('swLap'), swResetBtn = document.getElementById('swReset');
+  var swLapsEl = document.getElementById('swLaps');
+  var swElapsed = 0, swStartTime = 0, swRunning = false, swInterval = null, swLaps = [];
+
+  function formatStopwatch(ms){
+    var totalCs = Math.floor(ms/10);
+    var m = Math.floor(totalCs / 6000);
+    var s = Math.floor((totalCs % 6000) / 100);
+    var cs = totalCs % 100;
+    return pad2(m) + ':' + pad2(s) + '.' + pad2(cs);
+  }
+  function swTick(){
+    swElapsed = Date.now() - swStartTime;
+    swDisplay.textContent = formatStopwatch(swElapsed);
+  }
+  swStartBtn.addEventListener('click', function(){
+    if(swRunning){
+      clearInterval(swInterval);
+      swRunning = false;
+      swStartBtn.textContent = 'resume';
+    } else {
+      swStartTime = Date.now() - swElapsed;
+      swInterval = setInterval(swTick, 33);
+      swRunning = true;
+      swStartBtn.textContent = 'pause';
+    }
+  });
+  swLapBtn.addEventListener('click', function(){
+    if(!swRunning) return;
+    swLaps.push(swElapsed);
+    var row = document.createElement('div');
+    row.className = 'result';
+    row.style.marginTop = '6px';
+    row.textContent = 'lap ' + swLaps.length + ' — ' + formatStopwatch(swElapsed);
+    swLapsEl.prepend(row);
+  });
+  swResetBtn.addEventListener('click', function(){
+    clearInterval(swInterval);
+    swRunning = false;
+    swElapsed = 0;
+    swLaps = [];
+    swDisplay.textContent = '00:00.00';
+    swStartBtn.textContent = 'start';
+    swLapsEl.innerHTML = '';
+  });
+
+  /* ---------------- virtual dice ---------------- */
+  var diceCount = document.getElementById('diceCount'), diceSides = document.getElementById('diceSides');
+  var diceTray = document.getElementById('diceTray'), diceSum = document.getElementById('diceSum');
+  document.getElementById('rollBtn').addEventListener('click', function(){
+    var n = Math.max(1, Math.min(12, parseInt(diceCount.value,10) || 1));
+    var sides = parseInt(diceSides.value,10);
+    diceTray.innerHTML = '';
+    var sum = 0;
+    for(var i=0;i<n;i++){
+      var val = 1 + Math.floor(Math.random()*sides);
+      sum += val;
+      var d = document.createElement('div');
+      d.className = 'die rolling';
+      d.textContent = val;
+      diceTray.appendChild(d);
+    }
+    diceSum.textContent = n > 1 ? ('sum: ' + sum) : ('rolled: ' + sum);
+  });
+
+})();
+</script>
+</body>
+</html>
