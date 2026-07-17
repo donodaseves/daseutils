@@ -15,251 +15,182 @@
     --dur:160ms;
   }
   html[data-theme="dark"]{
-    --bg:#1A1B1D;
-    --bg-2:#26272C;
-    --panel:#212226;
-    --panel-2:#26272C;
-    --border:#34363B;
-    --border-soft:#2B2C31;
-    --text:#E8E9EB;
-    --text-dim:#9A9CA3;
-    --text-faint:#6B6D74;
-    --accent:#4C7EF0;
-    --accent-dim:#4C7EF033;
-    --accent-2:#7C9EF5;
-    --danger:#C94A3B;
-    --ok:#5FBF7A;
-    --btn-text:#ffffff;
+    --bg:#1A1B1D; --bg-2:#26272C; --panel:#212226; --panel-2:#26272C;
+    --border:#34363B; --border-soft:#2B2C31;
+    --text:#E8E9EB; --text-dim:#9A9CA3; --text-faint:#6B6D74;
+    --accent:#4C7EF0; --accent-dim:#4C7EF033; --accent-2:#7C9EF5;
+    --danger:#C94A3B; --ok:#5FBF7A; --btn-text:#ffffff;
     --shadow:0 8px 24px rgba(0,0,0,0.45);
   }
   html[data-theme="light"]{
-    --bg:#F1F1F0;
-    --bg-2:#F5F5F5;
-    --panel:#FFFFFF;
-    --panel-2:#F5F5F5;
-    --border:#DDDEDF;
-    --border-soft:#E8E8E9;
-    --text:#1E1F22;
-    --text-dim:#63656B;
-    --text-faint:#94969C;
-    --accent:#3D63C9;
-    --accent-dim:#3D63C91a;
-    --accent-2:#6E8DDC;
-    --danger:#B33A2C;
-    --ok:#2F8F4E;
-    --btn-text:#ffffff;
+    --bg:#F1F1F0; --bg-2:#F5F5F5; --panel:#FFFFFF; --panel-2:#F5F5F5;
+    --border:#DDDEDF; --border-soft:#E8E8E9;
+    --text:#1E1F22; --text-dim:#63656B; --text-faint:#94969C;
+    --accent:#3D63C9; --accent-dim:#3D63C91a; --accent-2:#6E8DDC;
+    --danger:#B33A2C; --ok:#2F8F4E; --btn-text:#ffffff;
     --shadow:0 8px 24px rgba(20,20,20,0.08);
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:var(--sans);
-    min-height:100vh;
-    line-height:1.5;
-    transition:background .15s ease, color .15s ease;
+    background:var(--bg); color:var(--text); font-family:var(--sans);
+    min-height:100vh; line-height:1.5;
   }
-  ::selection{background:var(--accent);color:#0b0d12;}
+  ::selection{background:var(--accent);color:#fff;}
   a{color:var(--accent);}
+  h1,h2,h3{margin:0;}
 
-  /* ---------- topbar (header) ---------- */
+  /* ============ topbar ============ */
   .topbar{
-    position:sticky;
-    top:0;
-    z-index:30;
-    display:flex;
-    align-items:center;
-    gap:16px;
-    background:var(--bg-2);
-    border-bottom:1px solid var(--border-soft);
+    position:sticky; top:0; z-index:40;
+    display:flex; align-items:center; gap:16px;
+    background:var(--bg-2); border-bottom:1px solid var(--border-soft);
     padding:14px 20px;
   }
-  .topbar-brand{
-    font-family:var(--serif);
-    font-weight:700;
-    font-size:20px;
-    letter-spacing:-0.01em;
-    white-space:nowrap;
-    color:var(--text);
+  .nav-toggle{
+    display:none; background:none; border:none; color:var(--text);
+    font-size:18px; cursor:pointer; padding:4px;
   }
-  .version-badge{
-    font-family:var(--mono);font-size:10px;color:var(--text-faint) !important;
-    border:1px solid var(--border);border-radius:10px;padding:1px 7px;margin-left:6px;
-    vertical-align:middle;
-  }
-  .search-wrap{
-    flex:1;
-    max-width:340px;
-    position:relative;
-  }
+  .topbar-brand{font-family:var(--serif); font-weight:700; font-size:20px; letter-spacing:-0.01em; white-space:nowrap;}
+
+  .search-wrap{flex:1; max-width:340px; position:relative;}
   .search-wrap input{
-    width:100%;
-    background:var(--bg-2);
-    border:1px solid var(--border);
-    color:var(--text);
-    border-radius:8px;
-    padding:8px 70px 8px 34px;
-    font-size:13px;
-    font-family:var(--sans);
-    outline:none;
-    transition:border-color var(--dur);
+    width:100%; background:var(--bg-2); border:1px solid var(--border); color:var(--text);
+    border-radius:8px; padding:8px 70px 8px 34px; font-size:13px; font-family:var(--sans);
+    outline:none; transition:border-color var(--dur);
   }
   .search-wrap input:focus{border-color:var(--text-faint);}
-  .search-wrap .icon{
-    position:absolute;left:11px;top:50%;transform:translateY(-50%);
-    color:var(--text-faint);font-size:13px;pointer-events:none;
-  }
+  .search-wrap .icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text-faint);font-size:13px;pointer-events:none;}
   .search-wrap kbd{
     position:absolute;right:8px;top:50%;transform:translateY(-50%);
     font-family:var(--mono);font-size:10.5px;color:var(--text-faint);
-    border:1px solid var(--border);border-radius:4px;padding:2px 5px;
-    pointer-events:none;
+    border:1px solid var(--border);border-radius:4px;padding:2px 5px;pointer-events:none;
   }
 
-  .header-controls{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    margin-left:auto;
-  }
+  .header-controls{display:flex;align-items:center;gap:8px;margin-left:auto;}
   .icon-btn{
-    background:var(--panel);
-    border:1px solid var(--border);
-    color:var(--text-dim);
-    border-radius:8px;
-    padding:8px 12px;
-    font-family:var(--mono);
-    font-size:12px;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    gap:6px;
-    text-decoration:none;
-    white-space:nowrap;
-    transition:border-color var(--dur), color var(--dur), background var(--dur);
+    background:var(--panel); border:1px solid var(--border); color:var(--text-dim);
+    border-radius:8px; padding:8px 12px; font-family:var(--mono); font-size:12px;
+    cursor:pointer; display:flex; align-items:center; gap:6px; text-decoration:none;
+    white-space:nowrap; transition:border-color var(--dur), color var(--dur);
   }
   .icon-btn:hover{border-color:var(--text-faint);color:var(--text);}
 
   .more-menu{position:relative;}
   .more-dropdown{
-    display:none;
-    flex-direction:column;
-    position:absolute;
-    top:calc(100% + 6px);
-    right:0;
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:8px;
-    box-shadow:var(--shadow);
-    min-width:170px;
-    overflow:hidden;
-    z-index:50;
+    display:none; flex-direction:column; position:absolute; top:calc(100% + 6px); right:0;
+    background:var(--panel); border:1px solid var(--border); border-radius:8px;
+    box-shadow:var(--shadow); min-width:170px; overflow:hidden; z-index:50;
   }
   .more-dropdown.open{display:flex;}
   .more-item{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding:9px 12px;
-    font-family:var(--mono);
-    font-size:12px;
-    color:var(--text-dim);
-    background:transparent;
-    border:none;
-    text-align:left;
-    cursor:pointer;
-    width:100%;
-    box-sizing:border-box;
+    display:flex; align-items:center; gap:8px; padding:9px 12px; font-family:var(--mono);
+    font-size:12px; color:var(--text-dim); background:transparent; border:none;
+    text-align:left; cursor:pointer; width:100%;
   }
   .more-item:hover{background:var(--bg-2);color:var(--text);}
   .more-item.danger{color:var(--danger);}
   .more-item.danger:hover{background:var(--danger);color:#fff;}
 
-  /* ---------- layout ---------- */
-  .app{
-    display:grid;
-    grid-template-columns:260px 1fr;
-    min-height:calc(100vh - 57px);
+  /* ============ command palette ============ */
+  .cmdk-overlay{
+    position:fixed; inset:0; z-index:90; background:rgba(0,0,0,.5);
+    display:none; align-items:flex-start; justify-content:center; padding:12vh 20px 20px;
   }
+  .cmdk-overlay.open{display:flex;}
+  .cmdk-box{
+    background:var(--panel); border:1px solid var(--border); border-radius:10px;
+    box-shadow:var(--shadow); width:100%; max-width:560px; max-height:70vh;
+    display:flex; flex-direction:column; overflow:hidden;
+  }
+  .cmdk-input-row{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--border-soft);}
+  .cmdk-input-row .icon{color:var(--text-faint);font-size:15px;}
+  .cmdk-input-row input{
+    flex:1; background:transparent; border:none; outline:none; color:var(--text);
+    font-family:var(--sans); font-size:15px;
+  }
+  .cmdk-results{overflow-y:auto; padding:8px;}
+  .cmdk-group-label{font-family:var(--mono);font-size:10.5px;color:var(--text-faint);padding:8px 10px 4px;}
+  .cmdk-item{
+    display:flex; align-items:center; gap:10px; width:100%; text-align:left;
+    background:none; border:none; padding:9px 10px; border-radius:6px; cursor:pointer;
+    font-family:var(--sans); font-size:13.5px; color:var(--text);
+  }
+  .cmdk-item .path{font-family:var(--mono);font-size:11px;color:var(--text-faint);margin-left:auto;}
+  .cmdk-item:hover, .cmdk-item.active{background:var(--bg-2);}
+  .cmdk-empty{padding:24px;text-align:center;color:var(--text-faint);font-size:13px;}
+
+  /* ============ layout shell ============ */
+  .app{display:grid;grid-template-columns:250px 1fr;min-height:calc(100vh - 57px);}
+  .sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:35;}
+  .sidebar-backdrop.open{display:block;}
+
   @media (max-width: 880px){
     .app{grid-template-columns:1fr;}
+    .nav-toggle{display:block;}
     .topbar-brand{font-size:17px;}
-    .search-wrap{max-width:none;}
-  }
-
-  /* ---------- sidebar ---------- */
-  .sidebar{
-    background:var(--bg-2);
-    border-right:1px solid var(--border);
-    padding:14px 0 40px;
-    position:sticky;
-    top:57px;
-    align-self:start;
-    height:calc(100vh - 57px);
-    overflow-y:auto;
-  }
-  .nav-toggle{display:none;}
-  @media (max-width: 880px){
-    .nav-toggle{
-      display:flex;align-items:center;justify-content:space-between;
-      width:100%;background:none;border:none;color:var(--text);
-      padding:12px 20px;font-family:var(--mono);font-size:13px;cursor:pointer;
+    .search-wrap{display:none;}
+    .sidebar{
+      position:fixed; top:0; left:0; height:100vh; z-index:36;
+      width:270px; transform:translateX(-100%); transition:transform var(--dur) ease;
+      box-shadow:var(--shadow);
     }
-    .nav-body{display:none;}
-    .nav-body.open{display:block;}
-    .sidebar{height:auto;max-height:calc(100vh - 57px);position:sticky;}
+    .sidebar.open{transform:translateX(0);}
   }
 
+  /* ============ sidebar ============ */
+  .sidebar{
+    background:var(--bg-2); border-right:1px solid var(--border-soft);
+    padding:14px 0 40px; position:sticky; top:57px; align-self:start;
+    height:calc(100vh - 57px); overflow-y:auto;
+  }
   .category{margin:4px 0;}
   .category-label{
-    display:flex;align-items:center;gap:8px;width:100%;text-align:left;
-    background:none;border:none;cursor:pointer;
-    font-family:var(--mono);
-    font-size:11.5px;
-    color:var(--text-faint);
-    padding:9px 20px;
-    letter-spacing:.03em;
+    display:flex; align-items:center; gap:8px; width:100%; text-align:left;
+    background:none; border:none; cursor:pointer; font-family:var(--mono); font-size:11.5px;
+    color:var(--text-faint); padding:9px 20px; letter-spacing:.03em;
   }
   .category-label:hover{color:var(--text-dim);}
-  .category-label .chevron{
-    font-size:10px;
-    transition:transform .15s ease;
-    color:var(--text-faint);
-  }
+  .category-label .chevron{font-size:10px; transition:transform var(--dur); color:var(--text-faint);}
   .category.expanded .category-label .chevron{transform:rotate(90deg);}
   .category.expanded .category-label{color:var(--text);}
 
   .tool-link{
-    display:none;
-    align-items:center;gap:8px;width:100%;text-align:left;
-    background:none;border:none;color:var(--text-dim);
-    font-family:var(--mono);font-size:13px;
-    padding:7px 20px 7px 34px;cursor:pointer;border-left:2px solid transparent;
+    display:none; align-items:center; gap:8px; width:100%; text-align:left;
+    background:none; border:none; color:var(--text-dim); font-family:var(--mono); font-size:13px;
+    padding:7px 20px 7px 34px; cursor:pointer; border-left:2px solid transparent;
   }
   .category.expanded .tool-link{display:flex;}
   body.search-active .tool-link{display:flex;}
   .tool-link:hover{color:var(--text);background:var(--panel);}
   .tool-link.active{color:var(--accent);border-left-color:var(--accent);background:var(--panel);}
   .tool-link .ext{color:var(--text-faint);}
-  .tool-link.active .ext{color:var(--accent-dim);}
+  .tool-link.active .ext{color:var(--accent-2);}
   .tool-link .arrow{margin-left:auto;font-size:11px;color:var(--text-faint);}
   .tool-link.hidden-by-search{display:none !important;}
   .category.hidden-by-search{display:none;}
 
-  /* ---------- main ---------- */
-  main{padding:32px 42px 80px;max-width:920px;margin:0 auto;}
+  /* ============ main / panels ============ */
+  main{padding:32px 42px 80px;max-width:1180px;margin:0 auto;}
   @media (max-width:600px){main{padding:22px 16px 60px;}}
-  .panel{display:none;animation:fade .25s ease;}
+
+  .panel{display:none;animation:fade .2s ease;}
   .panel.active{display:block;}
   @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
 
   .panel-head{margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--border-soft);text-align:center;}
   .panel-eyebrow{font-family:var(--mono);font-size:12px;color:var(--accent);margin:0 0 6px;}
-  .panel-head h2{margin:0;font-size:26px;letter-spacing:-0.01em;}
+  .panel-head h2{font-size:26px;letter-spacing:-0.01em;}
 
   .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;}
   .card h3{margin:0 0 14px;font-size:14px;font-family:var(--mono);color:var(--text-dim);font-weight:600;}
+
+  /* generic layout helpers */
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
+  .card-grid .card{margin-bottom:0;}
+  .io-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start;}
+  @media (max-width:760px){.io-grid{grid-template-columns:1fr;}}
+  .field-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:12px;}
 
   label{display:block;font-size:12.5px;color:var(--text-dim);margin-bottom:5px;font-family:var(--mono);}
   input[type=text], input[type=number], select, textarea{
@@ -267,8 +198,8 @@
     border-radius:7px;padding:9px 11px;font-size:14px;font-family:var(--sans);outline:none;
   }
   input[type=color]{width:52px;height:38px;border:1px solid var(--border);border-radius:7px;background:var(--bg-2);padding:2px;cursor:pointer;}
-  input:focus, select:focus, textarea:focus, button:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px rgba(94,234,212,.15);}
-  textarea{resize:vertical;min-height:100px;font-family:var(--mono);font-size:13px;}
+  input:focus, select:focus, textarea:focus, button:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim);}
+  textarea{resize:vertical;min-height:130px;font-family:var(--mono);font-size:13px;}
 
   .row{display:flex;gap:12px;flex-wrap:wrap;}
   .row > div{flex:1;min-width:110px;}
@@ -279,7 +210,7 @@
   button, .btn{
     background:var(--accent);color:var(--btn-text);border:1px solid var(--accent);font-family:var(--sans);
     font-weight:600;font-size:12.5px;padding:8px 15px;border-radius:6px;cursor:pointer;
-    transition:border-color var(--dur), background var(--dur), opacity .15s ease;
+    transition:border-color var(--dur), opacity .15s ease;
   }
   button:hover{opacity:.88;}
   button:active{transform:scale(.98);}
@@ -290,13 +221,13 @@
   button.small{padding:6px 10px;font-size:12px;}
   button:disabled{opacity:.4;cursor:not-allowed;}
 
-  .output-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
+  .action-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px;}
+  .output-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;align-items:center;}
 
   .result{
     font-family:var(--mono);font-size:15px;background:var(--bg-2);border:1px dashed var(--border);
     border-radius:7px;padding:12px 14px;color:var(--accent);margin-top:10px;word-break:break-word;
   }
-  .result .dim{color:var(--text-dim);font-size:12.5px;}
   .muted{color:var(--text-dim);font-size:13.5px;line-height:1.6;}
 
   table{width:100%;border-collapse:collapse;font-size:13.5px;}
@@ -305,7 +236,7 @@
   tr.best td{color:var(--accent);}
 
   .link-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(200px,1fr));gap:14px;}
-  .link-card{display:block;background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:18px;text-decoration:none;transition:border-color .15s ease, transform .1s ease;text-align:left;}
+  .link-card{display:block;background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:18px;text-decoration:none;transition:border-color var(--dur), transform var(--dur);text-align:left;}
   .link-card:hover{border-color:var(--accent);transform:translateY(-2px);}
   .link-card .name{font-family:var(--mono);color:var(--text);font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center;}
   .link-card .name .go{color:var(--accent);font-size:13px;}
@@ -314,7 +245,7 @@
 
   footer.foot{margin-top:40px;padding-top:16px;border-top:1px solid var(--border-soft);color:var(--text-faint);font-family:var(--mono);font-size:12px;text-align:center;}
 
-  /* dice / coin */
+  /* dice / coin / rps */
   .dice-tray{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;justify-content:center;}
   .die{width:56px;height:56px;border-radius:10px;background:var(--bg-2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:20px;color:var(--accent);}
   .die.rolling{animation:roll .35s ease;}
@@ -323,7 +254,7 @@
     width:90px;height:90px;border-radius:50%;margin:14px auto 0;
     background:linear-gradient(135deg, var(--accent-2), var(--accent));
     display:flex;align-items:center;justify-content:center;
-    font-family:var(--mono);font-weight:700;font-size:13px;color:#0b0d12;
+    font-family:var(--mono);font-weight:700;font-size:13px;color:#fff;
     border:3px solid var(--border);
   }
   .coin.flipping{animation:coinflip .5s ease;}
@@ -336,66 +267,37 @@
   .contrast-preview .big{font-size:22px;font-weight:700;margin-bottom:4px;}
   .contrast-preview .small{font-size:14px;}
   .badge{display:inline-block;font-family:var(--mono);font-size:11px;padding:3px 8px;border-radius:5px;margin:2px 6px 2px 0;}
-  .badge.pass{background:rgba(126,231,135,.15);color:var(--ok);}
-  .badge.fail{background:rgba(239,106,106,.15);color:var(--danger);}
+  .badge.pass{background:rgba(95,191,122,.15);color:var(--ok);}
+  .badge.fail{background:rgba(201,74,59,.15);color:var(--danger);}
 
-  /* paint */
-  #paintCanvas{background:#ffffff;border-radius:8px;border:1px solid var(--border);touch-action:none;display:block;max-width:100%;cursor:crosshair;margin:0 auto;}
-  .paint-toolbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px;justify-content:center;}
-  .paint-toolbar .field{margin-bottom:0;min-width:auto;}
-  .swatches{display:flex;gap:6px;}
-  .swatch{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);cursor:pointer;}
-  .swatch.active{border-color:var(--text);}
-
-  /* decision tree v2 */
+  /* decision tree */
   .tree-toolbar{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:10px;font-family:var(--mono);font-size:12px;color:var(--text-dim);}
   .tree-scroll{
-    position:relative;
-    overflow:hidden;
-    height:480px;
-    cursor:grab;
-    border-radius:8px;
-    background-image:radial-gradient(var(--border-soft) 1px, transparent 1px);
-    background-size:18px 18px;
+    position:relative; overflow:hidden; height:320px; cursor:grab; border-radius:8px;
+    background-image:radial-gradient(var(--border-soft) 1px, transparent 1px); background-size:18px 18px;
   }
   .tree-scroll.panning{cursor:grabbing;user-select:none;}
-  .tree-diagram{
-    position:absolute;
-    left:50%;
-    top:24px;
-    display:inline-flex;
-    justify-content:center;
-    transform-origin:0 0;
-    will-change:transform;
+  .tree-scroll.fullscreen{
+    position:fixed; inset:0; z-index:80; height:100vh; border-radius:0; background-color:var(--bg);
   }
+  .tree-diagram{position:absolute;left:50%;top:24px;display:inline-flex;justify-content:center;transform-origin:0 0;will-change:transform;}
   .tree-node{display:flex;flex-direction:column;align-items:center;}
-  .tree-card{
-    background:var(--bg-2);border:1px solid var(--border);border-radius:9px;
-    padding:12px;width:200px;position:relative;
-  }
+  .tree-card{background:var(--bg-2);border:1px solid var(--border);border-radius:9px;padding:12px;width:200px;position:relative;}
   .tree-card.outcome{border-color:var(--accent);background:var(--accent-dim);}
   .tree-card input{font-size:13px;padding:7px 9px;}
   .tree-card .node-actions{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
-  .tree-children{display:flex;justify-content:center;gap:34px;position:relative;padding-top:22px;margin-top:0;}
-  .tree-children.single{justify-content:center;}
-  .tree-children::before{
-    content:'';position:absolute;top:0;left:25%;right:25%;height:22px;
-    border-top:2px solid var(--border);
-  }
+  .tree-children{display:flex;justify-content:center;gap:34px;position:relative;padding-top:22px;}
+  .tree-children::before{content:'';position:absolute;top:0;left:25%;right:25%;height:22px;border-top:2px solid var(--border);}
   .tree-children.single::before{left:50%;right:50%;border:none;}
-  .tree-branch{position:relative;padding-top:0;display:flex;flex-direction:column;align-items:center;}
+  .tree-branch{position:relative;display:flex;flex-direction:column;align-items:center;}
   .tree-branch::before{content:'';position:absolute;top:-22px;left:50%;width:2px;height:22px;background:var(--border);}
   .branch-label{
-    font-family:var(--mono);font-size:10.5px;color:var(--text-faint);
-    background:var(--bg);padding:2px 6px;border:1px solid var(--border);border-radius:10px;
-    margin-bottom:8px;position:relative;z-index:1;
+    font-family:var(--mono);font-size:10.5px;color:var(--text-faint);background:var(--bg);
+    padding:2px 6px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;position:relative;z-index:1;
   }
 
   /* timers */
-  .timer-display{
-    font-family:var(--mono);font-size:52px;font-weight:700;text-align:center;
-    padding:24px 10px;letter-spacing:.02em;color:var(--accent);
-  }
+  .timer-display{font-family:var(--mono);font-size:52px;font-weight:700;text-align:center;padding:24px 10px;letter-spacing:.02em;color:var(--accent);}
   .timer-display.finished{color:var(--danger);animation:pulse 1s ease infinite;}
   @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
   .timer-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
@@ -417,24 +319,22 @@
     border-radius:7px;padding:10px 12px;margin-top:10px;max-height:360px;overflow:auto;white-space:pre-wrap;
   }
   .diff-line{padding:1px 6px;border-radius:3px;}
-  .diff-add{background:rgba(126,231,135,.15);color:var(--ok);}
-  .diff-del{background:rgba(239,106,106,.18);color:var(--danger);text-decoration:line-through;}
+  .diff-add{background:rgba(95,191,122,.18);color:var(--ok);}
+  .diff-del{background:rgba(201,74,59,.18);color:var(--danger);text-decoration:line-through;}
   .diff-same{color:var(--text-dim);}
   .diff-legend{display:flex;gap:14px;font-family:var(--mono);font-size:11.5px;color:var(--text-faint);margin-top:8px;justify-content:center;}
   .diff-legend .add{color:var(--ok);}
   .diff-legend .del{color:var(--danger);}
-
-  .center-note{text-align:center;color:var(--text-faint);font-size:12px;font-family:var(--mono);margin-top:6px;}
 </style>
 </head>
 <body>
 
-
 <div class="topbar">
-  <div class="topbar-brand">Dase Utils<span class="version-badge" id="versionBadge">v1.0.0</span></div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+  <div class="topbar-brand">Dase Utils</div>
   <div class="search-wrap">
     <span class="icon">⌕</span>
-    <input type="text" id="searchInput" placeholder="Search tools…">
+    <input type="text" id="searchInput" placeholder="Search tools…" readonly>
     <kbd id="searchKbd">Ctrl K</kbd>
   </div>
   <div class="header-controls">
@@ -450,765 +350,40 @@
   </div>
 </div>
 
-<div class="app">
-  <aside class="sidebar">
-    <button class="nav-toggle" id="navToggle">
-      <span>menu</span>
-      <span>☰</span>
-    </button>
-    <div class="nav-body" id="navBody">
-      <nav id="navList">
-
-        <div class="category" data-cat="calculators">
-          <button class="category-label"><span class="chevron">▸</span>/calculators</button>
-          <button class="tool-link" data-tool="percent">percentage<span class="ext">.calc</span></button>
-          <button class="tool-link" data-tool="ppu">price-per-unit<span class="ext">.calc</span></button>
-          <button class="tool-link" data-tool="unitconv">unit-converter<span class="ext">.calc</span></button>
-        </div>
-
-        <div class="category" data-cat="text">
-          <button class="category-label"><span class="chevron">▸</span>/text</button>
-          <button class="tool-link" data-tool="diffchecker">diff-checker<span class="ext">.txt</span></button>
-          <button class="tool-link" data-tool="uppercase">uppercase<span class="ext">.txt</span></button>
-          <button class="tool-link" data-tool="lowercase">lowercase<span class="ext">.txt</span></button>
-          <button class="tool-link" data-tool="titlecase">title-case<span class="ext">.txt</span></button>
-          <button class="tool-link" data-tool="wordcount">word-char-counter<span class="ext">.txt</span></button>
-          <button class="tool-link" data-tool="linecount">line-counter<span class="ext">.txt</span></button>
-          <button class="tool-link" data-tool="textcleaner">text-cleaner<span class="ext">.txt</span></button>
-          <button class="tool-link" data-tool="whitespace">whitespace-remover<span class="ext">.txt</span></button>
-          <button class="tool-link" data-tool="listsorter">list-sorter<span class="ext">.txt</span></button>
-        </div>
-
-        <div class="category" data-cat="generators">
-          <button class="category-label"><span class="chevron">▸</span>/generators</button>
-          <button class="tool-link" data-tool="picker">random-picker<span class="ext">.gen</span></button>
-          <button class="tool-link" data-tool="decisiontree">decision-tree<span class="ext">.gen</span></button>
-          <button class="tool-link" data-tool="lorem">lorem-ipsum<span class="ext">.gen</span></button>
-          <button class="tool-link" data-tool="randomnum">random-number<span class="ext">.gen</span></button>
-        </div>
-
-        <div class="category" data-cat="design">
-          <button class="category-label"><span class="chevron">▸</span>/design</button>
-          <button class="tool-link" data-tool="contrast">contrast-checker<span class="ext">.tool</span></button>
-          <button class="tool-link" data-tool="paint">paint<span class="ext">.tool</span></button>
-        </div>
-
-        <div class="category" data-cat="timers">
-          <button class="category-label"><span class="chevron">▸</span>/timers</button>
-          <button class="tool-link" data-tool="countdown">countdown<span class="ext">.timer</span></button>
-          <button class="tool-link" data-tool="stopwatch">stopwatch<span class="ext">.timer</span></button>
-        </div>
-
-        <div class="category" data-cat="fun">
-          <button class="category-label"><span class="chevron">▸</span>/fun</button>
-          <button class="tool-link" data-tool="dice">virtual-dice<span class="ext">.tool</span></button>
-          <button class="tool-link" data-tool="coinflip">coin-flipper<span class="ext">.tool</span></button>
-        </div>
-
-        <div class="category" data-cat="external">
-          <button class="category-label"><span class="chevron">▸</span>/external</button>
-          <button class="tool-link" data-tool="links">redirects<span class="arrow">↗</span></button>
-        </div>
-
-        <div class="category" data-cat="shortcuts">
-          <button class="category-label"><span class="chevron">▸</span>/shortcuts</button>
-          <button class="tool-link" data-tool="shortcuts">keyboard<span class="ext">.help</span></button>
-        </div>
-
-        <div class="category" data-cat="settings">
-          <button class="category-label"><span class="chevron">▸</span>/settings</button>
-          <button class="tool-link" data-tool="about">about<span class="ext">.info</span></button>
-        </div>
-
-      </nav>
+<div class="cmdk-overlay" id="cmdkOverlay">
+  <div class="cmdk-box">
+    <div class="cmdk-input-row">
+      <span class="icon">⌕</span>
+      <input type="text" id="cmdkInput" placeholder="Search tools…">
+      <kbd class="key" style="font-size:10.5px;">Esc</kbd>
     </div>
+    <div class="cmdk-results" id="cmdkResults"></div>
+  </div>
+</div>
+
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <nav id="navList"></nav>
   </aside>
-
-  <main>
-
-    <!-- PERCENTAGE CALCULATOR -->
-    <section class="panel" id="panel-percent">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/calculators/percentage.calc</p>
-        <h2>% Math Calculator</h2>
-      </div>
-
-      <div class="card">
-        <h3>what is X% of Y</h3>
-        <div class="row">
-          <div class="field"><label>X (%)</label><input type="number" id="p1x" placeholder="e.g. 15"></div>
-          <div class="field"><label>Y</label><input type="number" id="p1y" placeholder="e.g. 200"></div>
-        </div>
-        <div class="result" id="p1r">—</div>
-      </div>
-
-      <div class="card">
-        <h3>X is what % of Y</h3>
-        <div class="row">
-          <div class="field"><label>X</label><input type="number" id="p2x" placeholder="e.g. 30"></div>
-          <div class="field"><label>Y</label><input type="number" id="p2y" placeholder="e.g. 200"></div>
-        </div>
-        <div class="result" id="p2r">—</div>
-      </div>
-
-      <div class="card">
-        <h3>% change from X to Y</h3>
-        <div class="row">
-          <div class="field"><label>X (start)</label><input type="number" id="p3x" placeholder="e.g. 80"></div>
-          <div class="field"><label>Y (end)</label><input type="number" id="p3y" placeholder="e.g. 100"></div>
-        </div>
-        <div class="result" id="p3r">—</div>
-      </div>
-    </section>
-
-    <!-- PRICE PER UNIT -->
-    <section class="panel" id="panel-ppu">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/calculators/price-per-unit.calc</p>
-        <h2>Price-per-Unit Comparison</h2>
-      </div>
-      <div class="card">
-        <table id="ppuTable">
-          <thead><tr><th>item</th><th>price</th><th>qty</th><th>unit</th><th>per unit</th><th></th></tr></thead>
-          <tbody id="ppuBody"></tbody>
-        </table>
-        <div class="output-actions">
-          <button class="secondary small" id="ppuAdd">+ add item</button>
-          <button class="secondary small" id="ppuReset">clear</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- UNIT CONVERTER -->
-    <section class="panel" id="panel-unitconv">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/calculators/unit-converter.calc</p>
-        <h2>Unit Converter</h2>
-      </div>
-      <div class="card">
-        <div class="row">
-          <div class="field">
-            <label>category</label>
-            <select id="ucCategory">
-              <option value="length">length</option>
-              <option value="weight">weight</option>
-              <option value="temperature">temperature</option>
-            </select>
-          </div>
-        </div>
-        <div class="row">
-          <div class="field"><label>value</label><input type="number" id="ucValue" value="1"></div>
-          <div class="field">
-            <label>from</label>
-            <select id="ucFrom"></select>
-          </div>
-          <div class="field">
-            <label>to</label>
-            <select id="ucTo"></select>
-          </div>
-        </div>
-        <div class="result" id="ucResult">—</div>
-        <div class="output-actions">
-          <button class="secondary small copy-btn" data-target="ucResult">copy</button>
-          <button class="secondary small save-btn" data-target="ucResult" data-filename="unit-conversion.txt">save .txt</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- DIFF CHECKER -->
-    <section class="panel" id="panel-diffchecker">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/text/diff-checker.txt</p>
-        <h2>Diff Checker</h2>
-      </div>
-      <div class="card">
-        <div class="row">
-          <div class="field"><label>text A</label><textarea id="diffA" placeholder="original text…"></textarea></div>
-          <div class="field"><label>text B</label><textarea id="diffB" placeholder="changed text…"></textarea></div>
-        </div>
-        <div class="row" style="align-items:center;">
-          <div style="flex:none;"><button id="diffBtn">compare</button></div>
-          <div style="flex:none;"><button class="secondary" id="diffResetBtn">clear</button></div>
-        </div>
-        <div class="diff-output" id="diffOutput">run a comparison to see exactly which words changed</div>
-        <div class="diff-legend"><span class="add">■ added</span><span class="del">■ removed</span></div>
-        <div class="output-actions">
-          <button class="secondary small copy-btn" data-target="diffOutputText">copy</button>
-          <button class="secondary small save-btn" data-target="diffOutputText" data-filename="diff.txt">save .txt</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- UPPERCASE -->
-    <section class="panel" id="panel-uppercase">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/text/uppercase.txt</p>
-        <h2>Uppercase Converter</h2>
-      </div>
-      <div class="card">
-        <label>input</label>
-        <textarea id="upIn" placeholder="type or paste text…"></textarea>
-        <label style="margin-top:12px;">output</label>
-        <textarea id="upOut" readonly></textarea>
-        <div class="output-actions">
-          <button class="secondary small copy-btn" data-target="upOut">copy</button>
-          <button class="secondary small save-btn" data-target="upOut" data-filename="uppercase.txt">save .txt</button>
-          <button class="secondary small" id="upReset">clear</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- LOWERCASE -->
-    <section class="panel" id="panel-lowercase">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/text/lowercase.txt</p>
-        <h2>Lowercase Converter</h2>
-      </div>
-      <div class="card">
-        <label>input</label>
-        <textarea id="lowIn" placeholder="type or paste text…"></textarea>
-        <label style="margin-top:12px;">output</label>
-        <textarea id="lowOut" readonly></textarea>
-        <div class="output-actions">
-          <button class="secondary small copy-btn" data-target="lowOut">copy</button>
-          <button class="secondary small save-btn" data-target="lowOut" data-filename="lowercase.txt">save .txt</button>
-          <button class="secondary small" id="lowReset">clear</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- TITLE CASE -->
-    <section class="panel" id="panel-titlecase">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/text/title-case.txt</p>
-        <h2>Title Case Converter</h2>
-      </div>
-      <div class="card">
-        <label>input</label>
-        <textarea id="titleIn" placeholder="type or paste text…"></textarea>
-        <label style="margin-top:12px;">output</label>
-        <textarea id="titleOut" readonly></textarea>
-        <div class="output-actions">
-          <button class="secondary small copy-btn" data-target="titleOut">copy</button>
-          <button class="secondary small save-btn" data-target="titleOut" data-filename="title-case.txt">save .txt</button>
-          <button class="secondary small" id="titleReset">clear</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- WORD / CHAR COUNTER -->
-    <section class="panel" id="panel-wordcount">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/text/word-char-counter.txt</p>
-        <h2>Word & Character Counter</h2>
-      </div>
-      <div class="card">
-        <label>input</label>
-        <textarea id="wcIn" placeholder="type or paste text…"></textarea>
-        <div class="result" id="wcResult">words: 0 · characters: 0 · characters (no spaces): 0 · sentences: 0</div>
-        <div class="output-actions">
-          <button class="secondary small copy-btn" data-target="wcResult">copy</button>
-          <button class="secondary small save-btn" data-target="wcResult" data-filename="word-count.txt">save .txt</button>
-          <button class="secondary small" id="wcReset">clear</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- LINE COUNTER -->
-    <section class="panel" id="panel-linecount">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/text/line-counter.txt</p>
-        <h2>Line Counter</h2>
-      </div>
-      <div class="card">
-        <label>input</label>
-        <textarea id="lcIn" placeholder="type or paste text…"></textarea>
-        <div class="result" id="lcResult">total lines: 0 · non-empty lines: 0</div>
-        <div class="output-actions">
-          <button class="secondary small copy-btn" data-target="lcResult">copy</button>
-          <button class="secondary small save-btn" data-target="lcResult" data-filename="line-count.txt">save .txt</button>
-          <button class="secondary small" id="lcReset">clear</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- TEXT CLEANER -->
-    <section class="panel" id="panel-textcleaner">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/text/text-cleaner.txt</p>
-        <h2>Text Cleaner</h2>
-      </div>
-      <div class="card">
-        <label>input</label>
-        <textarea id="tcIn" placeholder="type or paste text…"></textarea>
-        <div class="row" style="margin-top:10px;">
-          <label class="checkfield"><input type="checkbox" id="tcTrim" checked> trim each line</label>
-          <label class="checkfield"><input type="checkbox" id="tcEmpty" checked> remove empty lines</label>
-          <label class="checkfield"><input type="checkbox" id="tcSpaces" checked> collapse spaces</label>
-          <label class="checkfield"><input type="checkbox" id="tcHtml"> strip HTML tags</label>
-        </div>
-        <button id="tcBtn" style="margin-top:10px;">clean</button>
-        <label style="margin-top:12px;">output</label>
-        <textarea id="tcOut" readonly></textarea>
-        <div class="output-actions">
-          <button class="secondary small copy-btn" data-target="tcOut">copy</button>
-          <button class="secondary small save-btn" data-target="tcOut" data-filename="cleaned-text.txt">save .txt</button>
-          <button class="secondary small" id="tcReset">clear</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHITESPACE REMOVER -->
-    <section class="panel" id="panel-whitespace">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/text/whitespace-remover.txt</p>
-        <h2>Whitespace Remover</h2>
-      </div>
-      <div class="card">
-        <label>input</label>
-        <textarea id="wsIn" placeholder="type or paste text…"></textarea>
-        <div class="row" style="margin-top:10px;">
-          <div style="flex:none;"><button class="secondary small" id="wsTrim">trim lines</button></div>
-          <div style="flex:none;"><button class="secondary small" id="wsCollapse">collapse spaces</button></div>
-          <div style="flex:none;"><button class="secondary small" id="wsAll">remove all whitespace</button></div>
-        </div>
-        <label style="margin-top:12px;">output</label>
-        <textarea id="wsOut" readonly></textarea>
-        <div class="output-actions">
-          <button class="secondary small copy-btn" data-target="wsOut">copy</button>
-          <button class="secondary small save-btn" data-target="wsOut" data-filename="whitespace-removed.txt">save .txt</button>
-          <button class="secondary small" id="wsReset">clear</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- LIST SORTER / DEDUPLICATOR -->
-    <section class="panel" id="panel-listsorter">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/text/list-sorter.txt</p>
-        <h2>List Sorter / Deduplicator</h2>
-      </div>
-      <div class="card">
-        <label>list (one item per line)</label>
-        <textarea id="lsIn" placeholder="banana&#10;apple&#10;apple&#10;cherry"></textarea>
-        <div class="row" style="margin-top:10px;">
-          <div style="flex:none;"><button class="secondary small" id="lsAZ">sort A → Z</button></div>
-          <div style="flex:none;"><button class="secondary small" id="lsZA">sort Z → A</button></div>
-          <div style="flex:none;"><button class="secondary small" id="lsDedupe">remove duplicates</button></div>
-          <div style="flex:none;"><button class="secondary small" id="lsShuffle">shuffle</button></div>
-          <label class="checkfield" style="flex:none;"><input type="checkbox" id="lsCase"> case-insensitive</label>
-        </div>
-        <div class="output-actions">
-          <button class="secondary small copy-btn" data-target="lsIn">copy</button>
-          <button class="secondary small save-btn" data-target="lsIn" data-filename="list.txt">save .txt</button>
-          <button class="secondary small" id="lsReset">clear</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- RANDOM PICKER -->
-    <section class="panel" id="panel-picker">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/generators/random-picker.gen</p>
-        <h2>Random Picker</h2>
-      </div>
-      <div class="card">
-        <label>options</label>
-        <textarea id="pickerList" placeholder="pizza&#10;sushi&#10;tacos&#10;burgers"></textarea>
-        <div class="row" style="margin-top:12px;align-items:center;">
-          <div class="field" style="flex:none;">
-            <label class="checkfield"><input type="checkbox" id="pickerRemove"> remove after pick</label>
-          </div>
-          <div style="flex:none;"><button id="pickerBtn">pick one</button></div>
-          <div style="flex:none;"><button class="secondary" id="pickerReset">clear</button></div>
-        </div>
-        <div class="result" id="pickerResult">—</div>
-      </div>
-    </section>
-
-    <!-- DECISION TREE -->
-    <section class="panel" id="panel-decisiontree">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/generators/decision-tree.gen</p>
-        <h2>Decision Tree Generator</h2>
-      </div>
-      <div class="card">
-        <div class="tree-toolbar">
-          <button class="secondary small" id="treeZoomOut">−</button>
-          <span id="treeZoomLabel">100%</span>
-          <button class="secondary small" id="treeZoomIn">+</button>
-          <button class="secondary small" id="treeZoomReset">reset zoom</button>
-        </div>
-        <div class="tree-scroll">
-          <div class="tree-diagram" id="treeRoot"></div>
-        </div>
-        <div class="center-note">drag to pan · scroll to zoom</div>
-        <div class="node-actions" style="margin-top:14px;text-align:center;">
-          <button class="secondary small" id="treeReset">clear tree</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- LOREM IPSUM / PLACEHOLDER DATA -->
-    <section class="panel" id="panel-lorem">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/generators/lorem-ipsum.gen</p>
-        <h2>Lorem Ipsum & Placeholder Data</h2>
-      </div>
-
-      <div class="card">
-        <h3>lorem ipsum</h3>
-        <div class="row">
-          <div class="field"><label>paragraphs</label><input type="number" id="loremCount" min="1" max="20" value="3"></div>
-          <div style="flex:none;align-self:flex-end;"><button id="loremBtn">generate</button></div>
-        </div>
-        <textarea id="loremOut" style="min-height:160px;margin-top:10px;" readonly></textarea>
-        <div class="output-actions">
-          <button class="secondary small copy-btn" data-target="loremOut">copy</button>
-          <button class="secondary small save-btn" data-target="loremOut" data-filename="lorem-ipsum.txt">save .txt</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>placeholder data</h3>
-        <div class="row">
-          <div class="field"><label>rows</label><input type="number" id="fakeCount" min="1" max="50" value="8"></div>
-          <div style="flex:none;align-self:flex-end;"><button id="fakeBtn">generate</button></div>
-        </div>
-        <div style="overflow-x:auto;margin-top:10px;">
-          <table id="fakeTable"><thead><tr><th>name</th><th>email</th><th>phone</th><th>city</th></tr></thead><tbody id="fakeBody"></tbody></table>
-        </div>
-        <textarea id="fakeJson" style="display:none;"></textarea>
-        <div class="output-actions">
-          <button class="secondary small copy-btn" data-target="fakeJson">copy as JSON</button>
-          <button class="secondary small save-btn" data-target="fakeJson" data-filename="placeholder-data.json">save .txt</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- RANDOM NUMBER GENERATOR -->
-    <section class="panel" id="panel-randomnum">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/generators/random-number.gen</p>
-        <h2>Random Number Generator</h2>
-      </div>
-      <div class="card">
-        <div class="row">
-          <div class="field"><label>min</label><input type="number" id="rnMin" value="1"></div>
-          <div class="field"><label>max</label><input type="number" id="rnMax" value="100"></div>
-          <div class="field"><label>how many</label><input type="number" id="rnCount" value="1" min="1" max="1000"></div>
-        </div>
-        <label class="checkfield"><input type="checkbox" id="rnUnique"> no duplicates</label>
-        <button id="rnBtn" style="margin-top:10px;">generate</button>
-        <div class="result" id="rnResult">—</div>
-        <div class="output-actions">
-          <button class="secondary small copy-btn" data-target="rnResult">copy</button>
-          <button class="secondary small save-btn" data-target="rnResult" data-filename="random-numbers.txt">save .txt</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTRAST CHECKER -->
-    <section class="panel" id="panel-contrast">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/design/contrast-checker.tool</p>
-        <h2>Contrast Checker</h2>
-      </div>
-      <div class="card">
-        <div class="row">
-          <div class="field"><label>text color</label><input type="color" id="fgColor" value="#e7e9f0"></div>
-          <div class="field"><label>background color</label><input type="color" id="bgColor" value="#0f1117"></div>
-        </div>
-        <div class="result" id="contrastRatio">—</div>
-        <div id="contrastBadges" style="margin-top:8px;"></div>
-        <div class="contrast-preview" id="contrastPreview">
-          <div class="big">The quick brown fox</div>
-          <div class="small">jumps over the lazy dog — sample body text at this size</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SIMPLE PAINT -->
-    <section class="panel" id="panel-paint">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/design/paint.tool</p>
-        <h2>Simple Paint</h2>
-      </div>
-      <div class="card">
-        <div class="paint-toolbar">
-          <div class="field"><label>color</label><input type="color" id="paintColor" value="#111111"></div>
-          <div class="swatches" id="swatches"></div>
-          <div class="field"><label>brush size</label><input type="number" id="brushSize" min="1" max="40" value="4" style="width:70px;"></div>
-          <button class="secondary small" id="paintClear">clear</button>
-          <button class="small" id="paintSave">download PNG</button>
-        </div>
-        <canvas id="paintCanvas" width="800" height="480"></canvas>
-      </div>
-    </section>
-
-    <!-- COUNTDOWN TIMER -->
-    <section class="panel" id="panel-countdown">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/timers/countdown.timer</p>
-        <h2>Countdown Timer</h2>
-      </div>
-      <div class="card">
-        <div class="timer-inputs">
-          <div class="field"><label>hours</label><input type="number" id="cdH" min="0" max="99" value="0"></div>
-          <div class="field"><label>minutes</label><input type="number" id="cdM" min="0" max="59" value="5"></div>
-          <div class="field"><label>seconds</label><input type="number" id="cdS" min="0" max="59" value="0"></div>
-        </div>
-        <div class="timer-display" id="cdDisplay">00:05:00</div>
-        <div class="timer-controls">
-          <button id="cdStart">start</button>
-          <button class="secondary" id="cdPause">pause</button>
-          <button class="secondary" id="cdReset">clear</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- STOPWATCH -->
-    <section class="panel" id="panel-stopwatch">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/timers/stopwatch.timer</p>
-        <h2>Stopwatch</h2>
-      </div>
-      <div class="card">
-        <div class="timer-display" id="swDisplay">00:00.00</div>
-        <div class="timer-controls">
-          <button id="swStart">start</button>
-          <button class="secondary" id="swLap">lap</button>
-          <button class="secondary" id="swReset">clear</button>
-        </div>
-        <div class="lap-list" id="swLaps"></div>
-      </div>
-    </section>
-
-    <!-- VIRTUAL DICE -->
-    <section class="panel" id="panel-dice">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/fun/virtual-dice.tool</p>
-        <h2>Virtual Dice</h2>
-      </div>
-      <div class="card">
-        <div class="row">
-          <div class="field"><label>number of dice</label><input type="number" id="diceCount" min="1" max="12" value="2"></div>
-          <div class="field">
-            <label>sides</label>
-            <select id="diceSides">
-              <option value="4">d4</option>
-              <option value="6" selected>d6</option>
-              <option value="8">d8</option>
-              <option value="10">d10</option>
-              <option value="12">d12</option>
-              <option value="20">d20</option>
-              <option value="100">d100</option>
-            </select>
-          </div>
-          <div style="flex:none;align-self:flex-end;"><button id="rollBtn">roll</button></div>
-        </div>
-        <div class="dice-tray" id="diceTray"></div>
-        <div class="result" id="diceSum" style="text-align:center;">—</div>
-      </div>
-    </section>
-
-    <!-- COIN FLIPPER -->
-    <section class="panel" id="panel-coinflip">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/fun/coin-flipper.tool</p>
-        <h2>Coin Flipper</h2>
-      </div>
-      <div class="card" style="text-align:center;">
-        <div class="coin" id="coinEl">?</div>
-        <button id="coinBtn" style="margin-top:16px;">flip</button>
-        <div class="flip-history" id="coinHistory"></div>
-      </div>
-    </section>
-
-    <!-- EXTERNAL LINKS -->
-    <section class="panel" id="panel-links">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/external/redirects</p>
-        <h2>Quick Redirects</h2>
-      </div>
-      <div class="link-grid">
-        <a class="link-card" href="https://www.diffchecker.com/" target="_blank" rel="noopener noreferrer">
-          <div class="name">Diffchecker <span class="go">↗</span></div>
-          <div class="desc">Compare text, files, images, folders.</div>
-          <div class="url">diffchecker.com</div>
-        </a>
-        <a class="link-card" href="https://who.is/" target="_blank" rel="noopener noreferrer">
-          <div class="name">Who.is <span class="go">↗</span></div>
-          <div class="desc">WHOIS domain and DNS lookups.</div>
-          <div class="url">who.is</div>
-        </a>
-        <a class="link-card" href="https://temp-mail.org/" target="_blank" rel="noopener noreferrer">
-          <div class="name">Temp Mail <span class="go">↗</span></div>
-          <div class="desc">Disposable inbox for throwaway signups.</div>
-          <div class="url">temp-mail.org</div>
-        </a>
-        <a class="link-card" href="https://www.remove.bg/" target="_blank" rel="noopener noreferrer">
-          <div class="name">remove.bg <span class="go">↗</span></div>
-          <div class="desc">Automatic background removal for images.</div>
-          <div class="url">remove.bg</div>
-        </a>
-      </div>
-
-      <div class="panel-head" style="margin-top:32px;">
-        <p class="panel-eyebrow">/external/own-projects</p>
-        <h2>More from Donodaseves</h2>
-      </div>
-      <div class="link-grid">
-        <a class="link-card" href="https://donodaseves.github.io/daseailab/" target="_blank" rel="noopener noreferrer">
-          <div class="name">Dase AI Lab <span class="go">↗</span></div>
-          <div class="desc">A dashboard for launching AI models with productivity utilities.</div>
-          <div class="url">donodaseves.github.io/daseailab</div>
-        </a>
-      </div>
-    </section>
-
-    <!-- SHORTCUTS -->
-    <section class="panel" id="panel-shortcuts">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/shortcuts/keyboard.help</p>
-        <h2>Shortcuts</h2>
-      </div>
-      <div class="card">
-        <div class="kbd-row"><span class="desc">Focus the search bar</span><kbd class="key">Ctrl / Cmd + K</kbd></div>
-        <div class="kbd-row"><span class="desc">Jump to the first matching tool</span><kbd class="key">Enter</kbd></div>
-        <div class="kbd-row"><span class="desc">Clear search and unfocus</span><kbd class="key">Esc</kbd></div>
-        <div class="kbd-row"><span class="desc">Zoom the decision tree</span><kbd class="key">Scroll / + / −</kbd></div>
-        <div class="kbd-row"><span class="desc">Open theme / reset / shortcuts menu</span><kbd class="key">⋯ More</kbd></div>
-      </div>
-    </section>
-
-    <!-- ABOUT / SETTINGS -->
-    <section class="panel" id="panel-about">
-      <div class="panel-head">
-        <p class="panel-eyebrow">/settings/about.info</p>
-        <h2>About & Data</h2>
-      </div>
-      <div class="card" style="text-align:center;">
-        <div class="result" id="aboutVersion">Dase Utils — v1.0.0</div>
-        <p class="muted" style="margin-top:10px;">donodaseves.github.io/daseutils</p>
-      </div>
-      <div class="card">
-        <h3>privacy</h3>
-        <p class="muted"><strong>Privacy.</strong> This is a fully client-side app — everything runs in your browser. No data is ever sent to or stored on any external server; every tool's content lives only in this browser's local storage.</p>
-        <p class="muted"><strong>Your data, your control.</strong> You can wipe everything stored by this app at any time using the <strong>⟲ Reset data</strong> option in the ⋯ More menu.</p>
-        <button class="danger" id="resetAllAboutBtn" style="margin-top:8px;">clear ALL data</button>
-      </div>
-      <div class="card">
-        <h3>personal project</h3>
-        <p class="muted"><strong>Personal project.</strong> This is a personal, hobby project provided "as-is," with no guaranteed support or bug fixes.</p>
-        <p class="muted"><strong>Support.</strong> If you find it useful, consider <a href="#" id="aboutDonateLink" target="_blank" rel="noopener">making a donation</a> to help keep it going.</p>
-        <a class="icon-btn" id="donateBtn" href="#" target="_blank" rel="noopener noreferrer" style="display:inline-flex;margin-top:6px;">♥ Donate</a>
-      </div>
-    </section>
-
-    <footer class="foot">Personal project. No support or bug fixes provided.</footer>
-  </main>
+  <main id="main"></main>
 </div>
 
 <script>
 (function(){
   "use strict";
 
-  /* ---------------- navigation ---------------- */
-  var links = document.querySelectorAll('.tool-link');
-  var panels = document.querySelectorAll('.panel');
-  var categoryEls = document.querySelectorAll('.category');
-
-  function showTool(name){
-    links.forEach(function(l){ l.classList.toggle('active', l.dataset.tool === name); });
-    panels.forEach(function(p){ p.classList.toggle('active', p.id === 'panel-' + name); });
-    var navBody = document.getElementById('navBody');
-    if(window.innerWidth <= 880){ navBody.classList.remove('open'); }
-    window.scrollTo({top:0});
-  }
-  links.forEach(function(l){
-    l.addEventListener('click', function(){ showTool(l.dataset.tool); });
-  });
-  document.getElementById('navToggle').addEventListener('click', function(){
-    document.getElementById('navBody').classList.toggle('open');
-  });
-
-  /* collapsible categories - all collapsed by default */
-  categoryEls.forEach(function(cat){
-    var label = cat.querySelector('.category-label');
-    label.addEventListener('click', function(){
-      cat.classList.toggle('expanded');
-    });
-  });
-
-  showTool('about');
-
-  /* ---------------- theme toggle ---------------- */
-  var themeToggleBtn = document.getElementById('theme-toggle');
-  themeToggleBtn.addEventListener('click', function(){
-    var isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-    document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    themeToggleBtn.textContent = isDark ? '☀ Theme' : '☾ Theme';
-  });
-
-  /* ---------------- search ---------------- */
-  var searchInput = document.getElementById('searchInput');
-  var isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
-  document.getElementById('searchKbd').textContent = isMac ? 'Cmd K' : 'Ctrl K';
-
-  function runSearch(){
-    var q = searchInput.value.trim().toLowerCase();
-    document.body.classList.toggle('search-active', q !== '');
-    categoryEls.forEach(function(cat){
-      var toolLinks = cat.querySelectorAll('.tool-link');
-      var anyVisible = false;
-      toolLinks.forEach(function(l){
-        var text = l.textContent.toLowerCase();
-        var match = q === '' || text.indexOf(q) !== -1;
-        l.classList.toggle('hidden-by-search', !match);
-        if(match) anyVisible = true;
-      });
-      cat.classList.toggle('hidden-by-search', q !== '' && !anyVisible);
-    });
-  }
-  searchInput.addEventListener('input', runSearch);
-
-  searchInput.addEventListener('keydown', function(e){
-    if(e.key === 'Enter'){
-      var firstVisible = document.querySelector('.tool-link:not(.hidden-by-search)');
-      if(firstVisible){ firstVisible.click(); }
-    } else if(e.key === 'Escape'){
-      searchInput.value = '';
-      runSearch();
-      searchInput.blur();
-    }
-  });
-
-  document.addEventListener('keydown', function(e){
-    var isShortcut = (e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K');
-    if(isShortcut){
-      e.preventDefault();
-      searchInput.focus();
-      searchInput.select();
-    }
-  });
-
-  /* ---------------- local storage helpers ---------------- */
+  /* =========================================================
+     STORAGE LAYER
+  ========================================================= */
   var STORE_PREFIX = 'daseutils.';
-  var SITE_VERSION = 'v1.0.0';
   var DONATE_URL = '#'; // TODO: replace with your real donate link (Ko-fi / PayPal / Buy Me a Coffee)
-  document.getElementById('versionBadge').textContent = SITE_VERSION;
-  document.getElementById('aboutVersion').textContent = 'Dase Utils — ' + SITE_VERSION;
-  document.getElementById('donateBtn').href = DONATE_URL;
-  document.getElementById('donate-btn').href = DONATE_URL;
-  document.getElementById('aboutDonateLink').href = DONATE_URL;
 
   function storeSet(key, value){ try{ localStorage.setItem(STORE_PREFIX + key, value); }catch(e){} }
   function storeGet(key){ try{ return localStorage.getItem(STORE_PREFIX + key); }catch(e){ return null; } }
   function storeRemove(key){ try{ localStorage.removeItem(STORE_PREFIX + key); }catch(e){} }
 
-  // restores + autosaves a text input/textarea under a storage key.
-  // dispatches an 'input' event after restoring so any live-computed outputs refresh too.
   function bindAutosave(el, key){
     if(!el) return;
     var saved = storeGet(key);
@@ -1220,9 +395,8 @@
     storeRemove(key);
     if(el){ el.value = defaultVal !== undefined ? defaultVal : ''; el.dispatchEvent(new Event('input')); }
   }
-
   function resetAllData(){
-    var ok = confirm('This clears all saved data (tool inputs, canvas, decision tree, theme) and reloads the page. Continue?');
+    var ok = confirm('This clears all saved data (tool inputs, decision tree, theme) and reloads the page. Continue?');
     if(!ok) return;
     var keys = [];
     for(var i=0;i<localStorage.length;i++){
@@ -1232,10 +406,1393 @@
     keys.forEach(function(k){ localStorage.removeItem(k); });
     location.reload();
   }
-  document.getElementById('reset-storage').addEventListener('click', resetAllData);
-  document.getElementById('resetAllAboutBtn').addEventListener('click', resetAllData);
 
-  /* ---------------- more menu ---------------- */
+  /* =========================================================
+     GENERIC HELPERS
+  ========================================================= */
+  function fmt(n){
+    if(!isFinite(n)) return '—';
+    return (Math.round(n * 10000) / 10000).toString();
+  }
+  function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function pad2(n){ return n.toString().padStart(2,'0'); }
+  function randOf(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+  function beep(){
+    try{
+      var ac = new (window.AudioContext || window.webkitAudioContext)();
+      var o = ac.createOscillator(), g = ac.createGain();
+      o.connect(g); g.connect(ac.destination);
+      o.frequency.value = 880; g.gain.value = 0.15;
+      o.start();
+      setTimeout(function(){ o.stop(); ac.close(); }, 400);
+    }catch(e){}
+  }
+  function $(sel, root){ return (root||document).querySelector(sel); }
+  function $all(sel, root){ return Array.prototype.slice.call((root||document).querySelectorAll(sel)); }
+
+  function getElText(el){
+    if(!el) return '';
+    if('value' in el) return el.value;
+    return el.textContent;
+  }
+  function copyText(text){ navigator.clipboard && navigator.clipboard.writeText(text).catch(function(){}); }
+  function saveText(text, filename){
+    var blob = new Blob([text], {type:'text/plain'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = filename || 'output.txt';
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  }
+  // generic delegated copy/save — any element with class copy-btn/save-btn + data-target works, anywhere
+  document.addEventListener('click', function(e){
+    var copyBtn = e.target.closest('.copy-btn');
+    if(copyBtn){ copyText(getElText(document.getElementById(copyBtn.dataset.target))); return; }
+    var saveBtn = e.target.closest('.save-btn');
+    if(saveBtn){ saveText(getElText(document.getElementById(saveBtn.dataset.target)), saveBtn.dataset.filename); }
+  });
+
+  function outputActions(targetId, filename, extraBtnHtml){
+    return (
+      '<div class="output-actions">' +
+        '<button class="secondary small copy-btn" data-target="' + targetId + '">copy</button>' +
+        '<button class="secondary small save-btn" data-target="' + targetId + '" data-filename="' + filename + '">save .txt</button>' +
+        (extraBtnHtml || '') +
+      '</div>'
+    );
+  }
+
+  /* =========================================================
+     CATEGORY METADATA (order defines sidebar order)
+  ========================================================= */
+  var CATEGORIES = [
+    { id:'calculators', label:'/calculators' },
+    { id:'text',        label:'/text' },
+    { id:'generators',  label:'/generators' },
+    { id:'design',      label:'/design' },
+    { id:'timers',      label:'/timers' },
+    { id:'fun',         label:'/fun' },
+    { id:'external',    label:'/external' },
+    { id:'shortcuts',   label:'/shortcuts' },
+    { id:'settings',    label:'/settings' }
+  ];
+
+  /* =========================================================
+     TOOL REGISTRY — populated by tool modules below.
+     Each tool: { id, category, navLabel, ext, eyebrow, title, render(), init(panelEl) }
+  ========================================================= */
+  var TOOLS = [];
+  function registerTool(def){ TOOLS.push(def); }
+
+  /* =========================================================
+     CALCULATORS
+  ========================================================= */
+
+  registerTool({
+    id:'percent', category:'calculators', navLabel:'percentage', ext:'.calc',
+    eyebrow:'/calculators/percentage.calc', title:'% Math Calculator',
+    render: function(){
+      return (
+        '<div class="card-grid">' +
+          '<div class="card"><h3>what is X% of Y</h3>' +
+            '<div class="field-grid">' +
+              '<div class="field"><label>X (%)</label><input type="number" id="p1x" placeholder="e.g. 15"></div>' +
+              '<div class="field"><label>Y</label><input type="number" id="p1y" placeholder="e.g. 200"></div>' +
+            '</div>' +
+            '<div class="result" id="p1r">—</div>' +
+          '</div>' +
+          '<div class="card"><h3>X is what % of Y</h3>' +
+            '<div class="field-grid">' +
+              '<div class="field"><label>X</label><input type="number" id="p2x" placeholder="e.g. 30"></div>' +
+              '<div class="field"><label>Y</label><input type="number" id="p2y" placeholder="e.g. 200"></div>' +
+            '</div>' +
+            '<div class="result" id="p2r">—</div>' +
+          '</div>' +
+          '<div class="card"><h3>% change from X to Y</h3>' +
+            '<div class="field-grid">' +
+              '<div class="field"><label>X (start)</label><input type="number" id="p3x" placeholder="e.g. 80"></div>' +
+              '<div class="field"><label>Y (end)</label><input type="number" id="p3y" placeholder="e.g. 100"></div>' +
+            '</div>' +
+            '<div class="result" id="p3r">—</div>' +
+          '</div>' +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      function bindPercent(xid, yid, rid, fn){
+        var x = $('#'+xid, panel), y = $('#'+yid, panel), r = $('#'+rid, panel);
+        function calc(){
+          var xv = parseFloat(x.value), yv = parseFloat(y.value);
+          if(isNaN(xv) || isNaN(yv)){ r.textContent = '—'; return; }
+          r.textContent = fn(xv, yv);
+        }
+        x.addEventListener('input', calc);
+        y.addEventListener('input', calc);
+      }
+      bindPercent('p1x','p1y','p1r', function(x,y){ return x + '% of ' + y + ' = ' + fmt(x/100*y); });
+      bindPercent('p2x','p2y','p2r', function(x,y){ if(y===0) return 'y cannot be 0'; return x + ' is ' + fmt(x/y*100) + '% of ' + y; });
+      bindPercent('p3x','p3y','p3r', function(x,y){
+        if(x===0) return 'x cannot be 0';
+        var change = (y-x)/x*100;
+        var sign = change >= 0 ? '+' : '';
+        return sign + fmt(change) + '%  (' + (change>=0?'increase':'decrease') + ')';
+      });
+    }
+  });
+
+  registerTool({
+    id:'ppu', category:'calculators', navLabel:'price-per-unit', ext:'.calc',
+    eyebrow:'/calculators/price-per-unit.calc', title:'Price-per-Unit Comparison',
+    render: function(){
+      return (
+        '<div class="card">' +
+          '<table id="ppuTable">' +
+            '<thead><tr><th>item</th><th>price</th><th>qty</th><th>unit</th><th>per unit</th><th></th></tr></thead>' +
+            '<tbody id="ppuBody"></tbody>' +
+          '</table>' +
+          '<div class="output-actions">' +
+            '<button class="secondary small" id="ppuAdd">+ add item</button>' +
+            '<button class="secondary small" id="ppuReset">clear</button>' +
+          '</div>' +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      var ppuBody = $('#ppuBody', panel);
+      var ppuDefaultRows = [['brand A', 3.49, 500, 'g'], ['brand B', 5.99, 1000, 'g']];
+      function ppuAddRow(name, price, qty, unit){
+        var tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td><input type="text" class="ppuName" value="'+(name||'')+'" placeholder="item" style="min-width:90px;"></td>' +
+          '<td><input type="number" class="ppuPrice" value="'+(price!==undefined?price:'')+'" placeholder="0.00" style="width:80px;"></td>' +
+          '<td><input type="number" class="ppuQty" value="'+(qty!==undefined?qty:'')+'" placeholder="0" style="width:70px;"></td>' +
+          '<td><input type="text" class="ppuUnit" value="'+(unit||'')+'" placeholder="g/ml/pcs" style="width:70px;"></td>' +
+          '<td class="ppuPer">—</td>' +
+          '<td><button class="secondary small ppuDel">×</button></td>';
+        ppuBody.appendChild(tr);
+        tr.querySelectorAll('input').forEach(function(inp){ inp.addEventListener('input', function(){ ppuRecalc(); ppuSave(); }); });
+        tr.querySelector('.ppuDel').addEventListener('click', function(){ tr.remove(); ppuRecalc(); ppuSave(); });
+        ppuRecalc();
+      }
+      function ppuRecalc(){
+        var rows = $all('tr', ppuBody);
+        var best = null, bestVal = Infinity;
+        rows.forEach(function(tr){
+          var price = parseFloat(tr.querySelector('.ppuPrice').value);
+          var qty = parseFloat(tr.querySelector('.ppuQty').value);
+          var per = tr.querySelector('.ppuPer');
+          tr.classList.remove('best');
+          if(isNaN(price) || isNaN(qty) || qty <= 0){ per.textContent = '—'; return; }
+          var val = price / qty;
+          per.textContent = fmt(val) + ' / ' + (tr.querySelector('.ppuUnit').value || 'unit');
+          if(val < bestVal){ bestVal = val; best = tr; }
+        });
+        if(best) best.classList.add('best');
+      }
+      function ppuSave(){
+        var rows = $all('tr', ppuBody).map(function(tr){
+          return [
+            tr.querySelector('.ppuName').value, tr.querySelector('.ppuPrice').value,
+            tr.querySelector('.ppuQty').value, tr.querySelector('.ppuUnit').value
+          ];
+        });
+        storeSet('ppuRows', JSON.stringify(rows));
+      }
+      (function ppuLoad(){
+        var saved = storeGet('ppuRows');
+        var rows = ppuDefaultRows;
+        if(saved){ try{ var parsed = JSON.parse(saved); if(parsed && parsed.length) rows = parsed; }catch(e){} }
+        rows.forEach(function(r){ ppuAddRow(r[0], r[1], r[2], r[3]); });
+      })();
+      $('#ppuAdd', panel).addEventListener('click', function(){ ppuAddRow(); ppuSave(); });
+      $('#ppuReset', panel).addEventListener('click', function(){
+        storeRemove('ppuRows');
+        ppuBody.innerHTML = '';
+        ppuDefaultRows.forEach(function(r){ ppuAddRow(r[0], r[1], r[2], r[3]); });
+      });
+    }
+  });
+
+  registerTool({
+    id:'unitconv', category:'calculators', navLabel:'unit-converter', ext:'.calc',
+    eyebrow:'/calculators/unit-converter.calc', title:'Unit Converter',
+    render: function(){
+      return (
+        '<div class="card">' +
+          '<div class="field-grid">' +
+            '<div class="field"><label>category</label><select id="ucCategory"><option value="length">length</option><option value="weight">weight</option><option value="temperature">temperature</option></select></div>' +
+            '<div class="field"><label>value</label><input type="number" id="ucValue" value="1"></div>' +
+            '<div class="field"><label>from</label><select id="ucFrom"></select></div>' +
+            '<div class="field"><label>to</label><select id="ucTo"></select></div>' +
+          '</div>' +
+          '<div class="result" id="ucResult">—</div>' +
+          outputActions('ucResult', 'unit-conversion.txt') +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      var ucUnits = {
+        length: { mm:0.001, cm:0.01, m:1, km:1000, 'in':0.0254, ft:0.3048, yd:0.9144, mi:1609.344 },
+        weight: { mg:0.001, g:1, kg:1000, oz:28.3495, lb:453.592 },
+        temperature: { C:1, F:1, K:1 }
+      };
+      var ucCategory = $('#ucCategory', panel), ucFrom = $('#ucFrom', panel), ucTo = $('#ucTo', panel),
+          ucValue = $('#ucValue', panel), ucResult = $('#ucResult', panel);
+
+      function ucPopulate(){
+        var cat = ucCategory.value;
+        var units = Object.keys(ucUnits[cat]);
+        ucFrom.innerHTML = units.map(function(u){ return '<option value="'+u+'">'+u+'</option>'; }).join('');
+        ucTo.innerHTML = units.map(function(u){ return '<option value="'+u+'">'+u+'</option>'; }).join('');
+        if(units.length > 1) ucTo.selectedIndex = 1;
+        ucCalc();
+      }
+      function tempToCelsius(v, unit){ if(unit==='C') return v; if(unit==='F') return (v-32)*5/9; if(unit==='K') return v-273.15; }
+      function celsiusTo(v, unit){ if(unit==='C') return v; if(unit==='F') return v*9/5+32; if(unit==='K') return v+273.15; }
+      function ucCalc(){
+        var cat = ucCategory.value;
+        var v = parseFloat(ucValue.value);
+        if(isNaN(v)){ ucResult.textContent = '—'; return; }
+        var from = ucFrom.value, to = ucTo.value, result;
+        if(cat === 'temperature'){ result = celsiusTo(tempToCelsius(v, from), to); }
+        else { result = (v * ucUnits[cat][from]) / ucUnits[cat][to]; }
+        ucResult.textContent = v + ' ' + from + ' = ' + fmt(result) + ' ' + to;
+      }
+      ucCategory.addEventListener('change', ucPopulate);
+      [ucValue, ucFrom, ucTo].forEach(function(el){ el.addEventListener('input', ucCalc); el.addEventListener('change', ucCalc); });
+      ucPopulate();
+    }
+  });
+
+  /* =========================================================
+     TEXT TOOLS
+  ========================================================= */
+
+  registerTool({
+    id:'diffchecker', category:'text', navLabel:'diff-checker', ext:'.txt',
+    eyebrow:'/text/diff-checker.txt', title:'Diff Checker',
+    render: function(){
+      return (
+        '<div class="card">' +
+          '<div class="io-grid">' +
+            '<div class="field"><label>text A</label><textarea id="diffA" placeholder="original text…"></textarea></div>' +
+            '<div class="field"><label>text B</label><textarea id="diffB" placeholder="changed text…"></textarea></div>' +
+          '</div>' +
+          '<div class="action-row">' +
+            '<button id="diffBtn">compare</button>' +
+            '<button class="secondary" id="diffResetBtn">clear</button>' +
+          '</div>' +
+          '<div class="diff-output" id="diffOutput">run a comparison to see exactly which words changed</div>' +
+          '<div class="diff-legend"><span class="add">■ added</span><span class="del">■ removed</span></div>' +
+          '<textarea id="diffOutputText" style="display:none;"></textarea>' +
+          outputActions('diffOutputText', 'diff.txt') +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      function tokenize(s){ return s.match(/\n|[^\S\n]+|\S+/g) || []; }
+      function diffTokens(a, b){
+        var ta = tokenize(a), tb = tokenize(b);
+        var n = ta.length, m = tb.length;
+        var dp = [];
+        for(var i=0;i<=n;i++) dp.push(new Array(m+1).fill(0));
+        for(i=n-1;i>=0;i--){
+          for(var j=m-1;j>=0;j--){
+            if(ta[i] === tb[j]) dp[i][j] = dp[i+1][j+1] + 1;
+            else dp[i][j] = Math.max(dp[i+1][j], dp[i][j+1]);
+          }
+        }
+        var res = []; i = 0; var jj = 0;
+        while(i < n && jj < m){
+          if(ta[i] === tb[jj]){ res.push({type:'same', text:ta[i]}); i++; jj++; }
+          else if(dp[i+1][jj] >= dp[i][jj+1]){ res.push({type:'del', text:ta[i]}); i++; }
+          else { res.push({type:'add', text:tb[jj]}); jj++; }
+        }
+        while(i < n){ res.push({type:'del', text:ta[i]}); i++; }
+        while(jj < m){ res.push({type:'add', text:tb[jj]}); jj++; }
+        return res;
+      }
+      $('#diffBtn', panel).addEventListener('click', function(){
+        var a = $('#diffA', panel).value, b = $('#diffB', panel).value;
+        var diff = diffTokens(a, b);
+        var html = [], plain = [];
+        diff.forEach(function(d){
+          if(d.type === 'same'){ html.push('<span class="diff-same">' + esc(d.text) + '</span>'); plain.push(d.text); }
+          else if(d.type === 'add'){ html.push('<span class="diff-line diff-add">' + esc(d.text) + '</span>'); plain.push('[+' + d.text + ']'); }
+          else { html.push('<span class="diff-line diff-del">' + esc(d.text) + '</span>'); plain.push('[-' + d.text + ']'); }
+        });
+        var hasChanges = diff.some(function(d){ return d.type !== 'same'; });
+        $('#diffOutput', panel).innerHTML = hasChanges ? html.join('') : '<span class="diff-same">no differences</span>';
+        $('#diffOutputText', panel).value = plain.join('');
+      });
+      bindAutosave($('#diffA', panel), 'diffA');
+      bindAutosave($('#diffB', panel), 'diffB');
+      $('#diffResetBtn', panel).addEventListener('click', function(){
+        resetField($('#diffA', panel), 'diffA');
+        resetField($('#diffB', panel), 'diffB');
+        $('#diffOutput', panel).innerHTML = 'run a comparison to see exactly which words changed';
+        $('#diffOutputText', panel).value = '';
+      });
+    }
+  });
+
+  registerTool({
+    id:'case', category:'text', navLabel:'case-converter', ext:'.txt',
+    eyebrow:'/text/case-converter.txt', title:'Case Converter',
+    render: function(){
+      return (
+        '<div class="card">' +
+          '<div class="action-row" style="margin-top:0;margin-bottom:10px;">' +
+            '<button class="secondary small" id="caseUpperBtn">UPPERCASE</button>' +
+            '<button class="secondary small" id="caseLowerBtn">lowercase</button>' +
+            '<button class="secondary small" id="caseTitleBtn">Title Case</button>' +
+          '</div>' +
+          '<div class="io-grid">' +
+            '<div class="field"><label>input</label><textarea id="caseIn" placeholder="type or paste text…"></textarea></div>' +
+            '<div class="field"><label>output</label><textarea id="caseOut" readonly></textarea></div>' +
+          '</div>' +
+          outputActions('caseOut', 'converted-text.txt', '<button class="secondary small" id="caseReset">clear</button>') +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      var caseIn = $('#caseIn', panel), caseOut = $('#caseOut', panel);
+      var lastCaseFn = null;
+      function applyCase(fn){ lastCaseFn = fn; caseOut.value = fn(caseIn.value); }
+      $('#caseUpperBtn', panel).addEventListener('click', function(){ applyCase(function(s){ return s.toUpperCase(); }); });
+      $('#caseLowerBtn', panel).addEventListener('click', function(){ applyCase(function(s){ return s.toLowerCase(); }); });
+      $('#caseTitleBtn', panel).addEventListener('click', function(){
+        applyCase(function(s){ return s.replace(/\w\S*/g, function(w){ return w.charAt(0).toUpperCase() + w.substr(1).toLowerCase(); }); });
+      });
+      caseIn.addEventListener('input', function(){ if(lastCaseFn){ caseOut.value = lastCaseFn(caseIn.value); } });
+      bindAutosave(caseIn, 'caseIn');
+      $('#caseReset', panel).addEventListener('click', function(){
+        resetField(caseIn, 'caseIn'); caseOut.value = ''; lastCaseFn = null;
+      });
+    }
+  });
+
+  registerTool({
+    id:'textstats', category:'text', navLabel:'text-stats', ext:'.txt',
+    eyebrow:'/text/text-stats.txt', title:'Word, Character & Line Counter',
+    render: function(){
+      return (
+        '<div class="card">' +
+          '<label>input</label><textarea id="statsIn" placeholder="type or paste text…"></textarea>' +
+          '<div class="result" id="statsResult">words: 0 · characters: 0 · characters (no spaces): 0 · sentences: 0 · lines: 0 · non-empty lines: 0</div>' +
+          outputActions('statsResult', 'text-stats.txt', '<button class="secondary small" id="statsReset">clear</button>') +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      var statsIn = $('#statsIn', panel), statsResult = $('#statsResult', panel);
+      statsIn.addEventListener('input', function(){
+        var text = statsIn.value;
+        var words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+        var chars = text.length;
+        var charsNoSpaces = text.replace(/\s/g,'').length;
+        var sentences = text.trim() === '' ? 0 : (text.match(/[.!?]+/g) || []).length;
+        var lines = text.length === 0 ? [] : text.split('\n');
+        var nonEmptyLines = lines.filter(function(l){ return l.trim() !== ''; }).length;
+        statsResult.textContent = 'words: ' + words + ' · characters: ' + chars + ' · characters (no spaces): ' + charsNoSpaces +
+          ' · sentences: ' + sentences + ' · lines: ' + lines.length + ' · non-empty lines: ' + nonEmptyLines;
+      });
+      bindAutosave(statsIn, 'statsIn');
+      $('#statsReset', panel).addEventListener('click', function(){ resetField(statsIn, 'statsIn'); });
+    }
+  });
+
+  registerTool({
+    id:'textcleaner', category:'text', navLabel:'text-cleaner', ext:'.txt',
+    eyebrow:'/text/text-cleaner.txt', title:'Text Cleaner & Whitespace Remover',
+    render: function(){
+      return (
+        '<div class="card">' +
+          '<div class="io-grid">' +
+            '<div class="field"><label>input</label><textarea id="tcIn" placeholder="type or paste text…"></textarea></div>' +
+            '<div class="field"><label>output</label><textarea id="tcOut" readonly></textarea></div>' +
+          '</div>' +
+          '<div class="action-row" style="margin-top:12px;">' +
+            '<label class="checkfield"><input type="checkbox" id="tcTrim" checked> trim each line</label>' +
+            '<label class="checkfield"><input type="checkbox" id="tcEmpty" checked> remove empty lines</label>' +
+            '<label class="checkfield"><input type="checkbox" id="tcSpaces" checked> collapse spaces</label>' +
+            '<label class="checkfield"><input type="checkbox" id="tcHtml"> strip HTML tags</label>' +
+          '</div>' +
+          '<div class="action-row">' +
+            '<button id="tcBtn">clean</button>' +
+            '<button class="secondary" id="wsAll">remove ALL whitespace</button>' +
+          '</div>' +
+          outputActions('tcOut', 'cleaned-text.txt', '<button class="secondary small" id="tcReset">clear</button>') +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      $('#tcBtn', panel).addEventListener('click', function(){
+        var text = $('#tcIn', panel).value;
+        if($('#tcHtml', panel).checked){ text = text.replace(/<[^>]*>/g, ''); }
+        var lines = text.split('\n');
+        if($('#tcTrim', panel).checked){ lines = lines.map(function(l){ return l.trim(); }); }
+        if($('#tcSpaces', panel).checked){ lines = lines.map(function(l){ return l.replace(/[ \t]+/g,' '); }); }
+        if($('#tcEmpty', panel).checked){ lines = lines.filter(function(l){ return l.trim() !== ''; }); }
+        $('#tcOut', panel).value = lines.join('\n');
+      });
+      $('#wsAll', panel).addEventListener('click', function(){
+        $('#tcOut', panel).value = $('#tcIn', panel).value.replace(/\s+/g,'');
+      });
+      bindAutosave($('#tcIn', panel), 'tcIn');
+      $('#tcReset', panel).addEventListener('click', function(){
+        resetField($('#tcIn', panel), 'tcIn'); $('#tcOut', panel).value = '';
+      });
+    }
+  });
+
+  registerTool({
+    id:'listsorter', category:'text', navLabel:'list-sorter', ext:'.txt',
+    eyebrow:'/text/list-sorter.txt', title:'List Sorter / Deduplicator',
+    render: function(){
+      return (
+        '<div class="card">' +
+          '<label>list (one item per line)</label>' +
+          '<textarea id="lsIn" placeholder="banana&#10;apple&#10;apple&#10;cherry"></textarea>' +
+          '<div class="action-row">' +
+            '<button class="secondary small" id="lsAZ">sort A → Z</button>' +
+            '<button class="secondary small" id="lsZA">sort Z → A</button>' +
+            '<button class="secondary small" id="lsDedupe">remove duplicates</button>' +
+            '<button class="secondary small" id="lsShuffle">shuffle</button>' +
+            '<label class="checkfield"><input type="checkbox" id="lsCase"> case-insensitive</label>' +
+          '</div>' +
+          outputActions('lsIn', 'list.txt', '<button class="secondary small" id="lsReset">clear</button>') +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      var lsIn = $('#lsIn', panel), lsCase = $('#lsCase', panel);
+      function lsGetItems(){ return lsIn.value.split('\n').filter(function(s){ return s.trim() !== ''; }); }
+      $('#lsAZ', panel).addEventListener('click', function(){
+        var items = lsGetItems();
+        items.sort(function(a,b){ return lsCase.checked ? a.toLowerCase().localeCompare(b.toLowerCase()) : a.localeCompare(b); });
+        lsIn.value = items.join('\n');
+      });
+      $('#lsZA', panel).addEventListener('click', function(){
+        var items = lsGetItems();
+        items.sort(function(a,b){ return lsCase.checked ? b.toLowerCase().localeCompare(a.toLowerCase()) : b.localeCompare(a); });
+        lsIn.value = items.join('\n');
+      });
+      $('#lsDedupe', panel).addEventListener('click', function(){
+        var items = lsGetItems(); var seen = {}, out = [];
+        items.forEach(function(it){
+          var key = lsCase.checked ? it.toLowerCase() : it;
+          if(!seen[key]){ seen[key] = true; out.push(it); }
+        });
+        lsIn.value = out.join('\n');
+      });
+      $('#lsShuffle', panel).addEventListener('click', function(){
+        var items = lsGetItems();
+        for(var i = items.length-1; i>0; i--){
+          var j = Math.floor(Math.random()*(i+1));
+          var tmp = items[i]; items[i] = items[j]; items[j] = tmp;
+        }
+        lsIn.value = items.join('\n');
+      });
+      bindAutosave(lsIn, 'lsIn');
+      $('#lsReset', panel).addEventListener('click', function(){ resetField(lsIn, 'lsIn'); });
+    }
+  });
+
+  /* =========================================================
+     GENERATORS
+  ========================================================= */
+
+  registerTool({
+    id:'picker', category:'generators', navLabel:'random-picker', ext:'.gen',
+    eyebrow:'/generators/random-picker.gen', title:'Random Picker',
+    render: function(){
+      return (
+        '<div class="card">' +
+          '<label>options</label>' +
+          '<textarea id="pickerList" placeholder="pizza&#10;sushi&#10;tacos&#10;burgers"></textarea>' +
+          '<div class="action-row">' +
+            '<label class="checkfield"><input type="checkbox" id="pickerRemove"> remove after pick</label>' +
+            '<button id="pickerBtn">pick one</button>' +
+            '<button class="secondary" id="pickerReset">clear</button>' +
+          '</div>' +
+          '<div class="result" id="pickerResult">—</div>' +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      var pickerList = $('#pickerList', panel), pickerResult = $('#pickerResult', panel), pickerRemove = $('#pickerRemove', panel);
+      $('#pickerBtn', panel).addEventListener('click', function(){
+        var items = pickerList.value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
+        if(items.length === 0){ pickerResult.textContent = 'add at least one option'; return; }
+        var idx = Math.floor(Math.random() * items.length);
+        pickerResult.textContent = '→ ' + items[idx];
+        if(pickerRemove.checked){ items.splice(idx, 1); pickerList.value = items.join('\n'); }
+      });
+      bindAutosave(pickerList, 'pickerList');
+      $('#pickerReset', panel).addEventListener('click', function(){
+        resetField(pickerList, 'pickerList'); pickerResult.textContent = '—';
+      });
+    }
+  });
+
+  registerTool({
+    id:'decisiontree', category:'generators', navLabel:'decision-tree', ext:'.gen',
+    eyebrow:'/generators/decision-tree.gen', title:'Decision Tree Generator',
+    render: function(){
+      return (
+        '<div class="card">' +
+          '<div class="tree-toolbar">' +
+            '<button class="secondary small" id="treeZoomOut">−</button>' +
+            '<span id="treeZoomLabel">100%</span>' +
+            '<button class="secondary small" id="treeZoomIn">+</button>' +
+            '<button class="secondary small" id="treeZoomReset">reset zoom</button>' +
+            '<button class="secondary small" id="treeFullscreen">⛶ expand</button>' +
+          '</div>' +
+          '<div class="tree-scroll" id="treeScroll"><div class="tree-diagram" id="treeRoot"></div></div>' +
+          '<div class="action-row" style="justify-content:center;">' +
+            '<button class="secondary small" id="treeReset">clear tree</button>' +
+          '</div>' +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      var tree = { type:'question', text:'', yes:null, no:null };
+      var treeRoot = $('#treeRoot', panel);
+      var treeScroll = $('#treeScroll', panel);
+
+      function newNode(){ return {type:'question', text:'', yes:null, no:null}; }
+      function buildCard(node){
+        var card = document.createElement('div');
+        card.className = 'tree-card' + (node.type === 'outcome' ? ' outcome' : '');
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = node.type === 'outcome' ? 'outcome…' : 'question…';
+        input.value = node.text;
+        input.addEventListener('input', function(){ node.text = input.value; });
+        card.appendChild(input);
+        var actions = document.createElement('div');
+        actions.className = 'node-actions';
+        if(node.type === 'question'){
+          if(!node.yes){
+            var addYes = document.createElement('button');
+            addYes.className = 'secondary small'; addYes.textContent = '+ yes';
+            addYes.addEventListener('click', function(){ node.yes = newNode(); render(); });
+            actions.appendChild(addYes);
+          }
+          if(!node.no){
+            var addNo = document.createElement('button');
+            addNo.className = 'secondary small'; addNo.textContent = '+ no';
+            addNo.addEventListener('click', function(){ node.no = newNode(); render(); });
+            actions.appendChild(addNo);
+          }
+          var toOutcome = document.createElement('button');
+          toOutcome.className = 'secondary small'; toOutcome.textContent = 'set as outcome';
+          toOutcome.addEventListener('click', function(){ node.type = 'outcome'; delete node.yes; delete node.no; render(); });
+          actions.appendChild(toOutcome);
+        } else {
+          var toQuestion = document.createElement('button');
+          toQuestion.className = 'secondary small'; toQuestion.textContent = 'set as question';
+          toQuestion.addEventListener('click', function(){ node.type = 'question'; node.yes = null; node.no = null; render(); });
+          actions.appendChild(toQuestion);
+        }
+        card.appendChild(actions);
+        return card;
+      }
+      function buildNode(node){
+        var wrap = document.createElement('div');
+        wrap.className = 'tree-node';
+        wrap.appendChild(buildCard(node));
+        if(node.type === 'question' && (node.yes || node.no)){
+          var childrenRow = document.createElement('div');
+          var branches = [];
+          if(node.yes) branches.push({label:'yes', child:node.yes});
+          if(node.no) branches.push({label:'no', child:node.no});
+          childrenRow.className = 'tree-children' + (branches.length === 1 ? ' single' : '');
+          branches.forEach(function(b){
+            var branch = document.createElement('div');
+            branch.className = 'tree-branch';
+            var lbl = document.createElement('div');
+            lbl.className = 'branch-label'; lbl.textContent = b.label;
+            branch.appendChild(lbl);
+            branch.appendChild(buildNode(b.child));
+            childrenRow.appendChild(branch);
+          });
+          wrap.appendChild(childrenRow);
+        }
+        return wrap;
+      }
+      function render(){
+        treeRoot.innerHTML = '';
+        treeRoot.appendChild(buildNode(tree));
+        storeSet('decisionTree', JSON.stringify(tree));
+      }
+      (function loadTree(){
+        var saved = storeGet('decisionTree');
+        if(saved){ try{ var parsed = JSON.parse(saved); if(parsed && parsed.type) tree = parsed; }catch(e){} }
+      })();
+      $('#treeReset', panel).addEventListener('click', function(){
+        tree = { type:'question', text:'', yes:null, no:null };
+        storeRemove('decisionTree');
+        render();
+      });
+      render();
+
+      // pan + zoom (translate/scale only affects the diagram, never the fixed viewport)
+      var isPanning = false, panStartX = 0, panStartY = 0, panX = 0, panY = 0, panStartPanX = 0, panStartPanY = 0;
+      var zoomLevel = 1;
+      var treeZoomLabel = $('#treeZoomLabel', panel);
+
+      function applyTransform(){
+        treeRoot.style.transform = 'translate(calc(-50% + ' + panX + 'px), ' + panY + 'px) scale(' + zoomLevel + ')';
+        treeZoomLabel.textContent = Math.round(zoomLevel * 100) + '%';
+      }
+      function isInteractive(el){ return !!el.closest('input, button, textarea, select, a'); }
+      function panStart(e){
+        if(isInteractive(e.target)) return;
+        isPanning = true;
+        treeScroll.classList.add('panning');
+        var p = e.touches ? e.touches[0] : e;
+        panStartX = p.clientX; panStartY = p.clientY;
+        panStartPanX = panX; panStartPanY = panY;
+      }
+      function panMove(e){
+        if(!isPanning) return;
+        var p = e.touches ? e.touches[0] : e;
+        panX = panStartPanX + (p.clientX - panStartX);
+        panY = panStartPanY + (p.clientY - panStartY);
+        applyTransform();
+        if(e.touches) e.preventDefault();
+      }
+      function panEnd(){ isPanning = false; treeScroll.classList.remove('panning'); }
+      treeScroll.addEventListener('mousedown', panStart);
+      window.addEventListener('mousemove', panMove);
+      window.addEventListener('mouseup', panEnd);
+      treeScroll.addEventListener('touchstart', panStart, {passive:true});
+      treeScroll.addEventListener('touchmove', panMove, {passive:false});
+      treeScroll.addEventListener('touchend', panEnd);
+
+      $('#treeZoomIn', panel).addEventListener('click', function(){ zoomLevel = Math.min(2, +(zoomLevel+0.1).toFixed(2)); applyTransform(); });
+      $('#treeZoomOut', panel).addEventListener('click', function(){ zoomLevel = Math.max(0.4, +(zoomLevel-0.1).toFixed(2)); applyTransform(); });
+      $('#treeZoomReset', panel).addEventListener('click', function(){ zoomLevel = 1; panX = 0; panY = 0; applyTransform(); });
+      treeScroll.addEventListener('wheel', function(e){
+        e.preventDefault();
+        var delta = e.deltaY > 0 ? -0.05 : 0.05;
+        zoomLevel = Math.min(2, Math.max(0.4, +(zoomLevel+delta).toFixed(2)));
+        applyTransform();
+      }, {passive:false});
+      applyTransform();
+
+      // fullscreen toggle
+      var fsBtn = $('#treeFullscreen', panel);
+      function setFullscreen(on){
+        treeScroll.classList.toggle('fullscreen', on);
+        fsBtn.textContent = on ? '✕ exit' : '⛶ expand';
+      }
+      fsBtn.addEventListener('click', function(){ setFullscreen(!treeScroll.classList.contains('fullscreen')); });
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape' && treeScroll.classList.contains('fullscreen')) setFullscreen(false);
+      });
+    }
+  });
+
+  registerTool({
+    id:'lorem', category:'generators', navLabel:'lorem-ipsum', ext:'.gen',
+    eyebrow:'/generators/lorem-ipsum.gen', title:'Lorem Ipsum & Placeholder Data',
+    render: function(){
+      return (
+        '<div class="card-grid">' +
+          '<div class="card"><h3>lorem ipsum</h3>' +
+            '<div class="field-grid">' +
+              '<div class="field"><label>paragraphs</label><input type="number" id="loremCount" min="1" max="20" value="3"></div>' +
+            '</div>' +
+            '<button id="loremBtn">generate</button>' +
+            '<textarea id="loremOut" style="min-height:160px;margin-top:10px;" readonly></textarea>' +
+            outputActions('loremOut', 'lorem-ipsum.txt', '<button class="secondary small" id="loremClear">clear</button>') +
+          '</div>' +
+          '<div class="card"><h3>placeholder data</h3>' +
+            '<div class="field-grid">' +
+              '<div class="field"><label>rows</label><input type="number" id="fakeCount" min="1" max="50" value="8"></div>' +
+            '</div>' +
+            '<button id="fakeBtn">generate</button>' +
+            '<div style="overflow-x:auto;margin-top:10px;"><table id="fakeTable"><thead><tr><th>name</th><th>email</th><th>phone</th><th>city</th></tr></thead><tbody id="fakeBody"></tbody></table></div>' +
+            '<textarea id="fakeJson" style="display:none;"></textarea>' +
+            outputActions('fakeJson', 'placeholder-data.json', '<button class="secondary small" id="fakeClear">clear</button>').replace('copy</button>','copy as JSON</button>') +
+          '</div>' +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      var loremWords = ("lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor " +
+        "incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation " +
+        "ullamco laboris nisi aliquip ex ea commodo consequat duis aute irure in reprehenderit " +
+        "voluptate velit esse cillum eu fugiat nulla pariatur excepteur sint occaecat cupidatat " +
+        "non proident sunt culpa qui officia deserunt mollit anim id est laborum").split(' ');
+      function sentence(){
+        var len = 6 + Math.floor(Math.random()*10);
+        var words = [];
+        for(var i=0;i<len;i++){ words.push(loremWords[Math.floor(Math.random()*loremWords.length)]); }
+        var s = words.join(' ');
+        return s.charAt(0).toUpperCase() + s.slice(1) + '.';
+      }
+      function paragraph(){
+        var n = 3 + Math.floor(Math.random()*4);
+        var out = [];
+        for(var i=0;i<n;i++){ out.push(sentence()); }
+        return out.join(' ');
+      }
+      $('#loremBtn', panel).addEventListener('click', function(){
+        var n = Math.max(1, Math.min(20, parseInt($('#loremCount', panel).value,10) || 3));
+        var paras = [];
+        for(var i=0;i<n;i++){ paras.push(paragraph()); }
+        $('#loremOut', panel).value = paras.join('\n\n');
+      });
+      $('#loremClear', panel).addEventListener('click', function(){ $('#loremOut', panel).value = ''; });
+
+      var fakeFirst = ["Alex","Jordan","Sam","Taylor","Casey","Morgan","Riley","Jamie","Quinn","Avery","Rui","Ines","Tiago","Bea","Leo","Nina","Marco","Sofia","Dara","Kai"];
+      var fakeLast = ["Silva","Costa","Pereira","Ferreira","Santos","Marques","Oliveira","Rocha","Cardoso","Lopes","Nguyen","Smith","Garcia","Muller","Novak","Kim","Andrade","Teixeira"];
+      var fakeCities = ["Lisbon","Porto","Coimbra","Braga","Faro","London","Madrid","Berlin","Toronto","Seoul"];
+      function genFake(n){
+        var rows = [];
+        for(var i=0;i<n;i++){
+          var f = randOf(fakeFirst), l = randOf(fakeLast);
+          rows.push({
+            name: f + ' ' + l,
+            email: (f + '.' + l).toLowerCase() + Math.floor(Math.random()*90+10) + '@example.com',
+            phone: '+1 ' + Math.floor(1000000000+Math.random()*8999999999).toString().slice(0,10),
+            city: randOf(fakeCities)
+          });
+        }
+        return rows;
+      }
+      $('#fakeBtn', panel).addEventListener('click', function(){
+        var n = Math.max(1, Math.min(50, parseInt($('#fakeCount', panel).value,10) || 8));
+        var fakeData = genFake(n);
+        var body = $('#fakeBody', panel);
+        body.innerHTML = '';
+        fakeData.forEach(function(r){
+          var tr = document.createElement('tr');
+          tr.innerHTML = '<td>'+r.name+'</td><td>'+r.email+'</td><td>'+r.phone+'</td><td>'+r.city+'</td>';
+          body.appendChild(tr);
+        });
+        $('#fakeJson', panel).value = JSON.stringify(fakeData, null, 2);
+      });
+      $('#fakeClear', panel).addEventListener('click', function(){
+        $('#fakeBody', panel).innerHTML = ''; $('#fakeJson', panel).value = '';
+      });
+    }
+  });
+
+  registerTool({
+    id:'randomnum', category:'generators', navLabel:'random-number', ext:'.gen',
+    eyebrow:'/generators/random-number.gen', title:'Random Number Generator',
+    render: function(){
+      return (
+        '<div class="card">' +
+          '<div class="field-grid">' +
+            '<div class="field"><label>min</label><input type="number" id="rnMin" value="1"></div>' +
+            '<div class="field"><label>max</label><input type="number" id="rnMax" value="100"></div>' +
+            '<div class="field"><label>how many</label><input type="number" id="rnCount" value="1" min="1" max="1000"></div>' +
+          '</div>' +
+          '<div class="action-row" style="margin-top:0;">' +
+            '<label class="checkfield"><input type="checkbox" id="rnUnique"> no duplicates</label>' +
+            '<button id="rnBtn">generate</button>' +
+          '</div>' +
+          '<div class="result" id="rnResult">—</div>' +
+          outputActions('rnResult', 'random-numbers.txt') +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      $('#rnBtn', panel).addEventListener('click', function(){
+        var min = parseInt($('#rnMin', panel).value,10);
+        var max = parseInt($('#rnMax', panel).value,10);
+        var count = Math.max(1, Math.min(1000, parseInt($('#rnCount', panel).value,10) || 1));
+        var unique = $('#rnUnique', panel).checked;
+        var rnResult = $('#rnResult', panel);
+        if(isNaN(min) || isNaN(max) || min > max){ rnResult.textContent = 'min must be less than or equal to max'; return; }
+        var range = max - min + 1;
+        if(unique && count > range){ rnResult.textContent = 'not enough unique numbers in that range'; return; }
+        var out = [];
+        if(unique){
+          var pool = [];
+          for(var i=min;i<=max;i++) pool.push(i);
+          for(i=pool.length-1;i>0;i--){ var j = Math.floor(Math.random()*(i+1)); var t=pool[i]; pool[i]=pool[j]; pool[j]=t; }
+          out = pool.slice(0, count);
+        } else {
+          for(i=0;i<count;i++){ out.push(min + Math.floor(Math.random()*range)); }
+        }
+        rnResult.textContent = out.join(', ');
+      });
+    }
+  });
+
+  /* =========================================================
+     DESIGN
+  ========================================================= */
+
+  registerTool({
+    id:'contrast', category:'design', navLabel:'contrast-checker', ext:'.tool',
+    eyebrow:'/design/contrast-checker.tool', title:'Contrast Checker',
+    render: function(){
+      return (
+        '<div class="card">' +
+          '<div class="field-grid">' +
+            '<div class="field"><label>text color</label><input type="color" id="fgColor" value="#e7e9f0"></div>' +
+            '<div class="field"><label>background color</label><input type="color" id="bgColor" value="#0f1117"></div>' +
+          '</div>' +
+          '<div class="result" id="contrastRatio">—</div>' +
+          '<div id="contrastBadges" style="margin-top:8px;"></div>' +
+          '<div class="contrast-preview" id="contrastPreview">' +
+            '<div class="big">The quick brown fox</div>' +
+            '<div class="small">jumps over the lazy dog — sample body text at this size</div>' +
+          '</div>' +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      var fgColor = $('#fgColor', panel), bgColor = $('#bgColor', panel);
+      var contrastRatio = $('#contrastRatio', panel), contrastBadges = $('#contrastBadges', panel), contrastPreview = $('#contrastPreview', panel);
+      function hexToRgb(hex){
+        var v = hex.replace('#','');
+        return { r: parseInt(v.substr(0,2),16), g: parseInt(v.substr(2,2),16), b: parseInt(v.substr(4,2),16) };
+      }
+      function relLum(rgb){
+        function chan(c){ c/=255; return c <= 0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4); }
+        return 0.2126*chan(rgb.r) + 0.7152*chan(rgb.g) + 0.0722*chan(rgb.b);
+      }
+      function calcContrast(){
+        var fg = hexToRgb(fgColor.value), bg = hexToRgb(bgColor.value);
+        var l1 = relLum(fg), l2 = relLum(bg);
+        var ratio = (Math.max(l1,l2) + 0.05) / (Math.min(l1,l2) + 0.05);
+        contrastRatio.textContent = fmt(ratio) + ' : 1';
+        var checks = [
+          ['AA normal text (4.5:1)', ratio >= 4.5],
+          ['AA large text (3:1)', ratio >= 3],
+          ['AAA normal text (7:1)', ratio >= 7],
+          ['AAA large text (4.5:1)', ratio >= 4.5]
+        ];
+        contrastBadges.innerHTML = checks.map(function(c){
+          return '<span class="badge '+(c[1]?'pass':'fail')+'">'+(c[1]?'✓':'✕')+' '+c[0]+'</span>';
+        }).join('');
+        contrastPreview.style.color = fgColor.value;
+        contrastPreview.style.background = bgColor.value;
+      }
+      fgColor.addEventListener('input', calcContrast);
+      bgColor.addEventListener('input', calcContrast);
+      calcContrast();
+    }
+  });
+
+  /* =========================================================
+     TIMERS
+  ========================================================= */
+
+  registerTool({
+    id:'countdown', category:'timers', navLabel:'countdown', ext:'.timer',
+    eyebrow:'/timers/countdown.timer', title:'Countdown Timer',
+    render: function(){
+      return (
+        '<div class="card">' +
+          '<div class="timer-inputs">' +
+            '<div class="field"><label>hours</label><input type="number" id="cdH" min="0" max="99" value="0"></div>' +
+            '<div class="field"><label>minutes</label><input type="number" id="cdM" min="0" max="59" value="5"></div>' +
+            '<div class="field"><label>seconds</label><input type="number" id="cdS" min="0" max="59" value="0"></div>' +
+          '</div>' +
+          '<div class="timer-display" id="cdDisplay">00:05:00</div>' +
+          '<div class="timer-controls">' +
+            '<button id="cdStart">start</button>' +
+            '<button class="secondary" id="cdPause">pause</button>' +
+            '<button class="secondary" id="cdReset">reset</button>' +
+          '</div>' +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      var cdH = $('#cdH', panel), cdM = $('#cdM', panel), cdS = $('#cdS', panel), cdDisplay = $('#cdDisplay', panel);
+      var cdRemainingMs = 0, cdEndTime = 0, cdRunning = false, cdInterval = null;
+      function formatHMS(ms){
+        var totalSec = Math.max(0, Math.round(ms/1000));
+        return pad2(Math.floor(totalSec/3600)) + ':' + pad2(Math.floor((totalSec%3600)/60)) + ':' + pad2(totalSec%60);
+      }
+      function cdUpdateFromInputs(){
+        var h = parseInt(cdH.value,10)||0, m = parseInt(cdM.value,10)||0, s = parseInt(cdS.value,10)||0;
+        cdDisplay.textContent = formatHMS((h*3600+m*60+s)*1000);
+      }
+      [cdH,cdM,cdS].forEach(function(el){ el.addEventListener('input', function(){ if(!cdRunning && cdRemainingMs<=0) cdUpdateFromInputs(); }); });
+      cdUpdateFromInputs();
+      function cdTick(){
+        var remaining = cdEndTime - Date.now();
+        if(remaining <= 0){
+          clearInterval(cdInterval); cdRunning = false; cdRemainingMs = 0;
+          cdDisplay.textContent = '00:00:00'; cdDisplay.classList.add('finished');
+          beep();
+          return;
+        }
+        cdRemainingMs = remaining;
+        cdDisplay.textContent = formatHMS(remaining);
+      }
+      $('#cdStart', panel).addEventListener('click', function(){
+        if(cdRunning) return;
+        cdDisplay.classList.remove('finished');
+        if(cdRemainingMs <= 0){
+          var h = parseInt(cdH.value,10)||0, m = parseInt(cdM.value,10)||0, s = parseInt(cdS.value,10)||0;
+          cdRemainingMs = (h*3600+m*60+s)*1000;
+        }
+        if(cdRemainingMs <= 0) return;
+        cdEndTime = Date.now() + cdRemainingMs;
+        cdRunning = true;
+        cdInterval = setInterval(cdTick, 250);
+      });
+      $('#cdPause', panel).addEventListener('click', function(){
+        if(!cdRunning) return;
+        clearInterval(cdInterval);
+        cdRemainingMs = cdEndTime - Date.now();
+        cdRunning = false;
+      });
+      $('#cdReset', panel).addEventListener('click', function(){
+        clearInterval(cdInterval); cdRunning = false; cdRemainingMs = 0;
+        cdDisplay.classList.remove('finished');
+        cdUpdateFromInputs();
+      });
+    }
+  });
+
+  registerTool({
+    id:'stopwatch', category:'timers', navLabel:'stopwatch', ext:'.timer',
+    eyebrow:'/timers/stopwatch.timer', title:'Stopwatch',
+    render: function(){
+      return (
+        '<div class="card">' +
+          '<div class="timer-display" id="swDisplay">00:00.00</div>' +
+          '<div class="timer-controls">' +
+            '<button id="swStart">start</button>' +
+            '<button class="secondary" id="swLap">lap</button>' +
+            '<button class="secondary" id="swReset">reset</button>' +
+          '</div>' +
+          '<div class="lap-list" id="swLaps"></div>' +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      var swDisplay = $('#swDisplay', panel), swLapsEl = $('#swLaps', panel);
+      var swElapsed = 0, swStartTime = 0, swRunning = false, swInterval = null, swLaps = [];
+      var swStartBtn = $('#swStart', panel);
+      function formatStopwatch(ms){
+        var totalCs = Math.floor(ms/10);
+        return pad2(Math.floor(totalCs/6000)) + ':' + pad2(Math.floor((totalCs%6000)/100)) + '.' + pad2(totalCs%100);
+      }
+      function swTick(){ swElapsed = Date.now() - swStartTime; swDisplay.textContent = formatStopwatch(swElapsed); }
+      swStartBtn.addEventListener('click', function(){
+        if(swRunning){
+          clearInterval(swInterval); swRunning = false; swStartBtn.textContent = 'resume';
+        } else {
+          swStartTime = Date.now() - swElapsed;
+          swInterval = setInterval(swTick, 33);
+          swRunning = true; swStartBtn.textContent = 'pause';
+        }
+      });
+      $('#swLap', panel).addEventListener('click', function(){
+        if(!swRunning) return;
+        swLaps.push(swElapsed);
+        var row = document.createElement('div');
+        row.className = 'result'; row.style.marginTop = '6px';
+        row.textContent = 'lap ' + swLaps.length + ' — ' + formatStopwatch(swElapsed);
+        swLapsEl.prepend(row);
+      });
+      $('#swReset', panel).addEventListener('click', function(){
+        clearInterval(swInterval); swRunning = false; swElapsed = 0; swLaps = [];
+        swDisplay.textContent = '00:00.00'; swStartBtn.textContent = 'start';
+        swLapsEl.innerHTML = '';
+      });
+    }
+  });
+
+  /* =========================================================
+     FUN
+  ========================================================= */
+
+  registerTool({
+    id:'dice', category:'fun', navLabel:'virtual-dice', ext:'.tool',
+    eyebrow:'/fun/virtual-dice.tool', title:'Virtual Dice',
+    render: function(){
+      return (
+        '<div class="card">' +
+          '<div class="field-grid">' +
+            '<div class="field"><label>number of dice</label><input type="number" id="diceCount" min="1" max="12" value="2"></div>' +
+            '<div class="field"><label>sides</label><select id="diceSides">' +
+              '<option value="4">d4</option><option value="6" selected>d6</option><option value="8">d8</option>' +
+              '<option value="10">d10</option><option value="12">d12</option><option value="20">d20</option><option value="100">d100</option>' +
+            '</select></div>' +
+          '</div>' +
+          '<div class="action-row" style="margin-top:0;justify-content:center;"><button id="rollBtn">roll</button></div>' +
+          '<div class="dice-tray" id="diceTray"></div>' +
+          '<div class="result" id="diceSum" style="text-align:center;">—</div>' +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      var diceCount = $('#diceCount', panel), diceSides = $('#diceSides', panel);
+      var diceTray = $('#diceTray', panel), diceSum = $('#diceSum', panel);
+      $('#rollBtn', panel).addEventListener('click', function(){
+        var n = Math.max(1, Math.min(12, parseInt(diceCount.value,10) || 1));
+        var sides = parseInt(diceSides.value,10);
+        diceTray.innerHTML = ''; var sum = 0;
+        for(var i=0;i<n;i++){
+          var val = 1 + Math.floor(Math.random()*sides); sum += val;
+          var d = document.createElement('div'); d.className = 'die rolling'; d.textContent = val;
+          diceTray.appendChild(d);
+        }
+        diceSum.textContent = n > 1 ? ('sum: ' + sum) : ('rolled: ' + sum);
+      });
+    }
+  });
+
+  registerTool({
+    id:'coinflip', category:'fun', navLabel:'coin-flipper', ext:'.tool',
+    eyebrow:'/fun/coin-flipper.tool', title:'Coin Flipper',
+    render: function(){
+      return (
+        '<div class="card" style="text-align:center;">' +
+          '<div class="coin" id="coinEl">?</div>' +
+          '<button id="coinBtn" style="margin-top:16px;">flip</button>' +
+          '<div class="flip-history" id="coinHistory"></div>' +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      var coinEl = $('#coinEl', panel), coinHistory = $('#coinHistory', panel);
+      var flipHistory = [];
+      $('#coinBtn', panel).addEventListener('click', function(){
+        coinEl.classList.remove('flipping'); void coinEl.offsetWidth; coinEl.classList.add('flipping');
+        var result = Math.random() < 0.5 ? 'Heads' : 'Tails';
+        setTimeout(function(){
+          coinEl.textContent = result;
+          flipHistory.unshift(result);
+          if(flipHistory.length > 12) flipHistory.pop();
+          coinHistory.innerHTML = flipHistory.map(function(r){ return '<span>' + (r==='Heads'?'H':'T') + '</span>'; }).join('');
+        }, 250);
+      });
+    }
+  });
+
+  registerTool({
+    id:'rps', category:'fun', navLabel:'rock-paper-scissors', ext:'.tool',
+    eyebrow:'/fun/rock-paper-scissors.tool', title:'Rock Paper Scissors',
+    render: function(){
+      return (
+        '<div class="card" style="text-align:center;">' +
+          '<div class="action-row" style="justify-content:center;">' +
+            '<button class="secondary" id="rpsRock">🪨 Rock</button>' +
+            '<button class="secondary" id="rpsPaper">📄 Paper</button>' +
+            '<button class="secondary" id="rpsScissors">✂️ Scissors</button>' +
+          '</div>' +
+          '<div class="result" id="rpsResult" style="margin-top:14px;">Pick one to play</div>' +
+          '<div class="flip-history" id="rpsHistory"></div>' +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      var rpsResult = $('#rpsResult', panel), rpsHistory = $('#rpsHistory', panel);
+      var rpsRecord = [];
+      var rpsIcons = { rock:'🪨', paper:'📄', scissors:'✂️' };
+      function rpsPlay(playerChoice){
+        var choices = ['rock','paper','scissors'];
+        var cpuChoice = choices[Math.floor(Math.random()*3)];
+        var outcome;
+        if(playerChoice === cpuChoice){ outcome = 'Draw'; }
+        else if(
+          (playerChoice === 'rock' && cpuChoice === 'scissors') ||
+          (playerChoice === 'paper' && cpuChoice === 'rock') ||
+          (playerChoice === 'scissors' && cpuChoice === 'paper')
+        ){ outcome = 'You win'; }
+        else { outcome = 'You lose'; }
+        rpsResult.textContent = rpsIcons[playerChoice] + ' vs ' + rpsIcons[cpuChoice] + '  —  ' + outcome;
+        rpsRecord.unshift(outcome === 'Draw' ? 'D' : outcome === 'You win' ? 'W' : 'L');
+        if(rpsRecord.length > 12) rpsRecord.pop();
+        rpsHistory.innerHTML = rpsRecord.map(function(r){ return '<span>' + r + '</span>'; }).join('');
+      }
+      $('#rpsRock', panel).addEventListener('click', function(){ rpsPlay('rock'); });
+      $('#rpsPaper', panel).addEventListener('click', function(){ rpsPlay('paper'); });
+      $('#rpsScissors', panel).addEventListener('click', function(){ rpsPlay('scissors'); });
+    }
+  });
+
+  /* =========================================================
+     EXTERNAL
+  ========================================================= */
+
+  registerTool({
+    id:'links', category:'external', navLabel:'redirects', ext:'', extIsArrow:true,
+    eyebrow:'/external/redirects', title:'Quick Redirects',
+    render: function(){
+      return (
+        '<div class="link-grid">' +
+          '<a class="link-card" href="https://www.diffchecker.com/" target="_blank" rel="noopener noreferrer">' +
+            '<div class="name">Diffchecker <span class="go">↗</span></div>' +
+            '<div class="desc">Compare text, files, images, folders.</div>' +
+            '<div class="url">diffchecker.com</div></a>' +
+          '<a class="link-card" href="https://who.is/" target="_blank" rel="noopener noreferrer">' +
+            '<div class="name">Who.is <span class="go">↗</span></div>' +
+            '<div class="desc">WHOIS domain and DNS lookups.</div>' +
+            '<div class="url">who.is</div></a>' +
+          '<a class="link-card" href="https://temp-mail.org/" target="_blank" rel="noopener noreferrer">' +
+            '<div class="name">Temp Mail <span class="go">↗</span></div>' +
+            '<div class="desc">Disposable inbox for throwaway signups.</div>' +
+            '<div class="url">temp-mail.org</div></a>' +
+          '<a class="link-card" href="https://www.remove.bg/" target="_blank" rel="noopener noreferrer">' +
+            '<div class="name">remove.bg <span class="go">↗</span></div>' +
+            '<div class="desc">Automatic background removal for images.</div>' +
+            '<div class="url">remove.bg</div></a>' +
+        '</div>' +
+        '<div class="panel-head" style="margin-top:32px;">' +
+          '<p class="panel-eyebrow">/external/own-projects</p><h2>More from Donodaseves</h2>' +
+        '</div>' +
+        '<div class="link-grid">' +
+          '<a class="link-card" href="https://donodaseves.github.io/daseailab/" target="_blank" rel="noopener noreferrer">' +
+            '<div class="name">Dase AI Lab <span class="go">↗</span></div>' +
+            '<div class="desc">A dashboard for launching AI models with productivity utilities.</div>' +
+            '<div class="url">donodaseves.github.io/daseailab</div></a>' +
+        '</div>'
+      );
+    },
+    init: function(){}
+  });
+
+  /* =========================================================
+     SHORTCUTS
+  ========================================================= */
+
+  registerTool({
+    id:'shortcuts', category:'shortcuts', navLabel:'keyboard', ext:'.help',
+    eyebrow:'/shortcuts/keyboard.help', title:'Shortcuts',
+    render: function(){
+      return (
+        '<div class="card">' +
+          '<div class="kbd-row"><span class="desc">Open the command palette</span><kbd class="key">Ctrl / Cmd + K</kbd></div>' +
+          '<div class="kbd-row"><span class="desc">Navigate palette results</span><kbd class="key">↑ / ↓ / Enter</kbd></div>' +
+          '<div class="kbd-row"><span class="desc">Close palette / exit fullscreen</span><kbd class="key">Esc</kbd></div>' +
+          '<div class="kbd-row"><span class="desc">Zoom the decision tree</span><kbd class="key">Scroll / + / −</kbd></div>' +
+          '<div class="kbd-row"><span class="desc">Open theme / reset / shortcuts menu</span><kbd class="key">⋯ More</kbd></div>' +
+        '</div>'
+      );
+    },
+    init: function(){}
+  });
+
+  /* =========================================================
+     SETTINGS
+  ========================================================= */
+
+  registerTool({
+    id:'about', category:'settings', navLabel:'about', ext:'.info',
+    eyebrow:'/settings/about.info', title:'About & Data',
+    render: function(){
+      return (
+        '<div class="card" style="text-align:center;">' +
+          '<div class="result" id="aboutVersion">Dase Utils</div>' +
+          '<p class="muted" style="margin-top:10px;">donodaseves.github.io/daseutils</p>' +
+        '</div>' +
+        '<div class="card">' +
+          '<h3>privacy</h3>' +
+          '<p class="muted"><strong>Privacy.</strong> This is a fully client-side app — everything runs in your browser. No data is ever sent to or stored on any external server; each tool keeps its content only in this browser local storage.</p>' +
+          '<p class="muted"><strong>Your data, your control.</strong> You can wipe everything stored by this app at any time using the <strong>⟲ Reset data</strong> option in the ⋯ More menu.</p>' +
+          '<button class="danger" id="resetAllAboutBtn" style="margin-top:8px;">clear ALL data</button>' +
+        '</div>' +
+        '<div class="card">' +
+          '<h3>personal project</h3>' +
+          '<p class="muted"><strong>Personal project.</strong> This is a personal, hobby project provided "as-is," with no guaranteed support or bug fixes.</p>' +
+          '<p class="muted"><strong>Support.</strong> If you find it useful, consider <a href="#" id="aboutDonateLink" target="_blank" rel="noopener">making a donation</a> to help keep it going.</p>' +
+          '<a class="icon-btn" id="aboutDonateBtn" href="#" target="_blank" rel="noopener noreferrer" style="display:inline-flex;margin-top:6px;">♥ Donate</a>' +
+        '</div>'
+      );
+    },
+    init: function(panel){
+      $('#resetAllAboutBtn', panel).addEventListener('click', resetAllData);
+      $('#aboutDonateLink', panel).href = DONATE_URL;
+      $('#aboutDonateBtn', panel).href = DONATE_URL;
+    }
+  });
+
+  /* =========================================================
+     RENDER ENGINE — builds sidebar + panels from TOOLS
+  ========================================================= */
+  var navList = document.getElementById('navList');
+  var mainEl = document.getElementById('main');
+
+  function buildSidebar(){
+    var html = '';
+    CATEGORIES.forEach(function(cat){
+      var toolsInCat = TOOLS.filter(function(t){ return t.category === cat.id; });
+      if(toolsInCat.length === 0) return;
+      html += '<div class="category" data-cat="' + cat.id + '">';
+      html += '<button class="category-label"><span class="chevron">▸</span>' + cat.label + '</button>';
+      toolsInCat.forEach(function(t){
+        var extHtml = t.extIsArrow ? '<span class="arrow">↗</span>' : '<span class="ext">' + t.ext + '</span>';
+        html += '<button class="tool-link" data-tool="' + t.id + '">' + t.navLabel + extHtml + '</button>';
+      });
+      html += '</div>';
+    });
+    navList.innerHTML = html;
+  }
+
+  function buildPanels(){
+    var html = '';
+    TOOLS.forEach(function(t){
+      html += '<section class="panel" id="panel-' + t.id + '">' +
+        '<div class="panel-head"><p class="panel-eyebrow">' + t.eyebrow + '</p><h2>' + t.title + '</h2></div>' +
+        t.render() +
+        '</section>';
+    });
+    mainEl.innerHTML = html;
+    TOOLS.forEach(function(t){
+      var panelEl = document.getElementById('panel-' + t.id);
+      try{ t.init(panelEl); }catch(err){ console.error('tool init failed:', t.id, err); }
+    });
+    var footer = document.createElement('footer');
+    footer.className = 'foot';
+    footer.textContent = 'Personal project. No support or bug fixes provided.';
+    mainEl.appendChild(footer);
+  }
+
+  buildSidebar();
+  buildPanels();
+
+  /* =========================================================
+     ROUTER
+  ========================================================= */
+  function showTool(id){
+    $all('.tool-link').forEach(function(l){ l.classList.toggle('active', l.dataset.tool === id); });
+    $all('.panel').forEach(function(p){ p.classList.toggle('active', p.id === 'panel-' + id); });
+    closeSidebarDrawer();
+    window.scrollTo({top:0});
+  }
+  document.addEventListener('click', function(e){
+    var toolLink = e.target.closest('.tool-link');
+    if(toolLink){ showTool(toolLink.dataset.tool); }
+  });
+
+  /* =========================================================
+     SIDEBAR ACCORDION
+  ========================================================= */
+  document.addEventListener('click', function(e){
+    var label = e.target.closest('.category-label');
+    if(!label) return;
+    var cat = label.closest('.category');
+    var wasExpanded = cat.classList.contains('expanded');
+    $all('.category').forEach(function(c){ c.classList.remove('expanded'); });
+    if(!wasExpanded){ cat.classList.add('expanded'); }
+  });
+
+  /* =========================================================
+     MOBILE DRAWER
+  ========================================================= */
+  var sidebarEl = document.getElementById('sidebar');
+  var sidebarBackdrop = document.getElementById('sidebarBackdrop');
+  function openSidebarDrawer(){ sidebarEl.classList.add('open'); sidebarBackdrop.classList.add('open'); }
+  function closeSidebarDrawer(){ sidebarEl.classList.remove('open'); sidebarBackdrop.classList.remove('open'); }
+  document.getElementById('navToggle').addEventListener('click', openSidebarDrawer);
+  sidebarBackdrop.addEventListener('click', closeSidebarDrawer);
+
+  /* =========================================================
+     COMMAND PALETTE (primary navigation)
+  ========================================================= */
+  var cmdkOverlay = document.getElementById('cmdkOverlay');
+  var cmdkInput = document.getElementById('cmdkInput');
+  var cmdkResults = document.getElementById('cmdkResults');
+  var cmdkActiveIndex = 0;
+  var cmdkVisibleTools = [];
+
+  function categoryLabelFor(catId){
+    var c = CATEGORIES.filter(function(c){ return c.id === catId; })[0];
+    return c ? c.label : catId;
+  }
+
+  function renderCmdkResults(query){
+    var q = query.trim().toLowerCase();
+    var matches = TOOLS.filter(function(t){
+      return q === '' || t.navLabel.toLowerCase().indexOf(q) !== -1 || t.title.toLowerCase().indexOf(q) !== -1;
+    });
+    cmdkVisibleTools = matches;
+    cmdkActiveIndex = 0;
+    if(matches.length === 0){
+      cmdkResults.innerHTML = '<div class="cmdk-empty">No tools match "' + esc(query) + '"</div>';
+      return;
+    }
+    var byCat = {};
+    matches.forEach(function(t){ (byCat[t.category] = byCat[t.category] || []).push(t); });
+    var html = '';
+    var flatIndex = 0;
+    CATEGORIES.forEach(function(cat){
+      var list = byCat[cat.id];
+      if(!list) return;
+      html += '<div class="cmdk-group-label">' + cat.label + '</div>';
+      list.forEach(function(t){
+        html += '<button class="cmdk-item' + (flatIndex===0?' active':'') + '" data-index="' + flatIndex + '" data-tool="' + t.id + '">' +
+          '<span>' + t.title + '</span><span class="path">' + t.eyebrow + '</span>' +
+        '</button>';
+        flatIndex++;
+      });
+    });
+    cmdkResults.innerHTML = html;
+  }
+
+  function cmdkSetActive(idx){
+    var items = $all('.cmdk-item', cmdkResults);
+    if(items.length === 0) return;
+    idx = ((idx % items.length) + items.length) % items.length;
+    cmdkActiveIndex = idx;
+    items.forEach(function(it, i){ it.classList.toggle('active', i === idx); });
+    items[idx].scrollIntoView({ block:'nearest' });
+  }
+
+  function openCmdk(){
+    cmdkOverlay.classList.add('open');
+    cmdkInput.value = '';
+    renderCmdkResults('');
+    setTimeout(function(){ cmdkInput.focus(); }, 10);
+  }
+  function closeCmdk(){ cmdkOverlay.classList.remove('open'); }
+
+  document.getElementById('searchInput').addEventListener('focus', function(e){ e.target.blur(); openCmdk(); });
+  document.getElementById('searchInput').addEventListener('click', openCmdk);
+
+  cmdkInput.addEventListener('input', function(){ renderCmdkResults(cmdkInput.value); });
+  cmdkInput.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowDown'){ e.preventDefault(); cmdkSetActive(cmdkActiveIndex + 1); }
+    else if(e.key === 'ArrowUp'){ e.preventDefault(); cmdkSetActive(cmdkActiveIndex - 1); }
+    else if(e.key === 'Enter'){
+      e.preventDefault();
+      var active = $('.cmdk-item.active', cmdkResults);
+      if(active){ showTool(active.dataset.tool); closeCmdk(); }
+    } else if(e.key === 'Escape'){ closeCmdk(); }
+  });
+  cmdkResults.addEventListener('click', function(e){
+    var item = e.target.closest('.cmdk-item');
+    if(item){ showTool(item.dataset.tool); closeCmdk(); }
+  });
+  cmdkOverlay.addEventListener('click', function(e){ if(e.target === cmdkOverlay) closeCmdk(); });
+
+  document.addEventListener('keydown', function(e){
+    var isShortcut = (e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K');
+    if(isShortcut){ e.preventDefault(); openCmdk(); return; }
+    if(e.key === 'Escape' && cmdkOverlay.classList.contains('open')){ closeCmdk(); }
+  });
+  document.getElementById('searchKbd').textContent = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent) ? 'Cmd K' : 'Ctrl K';
+
+  /* =========================================================
+     THEME TOGGLE
+  ========================================================= */
+  var themeToggleBtn = document.getElementById('theme-toggle');
+  themeToggleBtn.addEventListener('click', function(){
+    var isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+    document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    themeToggleBtn.textContent = isDark ? '☀ Theme' : '☾ Theme';
+  });
+
+  /* =========================================================
+     MORE MENU
+  ========================================================= */
   var moreTrigger = document.getElementById('more-trigger');
   var moreDropdown = document.getElementById('more-dropdown');
   function toggleMore(e){
@@ -1243,881 +1800,24 @@
     var isOpen = moreDropdown.classList.toggle('open');
     moreTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   }
-  function closeMore(){
-    moreDropdown.classList.remove('open');
-    moreTrigger.setAttribute('aria-expanded', 'false');
-  }
+  function closeMore(){ moreDropdown.classList.remove('open'); moreTrigger.setAttribute('aria-expanded', 'false'); }
   moreTrigger.addEventListener('click', toggleMore);
   document.addEventListener('click', function(e){
-    if(moreDropdown.classList.contains('open') && !moreDropdown.contains(e.target) && e.target !== moreTrigger){
-      closeMore();
-    }
+    if(moreDropdown.classList.contains('open') && !moreDropdown.contains(e.target) && e.target !== moreTrigger) closeMore();
   });
-  document.getElementById('shortcuts-trigger').addEventListener('click', function(){
-    showTool('shortcuts');
-    closeMore();
-  });
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape' && moreDropdown.classList.contains('open')) closeMore();
-  });
+  document.getElementById('shortcuts-trigger').addEventListener('click', function(){ showTool('shortcuts'); closeMore(); });
+  document.getElementById('reset-storage').addEventListener('click', resetAllData);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && moreDropdown.classList.contains('open')) closeMore(); });
 
-  /* ---------------- shared copy / save ---------------- */
-  function getElText(el){
-    if(!el) return '';
-    if('value' in el) return el.value;
-    return el.textContent;
-  }
-  function copyText(text){
-    navigator.clipboard && navigator.clipboard.writeText(text).catch(function(){});
-  }
-  function saveText(text, filename){
-    var blob = new Blob([text], {type:'text/plain'});
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = filename || 'output.txt';
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-  }
-  document.addEventListener('click', function(e){
-    var copyBtn = e.target.closest('.copy-btn');
-    if(copyBtn){
-      var el = document.getElementById(copyBtn.dataset.target);
-      copyText(getElText(el));
-      return;
-    }
-    var saveBtn = e.target.closest('.save-btn');
-    if(saveBtn){
-      var el2 = document.getElementById(saveBtn.dataset.target);
-      saveText(getElText(el2), saveBtn.dataset.filename);
-    }
-  });
+  /* =========================================================
+     DONATE LINK + BOOT
+  ========================================================= */
+  document.getElementById('donate-btn').href = DONATE_URL;
 
-  /* ---------------- percentage calculator ---------------- */
-  function fmt(n){
-    if(!isFinite(n)) return '—';
-    return (Math.round(n * 10000) / 10000).toString();
-  }
-  function bindPercent(xid, yid, rid, fn){
-    var x = document.getElementById(xid), y = document.getElementById(yid), r = document.getElementById(rid);
-    function calc(){
-      var xv = parseFloat(x.value), yv = parseFloat(y.value);
-      if(isNaN(xv) || isNaN(yv)){ r.textContent = '—'; return; }
-      r.textContent = fn(xv, yv);
-    }
-    x.addEventListener('input', calc);
-    y.addEventListener('input', calc);
-  }
-  bindPercent('p1x','p1y','p1r', function(x,y){ return x + '% of ' + y + ' = ' + fmt(x/100*y); });
-  bindPercent('p2x','p2y','p2r', function(x,y){ if(y===0) return 'y cannot be 0'; return x + ' is ' + fmt(x/y*100) + '% of ' + y; });
-  bindPercent('p3x','p3y','p3r', function(x,y){
-    if(x===0) return 'x cannot be 0';
-    var change = (y-x)/x*100;
-    var sign = change >= 0 ? '+' : '';
-    return sign + fmt(change) + '%  (' + (change>=0?'increase':'decrease') + ')';
-  });
-
-  /* ---------------- price per unit ---------------- */
-  var ppuBody = document.getElementById('ppuBody');
-  var ppuDefaultRows = [['brand A', 3.49, 500, 'g'], ['brand B', 5.99, 1000, 'g']];
-  function ppuAddRow(name, price, qty, unit){
-    var tr = document.createElement('tr');
-    tr.innerHTML =
-      '<td><input type="text" class="ppuName" value="'+(name||'')+'" placeholder="item" style="min-width:90px;"></td>' +
-      '<td><input type="number" class="ppuPrice" value="'+(price!==undefined?price:'')+'" placeholder="0.00" style="width:80px;"></td>' +
-      '<td><input type="number" class="ppuQty" value="'+(qty!==undefined?qty:'')+'" placeholder="0" style="width:70px;"></td>' +
-      '<td><input type="text" class="ppuUnit" value="'+(unit||'')+'" placeholder="g/ml/pcs" style="width:70px;"></td>' +
-      '<td class="ppuPer">—</td>' +
-      '<td><button class="secondary small ppuDel">×</button></td>';
-    ppuBody.appendChild(tr);
-    tr.querySelectorAll('input').forEach(function(inp){ inp.addEventListener('input', function(){ ppuRecalc(); ppuSave(); }); });
-    tr.querySelector('.ppuDel').addEventListener('click', function(){ tr.remove(); ppuRecalc(); ppuSave(); });
-    ppuRecalc();
-  }
-  function ppuRecalc(){
-    var rows = Array.from(ppuBody.querySelectorAll('tr'));
-    var best = null, bestVal = Infinity;
-    rows.forEach(function(tr){
-      var price = parseFloat(tr.querySelector('.ppuPrice').value);
-      var qty = parseFloat(tr.querySelector('.ppuQty').value);
-      var per = tr.querySelector('.ppuPer');
-      tr.classList.remove('best');
-      if(isNaN(price) || isNaN(qty) || qty <= 0){ per.textContent = '—'; return; }
-      var val = price / qty;
-      per.textContent = fmt(val) + ' / ' + (tr.querySelector('.ppuUnit').value || 'unit');
-      if(val < bestVal){ bestVal = val; best = tr; }
-    });
-    if(best) best.classList.add('best');
-  }
-  function ppuSave(){
-    var rows = Array.from(ppuBody.querySelectorAll('tr')).map(function(tr){
-      return [
-        tr.querySelector('.ppuName').value,
-        tr.querySelector('.ppuPrice').value,
-        tr.querySelector('.ppuQty').value,
-        tr.querySelector('.ppuUnit').value
-      ];
-    });
-    storeSet('ppuRows', JSON.stringify(rows));
-  }
-  function ppuLoadOrDefault(){
-    var saved = storeGet('ppuRows');
-    var rows = ppuDefaultRows;
-    if(saved){
-      try{ var parsed = JSON.parse(saved); if(parsed && parsed.length) rows = parsed; }catch(e){}
-    }
-    rows.forEach(function(r){ ppuAddRow(r[0], r[1], r[2], r[3]); });
-  }
-  document.getElementById('ppuAdd').addEventListener('click', function(){ ppuAddRow(); ppuSave(); });
-  document.getElementById('ppuReset').addEventListener('click', function(){
-    storeRemove('ppuRows');
-    ppuBody.innerHTML = '';
-    ppuDefaultRows.forEach(function(r){ ppuAddRow(r[0], r[1], r[2], r[3]); });
-  });
-  ppuLoadOrDefault();
-
-  /* ---------------- unit converter ---------------- */
-  var ucUnits = {
-    length: { mm:0.001, cm:0.01, m:1, km:1000, 'in':0.0254, ft:0.3048, yd:0.9144, mi:1609.344 },
-    weight: { mg:0.001, g:1, kg:1000, oz:28.3495, lb:453.592 },
-    temperature: { C:1, F:1, K:1 }
-  };
-  var ucCategory = document.getElementById('ucCategory'), ucFrom = document.getElementById('ucFrom'),
-      ucTo = document.getElementById('ucTo'), ucValue = document.getElementById('ucValue'), ucResult = document.getElementById('ucResult');
-
-  function ucPopulate(){
-    var cat = ucCategory.value;
-    var units = Object.keys(ucUnits[cat]);
-    ucFrom.innerHTML = units.map(function(u){ return '<option value="'+u+'">'+u+'</option>'; }).join('');
-    ucTo.innerHTML = units.map(function(u){ return '<option value="'+u+'">'+u+'</option>'; }).join('');
-    if(units.length > 1) ucTo.selectedIndex = 1;
-    ucCalc();
-  }
-  function tempToCelsius(v, unit){
-    if(unit === 'C') return v;
-    if(unit === 'F') return (v - 32) * 5/9;
-    if(unit === 'K') return v - 273.15;
-  }
-  function celsiusTo(v, unit){
-    if(unit === 'C') return v;
-    if(unit === 'F') return v * 9/5 + 32;
-    if(unit === 'K') return v + 273.15;
-  }
-  function ucCalc(){
-    var cat = ucCategory.value;
-    var v = parseFloat(ucValue.value);
-    if(isNaN(v)){ ucResult.textContent = '—'; return; }
-    var from = ucFrom.value, to = ucTo.value;
-    var result;
-    if(cat === 'temperature'){
-      result = celsiusTo(tempToCelsius(v, from), to);
-    } else {
-      var base = v * ucUnits[cat][from];
-      result = base / ucUnits[cat][to];
-    }
-    ucResult.textContent = v + ' ' + from + ' = ' + fmt(result) + ' ' + to;
-  }
-  ucCategory.addEventListener('change', ucPopulate);
-  [ucValue, ucFrom, ucTo].forEach(function(el){ el.addEventListener('input', ucCalc); el.addEventListener('change', ucCalc); });
-  ucPopulate();
-
-  /* ---------------- diff checker (word-level) ---------------- */
-  function tokenize(s){
-    // splits into words + whitespace/newlines, keeping every token so it can be reassembled exactly
-    return s.match(/\n|[^\S\n]+|\S+/g) || [];
-  }
-  function diffTokens(a, b){
-    var ta = tokenize(a), tb = tokenize(b);
-    var n = ta.length, m = tb.length;
-    var dp = [];
-    for(var i=0;i<=n;i++) dp.push(new Array(m+1).fill(0));
-    for(i=n-1;i>=0;i--){
-      for(var j=m-1;j>=0;j--){
-        if(ta[i] === tb[j]) dp[i][j] = dp[i+1][j+1] + 1;
-        else dp[i][j] = Math.max(dp[i+1][j], dp[i][j+1]);
-      }
-    }
-    var res = [];
-    i = 0; var jj = 0;
-    while(i < n && jj < m){
-      if(ta[i] === tb[jj]){ res.push({type:'same', text:ta[i]}); i++; jj++; }
-      else if(dp[i+1][jj] >= dp[i][jj+1]){ res.push({type:'del', text:ta[i]}); i++; }
-      else { res.push({type:'add', text:tb[jj]}); jj++; }
-    }
-    while(i < n){ res.push({type:'del', text:ta[i]}); i++; }
-    while(jj < m){ res.push({type:'add', text:tb[jj]}); jj++; }
-    return res;
-  }
-  function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-  document.getElementById('diffBtn').addEventListener('click', function(){
-    var a = document.getElementById('diffA').value, b = document.getElementById('diffB').value;
-    var diff = diffTokens(a, b);
-    var html = [], plain = [];
-    diff.forEach(function(d){
-      if(d.type === 'same'){
-        html.push('<span class="diff-same">' + esc(d.text) + '</span>');
-        plain.push(d.text);
-      } else if(d.type === 'add'){
-        html.push('<span class="diff-line diff-add">' + esc(d.text) + '</span>');
-        plain.push('[+' + d.text + ']');
-      } else {
-        html.push('<span class="diff-line diff-del">' + esc(d.text) + '</span>');
-        plain.push('[-' + d.text + ']');
-      }
-    });
-    var hasChanges = diff.some(function(d){ return d.type !== 'same'; });
-    document.getElementById('diffOutput').innerHTML = hasChanges ? html.join('') : '<span class="diff-same">no differences</span>';
-    var hidden = document.getElementById('diffOutputText');
-    if(!hidden){
-      hidden = document.createElement('textarea');
-      hidden.id = 'diffOutputText';
-      hidden.style.display = 'none';
-      document.getElementById('diffOutput').after(hidden);
-    }
-    hidden.value = plain.join('');
-  });
-  bindAutosave(document.getElementById('diffA'), 'diffA');
-  bindAutosave(document.getElementById('diffB'), 'diffB');
-  document.getElementById('diffResetBtn').addEventListener('click', function(){
-    resetField(document.getElementById('diffA'), 'diffA');
-    resetField(document.getElementById('diffB'), 'diffB');
-    document.getElementById('diffOutput').innerHTML = 'run a comparison to see exactly which words changed';
-  });
-
-  /* ---------------- case converters ---------------- */
-  function bindCase(inId, outId, fn){
-    var input = document.getElementById(inId), output = document.getElementById(outId);
-    input.addEventListener('input', function(){ output.value = fn(input.value); });
-  }
-  bindCase('upIn', 'upOut', function(s){ return s.toUpperCase(); });
-  bindCase('lowIn', 'lowOut', function(s){ return s.toLowerCase(); });
-  bindCase('titleIn', 'titleOut', function(s){
-    return s.replace(/\w\S*/g, function(word){ return word.charAt(0).toUpperCase() + word.substr(1).toLowerCase(); });
-  });
-  bindAutosave(document.getElementById('upIn'), 'upIn');
-  bindAutosave(document.getElementById('lowIn'), 'lowIn');
-  bindAutosave(document.getElementById('titleIn'), 'titleIn');
-  document.getElementById('upReset').addEventListener('click', function(){ resetField(document.getElementById('upIn'), 'upIn'); });
-  document.getElementById('lowReset').addEventListener('click', function(){ resetField(document.getElementById('lowIn'), 'lowIn'); });
-  document.getElementById('titleReset').addEventListener('click', function(){ resetField(document.getElementById('titleIn'), 'titleIn'); });
-
-  /* ---------------- word / char counter ---------------- */
-  var wcIn = document.getElementById('wcIn'), wcResult = document.getElementById('wcResult');
-  wcIn.addEventListener('input', function(){
-    var text = wcIn.value;
-    var words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
-    var chars = text.length;
-    var charsNoSpaces = text.replace(/\s/g,'').length;
-    var sentences = text.trim() === '' ? 0 : (text.match(/[.!?]+/g) || []).length;
-    wcResult.textContent = 'words: ' + words + ' · characters: ' + chars + ' · characters (no spaces): ' + charsNoSpaces + ' · sentences: ' + sentences;
-  });
-  bindAutosave(wcIn, 'wcIn');
-  document.getElementById('wcReset').addEventListener('click', function(){ resetField(wcIn, 'wcIn'); });
-
-  /* ---------------- line counter ---------------- */
-  var lcIn = document.getElementById('lcIn'), lcResult = document.getElementById('lcResult');
-  lcIn.addEventListener('input', function(){
-    var text = lcIn.value;
-    var lines = text.length === 0 ? [] : text.split('\n');
-    var nonEmpty = lines.filter(function(l){ return l.trim() !== ''; }).length;
-    lcResult.textContent = 'total lines: ' + lines.length + ' · non-empty lines: ' + nonEmpty;
-  });
-  bindAutosave(lcIn, 'lcIn');
-  document.getElementById('lcReset').addEventListener('click', function(){ resetField(lcIn, 'lcIn'); });
-
-  /* ---------------- text cleaner ---------------- */
-  document.getElementById('tcBtn').addEventListener('click', function(){
-    var text = document.getElementById('tcIn').value;
-    if(document.getElementById('tcHtml').checked){ text = text.replace(/<[^>]*>/g, ''); }
-    var lines = text.split('\n');
-    if(document.getElementById('tcTrim').checked){ lines = lines.map(function(l){ return l.trim(); }); }
-    if(document.getElementById('tcSpaces').checked){ lines = lines.map(function(l){ return l.replace(/[ \t]+/g,' '); }); }
-    if(document.getElementById('tcEmpty').checked){ lines = lines.filter(function(l){ return l.trim() !== ''; }); }
-    document.getElementById('tcOut').value = lines.join('\n');
-  });
-  bindAutosave(document.getElementById('tcIn'), 'tcIn');
-  document.getElementById('tcReset').addEventListener('click', function(){
-    resetField(document.getElementById('tcIn'), 'tcIn');
-    document.getElementById('tcOut').value = '';
-  });
-
-  /* ---------------- whitespace remover ---------------- */
-  var wsIn = document.getElementById('wsIn'), wsOut = document.getElementById('wsOut');
-  document.getElementById('wsTrim').addEventListener('click', function(){
-    wsOut.value = wsIn.value.split('\n').map(function(l){ return l.trim(); }).join('\n');
-  });
-  document.getElementById('wsCollapse').addEventListener('click', function(){
-    wsOut.value = wsIn.value.split('\n').map(function(l){ return l.trim().replace(/\s+/g,' '); }).join('\n');
-  });
-  document.getElementById('wsAll').addEventListener('click', function(){
-    wsOut.value = wsIn.value.replace(/\s+/g,'');
-  });
-  bindAutosave(wsIn, 'wsIn');
-  document.getElementById('wsReset').addEventListener('click', function(){
-    resetField(wsIn, 'wsIn');
-    wsOut.value = '';
-  });
-
-  /* ---------------- list sorter / deduplicator ---------------- */
-  var lsIn = document.getElementById('lsIn'), lsCase = document.getElementById('lsCase');
-  function lsGetItems(){ return lsIn.value.split('\n').map(function(s){ return s; }).filter(function(s){ return s.trim() !== ''; }); }
-  document.getElementById('lsAZ').addEventListener('click', function(){
-    var items = lsGetItems();
-    items.sort(function(a,b){ return lsCase.checked ? a.toLowerCase().localeCompare(b.toLowerCase()) : a.localeCompare(b); });
-    lsIn.value = items.join('\n');
-  });
-  document.getElementById('lsZA').addEventListener('click', function(){
-    var items = lsGetItems();
-    items.sort(function(a,b){ return lsCase.checked ? b.toLowerCase().localeCompare(a.toLowerCase()) : b.localeCompare(a); });
-    lsIn.value = items.join('\n');
-  });
-  document.getElementById('lsDedupe').addEventListener('click', function(){
-    var items = lsGetItems();
-    var seen = {}, out = [];
-    items.forEach(function(it){
-      var key = lsCase.checked ? it.toLowerCase() : it;
-      if(!seen[key]){ seen[key] = true; out.push(it); }
-    });
-    lsIn.value = out.join('\n');
-  });
-  document.getElementById('lsShuffle').addEventListener('click', function(){
-    var items = lsGetItems();
-    for(var i = items.length-1; i>0; i--){
-      var j = Math.floor(Math.random()*(i+1));
-      var tmp = items[i]; items[i] = items[j]; items[j] = tmp;
-    }
-    lsIn.value = items.join('\n');
-  });
-  bindAutosave(lsIn, 'lsIn');
-  document.getElementById('lsReset').addEventListener('click', function(){ resetField(lsIn, 'lsIn'); });
-
-  /* ---------------- random picker ---------------- */
-  var pickerList = document.getElementById('pickerList'), pickerBtn = document.getElementById('pickerBtn'),
-      pickerResult = document.getElementById('pickerResult'), pickerRemove = document.getElementById('pickerRemove');
-  pickerBtn.addEventListener('click', function(){
-    var items = pickerList.value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
-    if(items.length === 0){ pickerResult.textContent = 'add at least one option'; return; }
-    var idx = Math.floor(Math.random() * items.length);
-    pickerResult.textContent = '→ ' + items[idx];
-    if(pickerRemove.checked){
-      items.splice(idx, 1);
-      pickerList.value = items.join('\n');
-    }
-  });
-  bindAutosave(pickerList, 'pickerList');
-  document.getElementById('pickerReset').addEventListener('click', function(){
-    resetField(pickerList, 'pickerList');
-    pickerResult.textContent = '—';
-  });
-
-  /* ---------------- decision tree v2 ---------------- */
-  var tree = { type:'question', text:'', yes:null, no:null };
-  var treeRoot = document.getElementById('treeRoot');
-
-  function newNode(){ return {type:'question', text:'', yes:null, no:null}; }
-
-  function buildCard(node){
-    var card = document.createElement('div');
-    card.className = 'tree-card' + (node.type === 'outcome' ? ' outcome' : '');
-
-    var input = document.createElement('input');
-    input.type = 'text';
-    input.placeholder = node.type === 'outcome' ? 'outcome…' : 'question…';
-    input.value = node.text;
-    input.addEventListener('input', function(){ node.text = input.value; });
-    card.appendChild(input);
-
-    var actions = document.createElement('div');
-    actions.className = 'node-actions';
-
-    if(node.type === 'question'){
-      if(!node.yes){
-        var addYes = document.createElement('button');
-        addYes.className = 'secondary small';
-        addYes.textContent = '+ yes';
-        addYes.addEventListener('click', function(){ node.yes = newNode(); render(); });
-        actions.appendChild(addYes);
-      }
-      if(!node.no){
-        var addNo = document.createElement('button');
-        addNo.className = 'secondary small';
-        addNo.textContent = '+ no';
-        addNo.addEventListener('click', function(){ node.no = newNode(); render(); });
-        actions.appendChild(addNo);
-      }
-      var toOutcome = document.createElement('button');
-      toOutcome.className = 'secondary small';
-      toOutcome.textContent = 'set as outcome';
-      toOutcome.addEventListener('click', function(){ node.type = 'outcome'; delete node.yes; delete node.no; render(); });
-      actions.appendChild(toOutcome);
-    } else {
-      var toQuestion = document.createElement('button');
-      toQuestion.className = 'secondary small';
-      toQuestion.textContent = 'set as question';
-      toQuestion.addEventListener('click', function(){ node.type = 'question'; node.yes = null; node.no = null; render(); });
-      actions.appendChild(toQuestion);
-    }
-    card.appendChild(actions);
-    return card;
-  }
-
-  function buildNode(node){
-    var wrap = document.createElement('div');
-    wrap.className = 'tree-node';
-    wrap.appendChild(buildCard(node));
-
-    if(node.type === 'question' && (node.yes || node.no)){
-      var childrenRow = document.createElement('div');
-      var branches = [];
-      if(node.yes) branches.push({label:'yes', child:node.yes});
-      if(node.no) branches.push({label:'no', child:node.no});
-      childrenRow.className = 'tree-children' + (branches.length === 1 ? ' single' : '');
-
-      branches.forEach(function(b){
-        var branch = document.createElement('div');
-        branch.className = 'tree-branch';
-        var lbl = document.createElement('div');
-        lbl.className = 'branch-label';
-        lbl.textContent = b.label;
-        branch.appendChild(lbl);
-        branch.appendChild(buildNode(b.child));
-        childrenRow.appendChild(branch);
-      });
-      wrap.appendChild(childrenRow);
-    }
-    return wrap;
-  }
-
-  function render(){
-    treeRoot.innerHTML = '';
-    treeRoot.appendChild(buildNode(tree));
-    storeSet('decisionTree', JSON.stringify(tree));
-  }
-  (function loadTree(){
-    var saved = storeGet('decisionTree');
-    if(saved){
-      try{ var parsed = JSON.parse(saved); if(parsed && parsed.type) tree = parsed; }catch(e){}
-    }
-  })();
-  document.getElementById('treeReset').addEventListener('click', function(){
-    tree = { type:'question', text:'', yes:null, no:null };
-    storeRemove('decisionTree');
-    render();
-  });
-  render();
-
-  /* ---------------- decision tree pan + zoom ---------------- */
-  var treeScroll = document.querySelector('.tree-scroll');
-  var isPanning = false, panStartX = 0, panStartY = 0, panX = 0, panY = 0, panStartPanX = 0, panStartPanY = 0;
-  var zoomLevel = 1;
-  var treeZoomLabel = document.getElementById('treeZoomLabel');
-
-  function applyTransform(){
-    // translate is applied in the untransformed coordinate space, then scale — so panning
-    // always moves the diagram itself, and zoom only ever changes its size, never the
-    // fixed-size viewport (.tree-scroll) around it.
-    treeRoot.style.transform = 'translate(calc(-50% + ' + panX + 'px), ' + panY + 'px) scale(' + zoomLevel + ')';
-    treeZoomLabel.textContent = Math.round(zoomLevel * 100) + '%';
-  }
-
-  function isInteractive(el){ return !!el.closest('input, button, textarea, select, a'); }
-  function panStart(e){
-    if(isInteractive(e.target)) return;
-    isPanning = true;
-    treeScroll.classList.add('panning');
-    var p = e.touches ? e.touches[0] : e;
-    panStartX = p.clientX; panStartY = p.clientY;
-    panStartPanX = panX; panStartPanY = panY;
-  }
-  function panMove(e){
-    if(!isPanning) return;
-    var p = e.touches ? e.touches[0] : e;
-    panX = panStartPanX + (p.clientX - panStartX);
-    panY = panStartPanY + (p.clientY - panStartY);
-    applyTransform();
-    if(e.touches) e.preventDefault();
-  }
-  function panEnd(){ isPanning = false; treeScroll.classList.remove('panning'); }
-  treeScroll.addEventListener('mousedown', panStart);
-  window.addEventListener('mousemove', panMove);
-  window.addEventListener('mouseup', panEnd);
-  treeScroll.addEventListener('touchstart', panStart, {passive:true});
-  treeScroll.addEventListener('touchmove', panMove, {passive:false});
-  treeScroll.addEventListener('touchend', panEnd);
-
-  document.getElementById('treeZoomIn').addEventListener('click', function(){
-    zoomLevel = Math.min(2, +(zoomLevel + 0.1).toFixed(2));
-    applyTransform();
-  });
-  document.getElementById('treeZoomOut').addEventListener('click', function(){
-    zoomLevel = Math.max(0.4, +(zoomLevel - 0.1).toFixed(2));
-    applyTransform();
-  });
-  document.getElementById('treeZoomReset').addEventListener('click', function(){
-    zoomLevel = 1; panX = 0; panY = 0;
-    applyTransform();
-  });
-  treeScroll.addEventListener('wheel', function(e){
-    e.preventDefault();
-    var delta = e.deltaY > 0 ? -0.05 : 0.05;
-    zoomLevel = Math.min(2, Math.max(0.4, +(zoomLevel + delta).toFixed(2)));
-    applyTransform();
-  }, {passive:false});
-  applyTransform();
-
-  /* ---------------- lorem ipsum ---------------- */
-  var loremWords = ("lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor " +
-    "incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation " +
-    "ullamco laboris nisi aliquip ex ea commodo consequat duis aute irure in reprehenderit " +
-    "voluptate velit esse cillum eu fugiat nulla pariatur excepteur sint occaecat cupidatat " +
-    "non proident sunt culpa qui officia deserunt mollit anim id est laborum").split(' ');
-  function sentence(){
-    var len = 6 + Math.floor(Math.random()*10);
-    var words = [];
-    for(var i=0;i<len;i++){ words.push(loremWords[Math.floor(Math.random()*loremWords.length)]); }
-    var s = words.join(' ');
-    return s.charAt(0).toUpperCase() + s.slice(1) + '.';
-  }
-  function paragraph(){
-    var sentences = 3 + Math.floor(Math.random()*4);
-    var out = [];
-    for(var i=0;i<sentences;i++){ out.push(sentence()); }
-    return out.join(' ');
-  }
-  document.getElementById('loremBtn').addEventListener('click', function(){
-    var n = Math.max(1, Math.min(20, parseInt(document.getElementById('loremCount').value,10) || 3));
-    var paras = [];
-    for(var i=0;i<n;i++){ paras.push(paragraph()); }
-    document.getElementById('loremOut').value = paras.join('\n\n');
-  });
-
-  var fakeFirst = ["Alex","Jordan","Sam","Taylor","Casey","Morgan","Riley","Jamie","Quinn","Avery","Rui","Ines","Tiago","Bea","Leo","Nina","Marco","Sofia","Dara","Kai"];
-  var fakeLast = ["Silva","Costa","Pereira","Ferreira","Santos","Marques","Oliveira","Rocha","Cardoso","Lopes","Nguyen","Smith","Garcia","Muller","Novak","Kim","Andrade","Teixeira"];
-  var fakeCities = ["Lisbon","Porto","Coimbra","Braga","Faro","London","Madrid","Berlin","Toronto","Seoul"];
-  function randOf(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
-  function genFake(n){
-    var rows = [];
-    for(var i=0;i<n;i++){
-      var f = randOf(fakeFirst), l = randOf(fakeLast);
-      rows.push({
-        name: f + ' ' + l,
-        email: (f + '.' + l).toLowerCase() + Math.floor(Math.random()*90+10) + '@example.com',
-        phone: '+1 ' + Math.floor(1000000000+Math.random()*8999999999).toString().slice(0,10),
-        city: randOf(fakeCities)
-      });
-    }
-    return rows;
-  }
-  document.getElementById('fakeBtn').addEventListener('click', function(){
-    var n = Math.max(1, Math.min(50, parseInt(document.getElementById('fakeCount').value,10) || 8));
-    var fakeData = genFake(n);
-    var body = document.getElementById('fakeBody');
-    body.innerHTML = '';
-    fakeData.forEach(function(r){
-      var tr = document.createElement('tr');
-      tr.innerHTML = '<td>'+r.name+'</td><td>'+r.email+'</td><td>'+r.phone+'</td><td>'+r.city+'</td>';
-      body.appendChild(tr);
-    });
-    document.getElementById('fakeJson').value = JSON.stringify(fakeData, null, 2);
-  });
-
-  /* ---------------- random number generator ---------------- */
-  document.getElementById('rnBtn').addEventListener('click', function(){
-    var min = parseInt(document.getElementById('rnMin').value,10);
-    var max = parseInt(document.getElementById('rnMax').value,10);
-    var count = Math.max(1, Math.min(1000, parseInt(document.getElementById('rnCount').value,10) || 1));
-    var unique = document.getElementById('rnUnique').checked;
-    var rnResult = document.getElementById('rnResult');
-    if(isNaN(min) || isNaN(max) || min > max){ rnResult.textContent = 'min must be less than or equal to max'; return; }
-    var range = max - min + 1;
-    if(unique && count > range){ rnResult.textContent = 'not enough unique numbers in that range'; return; }
-    var out = [];
-    if(unique){
-      var pool = [];
-      for(var i=min;i<=max;i++) pool.push(i);
-      for(i=pool.length-1;i>0;i--){ var j = Math.floor(Math.random()*(i+1)); var t=pool[i]; pool[i]=pool[j]; pool[j]=t; }
-      out = pool.slice(0, count);
-    } else {
-      for(i=0;i<count;i++){ out.push(min + Math.floor(Math.random()*range)); }
-    }
-    rnResult.textContent = out.join(', ');
-  });
-
-  /* ---------------- contrast checker ---------------- */
-  var fgColor = document.getElementById('fgColor'), bgColor = document.getElementById('bgColor');
-  var contrastRatio = document.getElementById('contrastRatio'), contrastBadges = document.getElementById('contrastBadges'), contrastPreview = document.getElementById('contrastPreview');
-  function hexToRgb(hex){
-    var v = hex.replace('#','');
-    return { r: parseInt(v.substr(0,2),16), g: parseInt(v.substr(2,2),16), b: parseInt(v.substr(4,2),16) };
-  }
-  function relLum(rgb){
-    function chan(c){ c/=255; return c <= 0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4); }
-    return 0.2126*chan(rgb.r) + 0.7152*chan(rgb.g) + 0.0722*chan(rgb.b);
-  }
-  function calcContrast(){
-    var fg = hexToRgb(fgColor.value), bg = hexToRgb(bgColor.value);
-    var l1 = relLum(fg), l2 = relLum(bg);
-    var ratio = (Math.max(l1,l2) + 0.05) / (Math.min(l1,l2) + 0.05);
-    contrastRatio.textContent = fmt(ratio) + ' : 1';
-    var checks = [
-      ['AA normal text (4.5:1)', ratio >= 4.5],
-      ['AA large text (3:1)', ratio >= 3],
-      ['AAA normal text (7:1)', ratio >= 7],
-      ['AAA large text (4.5:1)', ratio >= 4.5]
-    ];
-    contrastBadges.innerHTML = checks.map(function(c){
-      return '<span class="badge '+(c[1]?'pass':'fail')+'">'+(c[1]?'✓':'✕')+' '+c[0]+'</span>';
-    }).join('');
-    contrastPreview.style.color = fgColor.value;
-    contrastPreview.style.background = bgColor.value;
-  }
-  fgColor.addEventListener('input', calcContrast);
-  bgColor.addEventListener('input', calcContrast);
-  calcContrast();
-
-  /* ---------------- simple paint ---------------- */
-  var canvas = document.getElementById('paintCanvas');
-  var ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#ffffff';
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.lineCap = 'round';
-  ctx.lineJoin = 'round';
-  var drawing = false, lastX = 0, lastY = 0;
-  var paintColor = document.getElementById('paintColor'), brushSize = document.getElementById('brushSize');
-
-  function getPos(e){
-    var rect = canvas.getBoundingClientRect();
-    var scaleX = canvas.width / rect.width, scaleY = canvas.height / rect.height;
-    var clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    var clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
-  }
-  function start(e){
-    drawing = true;
-    var p = getPos(e);
-    lastX = p.x; lastY = p.y;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, (parseInt(brushSize.value,10)||4)/2, 0, Math.PI*2);
-    ctx.fillStyle = paintColor.value;
-    ctx.fill();
-    e.preventDefault();
-  }
-  function move(e){
-    if(!drawing) return;
-    var p = getPos(e);
-    ctx.strokeStyle = paintColor.value;
-    ctx.lineWidth = parseInt(brushSize.value,10) || 4;
-    ctx.beginPath();
-    ctx.moveTo(lastX, lastY);
-    ctx.lineTo(p.x, p.y);
-    ctx.stroke();
-    lastX = p.x; lastY = p.y;
-    e.preventDefault();
-  }
-  function end(){
-    if(drawing){ storeSet('paintCanvas', canvas.toDataURL('image/png')); }
-    drawing = false;
-  }
-  canvas.addEventListener('mousedown', start);
-  canvas.addEventListener('mousemove', move);
-  window.addEventListener('mouseup', end);
-  canvas.addEventListener('touchstart', start, {passive:false});
-  canvas.addEventListener('touchmove', move, {passive:false});
-  canvas.addEventListener('touchend', end);
-
-  (function loadPaint(){
-    var saved = storeGet('paintCanvas');
-    if(!saved) return;
-    var img = new Image();
-    img.onload = function(){ ctx.drawImage(img, 0, 0); };
-    img.src = saved;
-  })();
-
-  document.getElementById('paintClear').addEventListener('click', function(){
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-    storeRemove('paintCanvas');
-  });
-  document.getElementById('paintSave').addEventListener('click', function(){
-    var link = document.createElement('a');
-    link.download = 'drawing.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-  });
-  var swatchColors = ['#111111','#ef6a6a','#f5a623','#5eead4','#4d8dff','#a855f7','#ffffff'];
-  var swatchesEl = document.getElementById('swatches');
-  swatchColors.forEach(function(c, i){
-    var s = document.createElement('div');
-    s.className = 'swatch' + (i===0?' active':'');
-    s.style.background = c;
-    s.addEventListener('click', function(){
-      paintColor.value = c;
-      swatchesEl.querySelectorAll('.swatch').forEach(function(sw){ sw.classList.remove('active'); });
-      s.classList.add('active');
-    });
-    swatchesEl.appendChild(s);
-  });
-
-  /* ---------------- shared beep ---------------- */
-  function beep(){
-    try{
-      var ac = new (window.AudioContext || window.webkitAudioContext)();
-      var o = ac.createOscillator(), g = ac.createGain();
-      o.connect(g); g.connect(ac.destination);
-      o.frequency.value = 880;
-      g.gain.value = 0.15;
-      o.start();
-      setTimeout(function(){ o.stop(); ac.close(); }, 400);
-    }catch(e){}
-  }
-
-  /* ---------------- countdown timer ---------------- */
-  var cdH = document.getElementById('cdH'), cdM = document.getElementById('cdM'), cdS = document.getElementById('cdS');
-  var cdDisplay = document.getElementById('cdDisplay');
-  var cdStartBtn = document.getElementById('cdStart'), cdPauseBtn = document.getElementById('cdPause'), cdResetBtn = document.getElementById('cdReset');
-  var cdRemainingMs = 0, cdEndTime = 0, cdRunning = false, cdInterval = null;
-
-  function pad2(n){ return n.toString().padStart(2,'0'); }
-  function formatHMS(ms){
-    var totalSec = Math.max(0, Math.round(ms/1000));
-    var h = Math.floor(totalSec/3600);
-    var m = Math.floor((totalSec%3600)/60);
-    var s = totalSec%60;
-    return pad2(h) + ':' + pad2(m) + ':' + pad2(s);
-  }
-  function cdUpdateFromInputs(){
-    var h = parseInt(cdH.value,10) || 0, m = parseInt(cdM.value,10) || 0, s = parseInt(cdS.value,10) || 0;
-    cdDisplay.textContent = formatHMS((h*3600+m*60+s)*1000);
-  }
-  [cdH,cdM,cdS].forEach(function(el){ el.addEventListener('input', function(){ if(!cdRunning && cdRemainingMs<=0) cdUpdateFromInputs(); }); });
-  cdUpdateFromInputs();
-
-  function cdTick(){
-    var remaining = cdEndTime - Date.now();
-    if(remaining <= 0){
-      clearInterval(cdInterval);
-      cdRunning = false;
-      cdRemainingMs = 0;
-      cdDisplay.textContent = '00:00:00';
-      cdDisplay.classList.add('finished');
-      beep();
-      return;
-    }
-    cdRemainingMs = remaining;
-    cdDisplay.textContent = formatHMS(remaining);
-  }
-  cdStartBtn.addEventListener('click', function(){
-    if(cdRunning) return;
-    cdDisplay.classList.remove('finished');
-    if(cdRemainingMs <= 0){
-      var h = parseInt(cdH.value,10) || 0, m = parseInt(cdM.value,10) || 0, s = parseInt(cdS.value,10) || 0;
-      cdRemainingMs = (h*3600+m*60+s)*1000;
-    }
-    if(cdRemainingMs <= 0) return;
-    cdEndTime = Date.now() + cdRemainingMs;
-    cdRunning = true;
-    cdInterval = setInterval(cdTick, 250);
-  });
-  cdPauseBtn.addEventListener('click', function(){
-    if(!cdRunning) return;
-    clearInterval(cdInterval);
-    cdRemainingMs = cdEndTime - Date.now();
-    cdRunning = false;
-  });
-  cdResetBtn.addEventListener('click', function(){
-    clearInterval(cdInterval);
-    cdRunning = false;
-    cdRemainingMs = 0;
-    cdDisplay.classList.remove('finished');
-    cdUpdateFromInputs();
-  });
-
-  /* ---------------- stopwatch ---------------- */
-  var swDisplay = document.getElementById('swDisplay');
-  var swStartBtn = document.getElementById('swStart'), swLapBtn = document.getElementById('swLap'), swResetBtn = document.getElementById('swReset');
-  var swLapsEl = document.getElementById('swLaps');
-  var swElapsed = 0, swStartTime = 0, swRunning = false, swInterval = null, swLaps = [];
-
-  function formatStopwatch(ms){
-    var totalCs = Math.floor(ms/10);
-    var m = Math.floor(totalCs / 6000);
-    var s = Math.floor((totalCs % 6000) / 100);
-    var cs = totalCs % 100;
-    return pad2(m) + ':' + pad2(s) + '.' + pad2(cs);
-  }
-  function swTick(){
-    swElapsed = Date.now() - swStartTime;
-    swDisplay.textContent = formatStopwatch(swElapsed);
-  }
-  swStartBtn.addEventListener('click', function(){
-    if(swRunning){
-      clearInterval(swInterval);
-      swRunning = false;
-      swStartBtn.textContent = 'resume';
-    } else {
-      swStartTime = Date.now() - swElapsed;
-      swInterval = setInterval(swTick, 33);
-      swRunning = true;
-      swStartBtn.textContent = 'pause';
-    }
-  });
-  swLapBtn.addEventListener('click', function(){
-    if(!swRunning) return;
-    swLaps.push(swElapsed);
-    var row = document.createElement('div');
-    row.className = 'result';
-    row.style.marginTop = '6px';
-    row.textContent = 'lap ' + swLaps.length + ' — ' + formatStopwatch(swElapsed);
-    swLapsEl.prepend(row);
-  });
-  swResetBtn.addEventListener('click', function(){
-    clearInterval(swInterval);
-    swRunning = false;
-    swElapsed = 0;
-    swLaps = [];
-    swDisplay.textContent = '00:00.00';
-    swStartBtn.textContent = 'start';
-    swLapsEl.innerHTML = '';
-  });
-
-  /* ---------------- virtual dice ---------------- */
-  var diceCount = document.getElementById('diceCount'), diceSides = document.getElementById('diceSides');
-  var diceTray = document.getElementById('diceTray'), diceSum = document.getElementById('diceSum');
-  document.getElementById('rollBtn').addEventListener('click', function(){
-    var n = Math.max(1, Math.min(12, parseInt(diceCount.value,10) || 1));
-    var sides = parseInt(diceSides.value,10);
-    diceTray.innerHTML = '';
-    var sum = 0;
-    for(var i=0;i<n;i++){
-      var val = 1 + Math.floor(Math.random()*sides);
-      sum += val;
-      var d = document.createElement('div');
-      d.className = 'die rolling';
-      d.textContent = val;
-      diceTray.appendChild(d);
-    }
-    diceSum.textContent = n > 1 ? ('sum: ' + sum) : ('rolled: ' + sum);
-  });
-
-  /* ---------------- coin flipper ---------------- */
-  var coinEl = document.getElementById('coinEl'), coinHistory = document.getElementById('coinHistory');
-  var flipHistory = [];
-  document.getElementById('coinBtn').addEventListener('click', function(){
-    coinEl.classList.remove('flipping');
-    void coinEl.offsetWidth;
-    coinEl.classList.add('flipping');
-    var result = Math.random() < 0.5 ? 'Heads' : 'Tails';
-    setTimeout(function(){
-      coinEl.textContent = result;
-      flipHistory.unshift(result);
-      if(flipHistory.length > 12) flipHistory.pop();
-      coinHistory.innerHTML = flipHistory.map(function(r){ return '<span>' + (r === 'Heads' ? 'H' : 'T') + '</span>'; }).join('');
-    }, 250);
-  });
+  showTool('about');
 
 })();
+
 </script>
 </body>
 </html>
